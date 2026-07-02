@@ -30,25 +30,40 @@ class _GradientButtonState extends State<GradientButton> {
         onExit: (_) => setState(() => _isHovered = false),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          child: OutlinedButton(
-            onPressed: widget.onPressed,
-            style: OutlinedButton.styleFrom(
-              side: BorderSide(
-                color: _isHovered
-                    ? AppColors.primary
-                    : Theme.of(context).dividerColor,
-                width: 1.5,
-              ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: _isHovered
+                  ? AppColors.primary
+                  : Theme.of(context).dividerColor,
+              width: 1.5,
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(widget.text),
-                if (widget.icon != null) ...[
-                  const SizedBox(width: 8),
-                  Icon(widget.icon, size: 18),
-                ],
-              ],
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: widget.onPressed,
+              borderRadius: BorderRadius.circular(12),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      widget.text,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    if (widget.icon != null) ...[
+                      const SizedBox(width: 8),
+                      Icon(widget.icon, size: 18),
+                    ],
+                  ],
+                ),
+              ),
             ),
           ),
         ),
