@@ -89,71 +89,45 @@ class ProcessSection extends StatelessWidget {
   }
 }
 
-class _DesktopTimelineItem extends StatefulWidget {
+class _DesktopTimelineItem extends StatelessWidget {
   final Map<String, String> step;
   final bool isDark;
 
   const _DesktopTimelineItem({required this.step, required this.isDark});
 
   @override
-  State<_DesktopTimelineItem> createState() => _DesktopTimelineItemState();
-}
-
-class _DesktopTimelineItemState extends State<_DesktopTimelineItem> {
-  bool _isHovered = false;
-
-  @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        transform: Matrix4.identity()..translateByDouble(0.0, _isHovered ? -4.0 : 0.0, 0.0, 0.0),
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: widget.isDark ? AppColors.darkCard : AppColors.lightCard,
-          border: Border.all(
-            color: _isHovered
-                ? AppColors.primary.withValues(alpha: 0.3)
-                : (widget.isDark
-                    ? AppColors.darkBorder
-                    : AppColors.lightBorder),
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: isDark ? AppColors.darkCard : AppColors.lightCard,
+        border: Border.all(
+          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            step['number']!,
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.w800,
+              color: AppColors.primary.withValues(alpha: 0.3),
+            ),
           ),
-          boxShadow: _isHovered
-              ? [
-                  BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.08),
-                    blurRadius: 16,
-                    offset: const Offset(0, 6),
-                  ),
-                ]
-              : [],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.step['number']!,
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w800,
-                color: AppColors.primary.withValues(alpha: 0.3),
-              ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              widget.step['title']!,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              widget.step['description']!,
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ],
-        ),
+          const SizedBox(height: 12),
+          Text(
+            step['title']!,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            step['description']!,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ],
       ),
     );
   }
