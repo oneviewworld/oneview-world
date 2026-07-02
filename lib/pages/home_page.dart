@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../core/constants/app_constants.dart';
 import '../core/theme/theme_provider.dart';
 import '../widgets/common/navigation_bar.dart';
-import '../widgets/animations/animated_gradient_bg.dart';
 import '../sections/hero_section.dart';
 import '../sections/services_section.dart';
 import '../sections/solutions_section.dart';
@@ -28,7 +27,6 @@ class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
   double _scrollProgress = 0;
 
-  // Section keys for scroll navigation
   final Map<String, GlobalKey> _sectionKeys = {
     AppConstants.sectionHome: GlobalKey(),
     AppConstants.sectionServices: GlobalKey(),
@@ -81,48 +79,39 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Stack(
         children: [
-          // Animated background
-          Positioned.fill(
-            child: AnimatedGradientBackground(
-              isDark: widget.themeProvider.isDark,
-              child: const SizedBox.expand(),
-            ),
-          ),
-          // Content
-          CustomScrollView(
+          // Scrollable content
+          SingleChildScrollView(
             controller: _scrollController,
-            slivers: [
-              SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    _buildSection(AppConstants.sectionHome, HeroSection(
-                      onViewWork: () =>
-                          _scrollToSection(AppConstants.sectionProjects),
-                      onStartProject: () =>
-                          _scrollToSection(AppConstants.sectionContact),
-                    )),
-                    _buildSection(AppConstants.sectionServices,
-                        const ServicesSection()),
-                    _buildSection(AppConstants.sectionSolutions,
-                        const SolutionsSection()),
-                    _buildSection(AppConstants.sectionProjects,
-                        const ProjectsSection()),
-                    _buildSection(AppConstants.sectionTechnologies,
-                        const TechnologiesSection()),
-                    _buildSection(AppConstants.sectionWhyOneView,
-                        const WhyOneViewSection()),
-                    _buildSection(
-                        AppConstants.sectionProcess, const ProcessSection()),
-                    _buildSection(
-                        AppConstants.sectionAbout, const AboutSection()),
-                    _buildSection(AppConstants.sectionFaq, const FaqSection()),
-                    _buildSection(AppConstants.sectionContact,
-                        const ContactSection()),
-                    FooterSection(onNavItemTap: _scrollToSection),
-                  ],
-                ),
-              ),
-            ],
+            child: Column(
+              children: [
+                // Top padding for nav bar
+                const SizedBox(height: 70),
+                _buildSection(AppConstants.sectionHome, HeroSection(
+                  onViewWork: () =>
+                      _scrollToSection(AppConstants.sectionProjects),
+                  onStartProject: () =>
+                      _scrollToSection(AppConstants.sectionContact),
+                )),
+                _buildSection(AppConstants.sectionServices,
+                    const ServicesSection()),
+                _buildSection(AppConstants.sectionSolutions,
+                    const SolutionsSection()),
+                _buildSection(AppConstants.sectionProjects,
+                    const ProjectsSection()),
+                _buildSection(AppConstants.sectionTechnologies,
+                    const TechnologiesSection()),
+                _buildSection(AppConstants.sectionWhyOneView,
+                    const WhyOneViewSection()),
+                _buildSection(
+                    AppConstants.sectionProcess, const ProcessSection()),
+                _buildSection(
+                    AppConstants.sectionAbout, const AboutSection()),
+                _buildSection(AppConstants.sectionFaq, const FaqSection()),
+                _buildSection(AppConstants.sectionContact,
+                    const ContactSection()),
+                FooterSection(onNavItemTap: _scrollToSection),
+              ],
+            ),
           ),
           // Navigation bar
           Positioned(
@@ -140,7 +129,7 @@ class _HomePageState extends State<HomePage> {
             bottom: 24,
             right: 24,
             child: AnimatedOpacity(
-              opacity: _scrollProgress > 0.1 ? 1.0 : 0.0,
+              opacity: _scrollProgress > 0.05 ? 1.0 : 0.0,
               duration: const Duration(milliseconds: 300),
               child: FloatingActionButton.small(
                 onPressed: () {

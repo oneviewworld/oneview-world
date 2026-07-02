@@ -56,35 +56,38 @@ class _HeroSectionState extends State<HeroSection>
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
-      constraints: BoxConstraints(minHeight: screenHeight * 0.9),
+      constraints: BoxConstraints(minHeight: screenHeight * 0.85),
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 20 : 64,
         vertical: isMobile ? 80 : 120,
       ),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: AppSpacing.maxWidthWide),
-          child: isDesktop
-              ? Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(flex: 5, child: _buildContent(context, isDark)),
-                    const SizedBox(width: 64),
-                    Expanded(flex: 4, child: _buildOrbit(context, isDark)),
-                  ],
-                )
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildContent(context, isDark),
-                    const SizedBox(height: 48),
-                    SizedBox(
-                      height: isMobile ? 250 : 350,
-                      child: _buildOrbit(context, isDark),
-                    ),
-                  ],
-                ),
-        ),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: AppSpacing.maxWidthWide),
+        child: isDesktop
+            ? Row(
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: _buildContent(context, isDark),
+                  ),
+                  const SizedBox(width: 64),
+                  SizedBox(
+                    width: 350,
+                    height: 350,
+                    child: _buildOrbit(context, isDark),
+                  ),
+                ],
+              )
+            : Column(
+                children: [
+                  _buildContent(context, isDark),
+                  const SizedBox(height: 48),
+                  SizedBox(
+                    height: isMobile ? 250 : 350,
+                    child: _buildOrbit(context, isDark),
+                  ),
+                ],
+              ),
       ),
     );
   }
