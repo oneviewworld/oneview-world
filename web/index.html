@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta Tags -->
+  <title>OneView - Building Mobile Apps, Games & Digital Solutions</title>
+  <meta name="title" content="OneView - Building Mobile Apps, Games & Digital Solutions">
+  <meta name="description" content="OneView helps startups, enterprises and growing businesses design, build and scale mobile applications, enterprise software, backend systems, games and digital experiences.">
+  <meta name="keywords" content="Flutter development, mobile app development, cross-platform development, .NET MAUI, enterprise software, game development, UI/UX design, software consulting, healthcare software, business automation">
+  <meta name="author" content="OneView">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://oneview.world">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://oneview.world">
+  <meta property="og:title" content="OneView - Building Mobile Apps, Games & Digital Solutions">
+  <meta property="og:description" content="OneView helps startups, enterprises and growing businesses design, build and scale mobile applications, enterprise software, backend systems, games and digital experiences.">
+  <meta property="og:site_name" content="OneView">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://oneview.world">
+  <meta property="twitter:title" content="OneView - Building Mobile Apps, Games & Digital Solutions">
+  <meta property="twitter:description" content="OneView helps startups, enterprises and growing businesses design, build and scale mobile applications, enterprise software, backend systems, games and digital experiences.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#6366F1">
+  <meta name="msapplication-TileColor" content="#6366F1">
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "OneView",
+    "url": "https://oneview.world",
+    "logo": "https://oneview.world/icons/Icon-512.png",
+    "description": "OneView helps startups, enterprises and growing businesses design, build and scale mobile applications, enterprise software, backend systems, games and digital experiences.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "IN"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@oneview.world",
+      "contactType": "customer service"
+    },
+    "sameAs": [
+      "https://github.com/ArcaneArts",
+      "https://linkedin.com/company/oneview-world"
+    ]
+  }
+  </script>
+
+  <!-- Service Worker -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <style>
+    /* Loading screen */
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #0A0A0F;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .loading-content {
+      text-align: center;
+    }
+    .loading-logo {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #6366F1, #8B5CF6, #06B6D4);
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .loading-text {
+      color: #9CA3AF;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading">
+    <div class="loading-content">
+      <div class="loading-logo">O</div>
+      <div class="loading-text">Loading OneView...</div>
+    </div>
+  </div>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
