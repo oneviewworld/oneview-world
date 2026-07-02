@@ -267,6 +267,7 @@ class AppData {
         'assets/projects/reconvision/screen_2.png',
       ],
       isFeatured: true,
+      isScreenshotLandscape: true,
     ),
     ProjectModel(
       id: 'digital-butler',
@@ -326,6 +327,7 @@ class AppData {
         'assets/projects/smartlogix/screen_2.png',
       ],
       isFeatured: true,
+      isScreenshotLandscape: true,
     ),
     ProjectModel(
       id: 'healthx-patients',

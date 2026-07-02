@@ -10,6 +10,7 @@ class ProjectModel {
   final List<String> screenshots;
   final String? appStoreUrl;
   final bool isFeatured;
+  final bool isScreenshotLandscape;
 
   const ProjectModel({
     required this.id,
@@ -23,5 +24,6 @@ class ProjectModel {
     this.screenshots = const [],
     this.appStoreUrl,
     this.isFeatured = false,
+    this.isScreenshotLandscape = false,
   });
 }

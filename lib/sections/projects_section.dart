@@ -105,17 +105,55 @@ class _ProjectCard extends StatelessWidget {
 
   Widget _buildVisual(BuildContext context, List<Color> colors) {
     if (project.screenshots.isNotEmpty) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Image.asset(
-          project.screenshots.first,
-          height: 220,
-          width: double.infinity,
-          fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) =>
-              _buildFallbackVisual(context, colors),
-        ),
-      );
+      if (project.isScreenshotLandscape) {
+        // Web/landscape screenshot — show as wide horizontal rectangle
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: colors[0].withValues(alpha: 0.2),
+              ),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(11),
+              child: Image.asset(
+                project.screenshots.first,
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) =>
+                    _buildFallbackVisual(context, colors),
+              ),
+            ),
+          ),
+        );
+      } else {
+        // Mobile/portrait screenshot — show as tall vertical rectangle
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+            height: 340,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.black.withValues(alpha: 0.3),
+            ),
+            child: Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  project.screenshots.first,
+                  height: 320,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) =>
+                      _buildFallbackVisual(context, colors),
+                ),
+              ),
+            ),
+          ),
+        );
+      }
     }
     return _buildFallbackVisual(context, colors);
   }
