@@ -54,6 +54,17 @@ class _FadeInWidgetState extends State<FadeInWidget>
     ).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeOut),
     );
+
+    // Fallback: trigger animation after a short delay in case
+    // VisibilityDetector doesn't fire on initial load (Flutter Web issue)
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(widget.delay + const Duration(milliseconds: 100), () {
+        if (mounted && !_hasAnimated) {
+          _hasAnimated = true;
+          _controller.forward();
+        }
+      });
+    });
   }
 
   @override
