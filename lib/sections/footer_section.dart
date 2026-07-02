@@ -173,16 +173,13 @@ class FooterSection extends StatelessWidget {
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(height: 16),
-        _SocialLink(
-          label: 'GitHub',
-          url: AppConstants.githubUrl,
-          isDark: isDark,
-        ),
-        const SizedBox(height: 10),
-        _SocialLink(
-          label: 'LinkedIn',
-          url: AppConstants.linkedinUrl,
-          isDark: isDark,
+        Text(
+          'LinkedIn — Coming Soon',
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: isDark
+                    ? AppColors.darkTextSecondary
+                    : AppColors.lightTextSecondary,
+              ),
         ),
         const SizedBox(height: 10),
         _SocialLink(

@@ -22,8 +22,7 @@ class AppConstants {
       'built to grow with your business.';
 
   // Social links
-  static const String githubUrl = 'https://github.com/ArcaneArts';
-  static const String linkedinUrl = 'https://linkedin.com/company/oneview-world';
+  static const String linkedinUrl = 'coming-soon';
 
   // Navigation
   static const List<String> navItems = [
