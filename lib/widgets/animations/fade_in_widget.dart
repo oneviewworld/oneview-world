@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
+/// A widget that fades in its child with optional slide and scale.
+/// Triggers immediately after mount with the specified delay —
+/// no visibility detection needed, works reliably on Flutter Web.
 class FadeInWidget extends StatefulWidget {
   final Widget child;
   final Duration duration;
@@ -27,7 +29,6 @@ class _FadeInWidgetState extends State<FadeInWidget>
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
   late Animation<double> _scaleAnimation;
-  bool _hasAnimated = false;
 
   @override
   void initState() {
@@ -55,15 +56,9 @@ class _FadeInWidgetState extends State<FadeInWidget>
       CurvedAnimation(parent: _controller, curve: Curves.easeOut),
     );
 
-    // Fallback: trigger animation after a short delay in case
-    // VisibilityDetector doesn't fire on initial load (Flutter Web issue)
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(widget.delay + const Duration(milliseconds: 100), () {
-        if (mounted && !_hasAnimated) {
-          _hasAnimated = true;
-          _controller.forward();
-        }
-      });
+    // Start animation after delay
+    Future.delayed(widget.delay, () {
+      if (mounted) _controller.forward();
     });
   }
 
@@ -73,36 +68,23 @@ class _FadeInWidgetState extends State<FadeInWidget>
     super.dispose();
   }
 
-  void _onVisibilityChanged(VisibilityInfo info) {
-    if (info.visibleFraction > 0.1 && !_hasAnimated) {
-      _hasAnimated = true;
-      Future.delayed(widget.delay, () {
-        if (mounted) _controller.forward();
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return VisibilityDetector(
-      key: Key('fade-in-${widget.hashCode}'),
-      onVisibilityChanged: _onVisibilityChanged,
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          return Transform.translate(
-            offset: _slideAnimation.value,
-            child: Transform.scale(
-              scale: _scaleAnimation.value,
-              child: Opacity(
-                opacity: _fadeAnimation.value,
-                child: child,
-              ),
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: _slideAnimation.value,
+          child: Transform.scale(
+            scale: _scaleAnimation.value,
+            child: Opacity(
+              opacity: _fadeAnimation.value,
+              child: child,
             ),
-          );
-        },
-        child: widget.child,
-      ),
+          ),
+        );
+      },
+      child: widget.child,
     );
   }
 }
