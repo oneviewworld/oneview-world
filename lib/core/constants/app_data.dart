@@ -113,6 +113,20 @@ class AppData {
       ],
     ),
     ServiceModel(
+      title: 'AI & ML Integration',
+      description:
+          'Intelligent AI-powered solutions integrating LLMs, computer vision, '
+          'and machine learning pipelines into production applications using '
+          'Python, FastAPI, and Ollama.',
+      icon: Icons.psychology,
+      benefits: [
+        'LLM & chatbot integration',
+        'Computer vision pipelines',
+        'Document OCR & extraction',
+        'Production AI deployment',
+      ],
+    ),
+    ServiceModel(
       title: 'Game Development',
       description:
           'Engaging mobile games and interactive experiences built with '
@@ -420,30 +434,38 @@ class AppData {
   ];
 
   static const List<TechnologyModel> technologies = [
+    // Mobile
+    TechnologyModel(
+      name: '.NET MAUI',
+      category: 'Mobile',
+      icon: Icons.devices,
+      color: Color(0xFF512BD4),
+    ),
+    TechnologyModel(
+      name: 'Xamarin.Forms',
+      category: 'Mobile',
+      icon: Icons.phone_android,
+      color: Color(0xFF3498DB),
+    ),
     TechnologyModel(
       name: 'Flutter',
-      category: 'Frontend',
+      category: 'Mobile',
       icon: Icons.flutter_dash,
       color: Color(0xFF02569B),
     ),
     TechnologyModel(
       name: 'Dart',
-      category: 'Language',
+      category: 'Mobile',
       icon: Icons.code,
       color: Color(0xFF0175C2),
     ),
     TechnologyModel(
-      name: '.NET MAUI',
-      category: 'Frontend',
-      icon: Icons.devices,
-      color: Color(0xFF512BD4),
+      name: 'C#',
+      category: 'Mobile',
+      icon: Icons.code,
+      color: Color(0xFF68217A),
     ),
-    TechnologyModel(
-      name: 'Xamarin',
-      category: 'Frontend',
-      icon: Icons.phone_android,
-      color: Color(0xFF3498DB),
-    ),
+    // Backend
     TechnologyModel(
       name: 'ASP.NET Core',
       category: 'Backend',
@@ -451,10 +473,16 @@ class AppData {
       color: Color(0xFF512BD4),
     ),
     TechnologyModel(
-      name: 'C#',
-      category: 'Language',
+      name: 'FastAPI',
+      category: 'Backend',
+      icon: Icons.speed,
+      color: Color(0xFF009688),
+    ),
+    TechnologyModel(
+      name: 'Python',
+      category: 'Backend',
       icon: Icons.code,
-      color: Color(0xFF68217A),
+      color: Color(0xFF3776AB),
     ),
     TechnologyModel(
       name: 'REST APIs',
@@ -462,17 +490,31 @@ class AppData {
       icon: Icons.api,
       color: Color(0xFF10B981),
     ),
+    // AI / ML
+    TechnologyModel(
+      name: 'Ollama',
+      category: 'AI / ML',
+      icon: Icons.psychology,
+      color: Color(0xFF8B5CF6),
+    ),
+    TechnologyModel(
+      name: 'Computer Vision',
+      category: 'AI / ML',
+      icon: Icons.visibility,
+      color: Color(0xFFEC4899),
+    ),
+    TechnologyModel(
+      name: 'AI Pipelines',
+      category: 'AI / ML',
+      icon: Icons.auto_awesome,
+      color: Color(0xFFF59E0B),
+    ),
+    // Database & Cloud
     TechnologyModel(
       name: 'SQL Server',
       category: 'Database',
       icon: Icons.storage,
       color: Color(0xFFCC2927),
-    ),
-    TechnologyModel(
-      name: 'Firebase',
-      category: 'Cloud',
-      icon: Icons.local_fire_department,
-      color: Color(0xFFFFA000),
     ),
     TechnologyModel(
       name: 'Supabase',
@@ -481,16 +523,10 @@ class AppData {
       color: Color(0xFF3ECF8E),
     ),
     TechnologyModel(
-      name: 'Git',
-      category: 'DevOps',
-      icon: Icons.merge_type,
-      color: Color(0xFFF05032),
-    ),
-    TechnologyModel(
-      name: 'GitHub',
-      category: 'DevOps',
-      icon: Icons.code,
-      color: Color(0xFF181717),
+      name: 'SQLite',
+      category: 'Database',
+      icon: Icons.storage,
+      color: Color(0xFF003B57),
     ),
     TechnologyModel(
       name: 'Azure',
@@ -498,21 +534,22 @@ class AppData {
       icon: Icons.cloud,
       color: Color(0xFF0078D4),
     ),
+    // Tools
     TechnologyModel(
-      name: 'AWS',
-      category: 'Cloud',
-      icon: Icons.cloud_queue,
-      color: Color(0xFFFF9900),
+      name: 'Git',
+      category: 'Tools',
+      icon: Icons.merge_type,
+      color: Color(0xFFF05032),
     ),
     TechnologyModel(
       name: 'Docker',
-      category: 'DevOps',
+      category: 'Tools',
       icon: Icons.view_in_ar,
       color: Color(0xFF2496ED),
     ),
     TechnologyModel(
       name: 'CI/CD',
-      category: 'DevOps',
+      category: 'Tools',
       icon: Icons.loop,
       color: Color(0xFF6366F1),
     ),
@@ -709,9 +746,9 @@ class AppData {
   ];
 
   static const List<Map<String, dynamic>> stats = [
-    {'value': '50+', 'label': 'Projects Delivered'},
-    {'value': '30+', 'label': 'Happy Clients'},
-    {'value': '6+', 'label': 'Years in Business'},
-    {'value': '99%', 'label': 'Client Retention'},
+    {'value': '11+', 'label': 'Projects Delivered'},
+    {'value': '5', 'label': 'Platforms'},
+    {'value': '9+', 'label': 'Years Engineering'},
+    {'value': '3+', 'label': 'AI Projects'},
   ];
 }
