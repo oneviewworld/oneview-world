@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/constants/app_constants.dart';
@@ -33,62 +32,49 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        ClipRRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-            child: Container(
-              decoration: BoxDecoration(
-                color: isDark
-                    ? AppColors.darkBackground.withValues(alpha: 0.85)
-                    : AppColors.lightBackground.withValues(alpha: 0.85),
-                border: Border(
-                  bottom: BorderSide(
-                    color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-                    width: 0.5,
-                  ),
-                ),
-              ),
-              child: Column(
-                children: [
-                  // Scroll progress
-                  LinearProgressIndicator(
-                    value: widget.scrollProgress,
-                    backgroundColor: Colors.transparent,
-                    valueColor: const AlwaysStoppedAnimation<Color>(
-                      AppColors.primary,
-                    ),
-                    minHeight: 2,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isMobile ? 16 : 32,
-                      vertical: 16,
-                    ),
-                    child: Row(
-                      children: [
-                        // Logo
-                        _buildLogo(context, isDark),
-                        const Spacer(),
-                        // Desktop nav
-                        if (!isMobile && !isTablet)
-                          _buildDesktopNav(context, isDark),
-                        // Theme toggle
-                        const SizedBox(width: 8),
-                        _buildThemeToggle(isDark),
-                        // Mobile menu button
-                        if (isMobile || isTablet) ...[
-                          const SizedBox(width: 8),
-                          _buildMobileMenuButton(isDark),
-                        ],
-                      ],
-                    ),
-                  ),
-                ],
+        Container(
+          decoration: BoxDecoration(
+            color: isDark
+                ? AppColors.darkBackground.withValues(alpha: 0.95)
+                : AppColors.lightBackground.withValues(alpha: 0.95),
+            border: Border(
+              bottom: BorderSide(
+                color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                width: 0.5,
               ),
             ),
           ),
+          child: Column(
+            children: [
+              LinearProgressIndicator(
+                value: widget.scrollProgress,
+                backgroundColor: Colors.transparent,
+                valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                minHeight: 2,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: isMobile ? 16 : 32,
+                  vertical: 16,
+                ),
+                child: Row(
+                  children: [
+                    _buildLogo(context, isDark),
+                    const Spacer(),
+                    if (!isMobile && !isTablet)
+                      _buildDesktopNav(context, isDark),
+                    const SizedBox(width: 8),
+                    _buildThemeToggle(isDark),
+                    if (isMobile || isTablet) ...[
+                      const SizedBox(width: 8),
+                      _buildMobileMenuButton(isDark),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
-        // Mobile menu
         if (_isMobileMenuOpen && (isMobile || isTablet))
           _buildMobileMenu(context, isDark),
       ],
@@ -198,39 +184,34 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       (AppConstants.sectionContact, 'Contact'),
     ];
 
-    return ClipRRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: isDark
-                ? AppColors.darkBackground.withValues(alpha: 0.95)
-                : AppColors.lightBackground.withValues(alpha: 0.95),
-            border: Border(
-              bottom: BorderSide(
-                color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-              ),
-            ),
-          ),
-          child: Column(
-            children: navSections.map((item) {
-              return ListTile(
-                title: Text(
-                  item.$2,
-                  style: TextStyle(
-                    color: isDark ? AppColors.darkText : AppColors.lightText,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                onTap: () {
-                  setState(() => _isMobileMenuOpen = false);
-                  widget.onNavItemTap(item.$1);
-                },
-              );
-            }).toList(),
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: isDark
+            ? AppColors.darkBackground.withValues(alpha: 0.98)
+            : AppColors.lightBackground.withValues(alpha: 0.98),
+        border: Border(
+          bottom: BorderSide(
+            color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
           ),
         ),
+      ),
+      child: Column(
+        children: navSections.map((item) {
+          return ListTile(
+            title: Text(
+              item.$2,
+              style: TextStyle(
+                color: isDark ? AppColors.darkText : AppColors.lightText,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            onTap: () {
+              setState(() => _isMobileMenuOpen = false);
+              widget.onNavItemTap(item.$1);
+            },
+          );
+        }).toList(),
       ),
     );
   }

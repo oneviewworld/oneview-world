@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 
@@ -37,13 +36,10 @@ class _GlassCardState extends State<GlassCard> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           curve: Curves.easeOut,
-          transform: Matrix4.identity()
-            ..translateByDouble(0.0, _isHovered ? -4.0 : 0.0, 0.0, 0.0),
+          padding: widget.padding ?? const EdgeInsets.all(24),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(widget.borderRadius),
-            color: isDark
-                ? AppColors.darkCard.withValues(alpha: 0.8)
-                : AppColors.lightCard.withValues(alpha: 0.8),
+            color: isDark ? AppColors.darkCard : AppColors.lightCard,
             border: Border.all(
               color: _isHovered
                   ? AppColors.primary.withValues(alpha: 0.3)
@@ -68,16 +64,7 @@ class _GlassCardState extends State<GlassCard> {
                     ),
                   ],
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-              child: Padding(
-                padding: widget.padding ?? const EdgeInsets.all(24),
-                child: widget.child,
-              ),
-            ),
-          ),
+          child: widget.child,
         ),
       ),
     );
