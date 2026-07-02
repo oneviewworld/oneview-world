@@ -4,6 +4,7 @@ import '../core/constants/app_spacing.dart';
 import '../core/theme/app_colors.dart';
 import '../core/utils/responsive.dart';
 import '../models/project_model.dart';
+import '../pages/project_detail_page.dart';
 import '../widgets/common/section_header.dart';
 import '../widgets/common/glass_card.dart';
 import '../widgets/animations/fade_in_widget.dart';
@@ -75,56 +76,68 @@ class _ProjectCard extends StatelessWidget {
     final colors = ProjectsSection._domainColors[project.domain] ??
         [AppColors.primary, AppColors.accent];
 
-    return GlassCard(
-      padding: EdgeInsets.all(isMobile ? 24 : 36),
-      child: isMobile
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildVisual(context, colors),
-                const SizedBox(height: 24),
-                _buildContent(context, isDark),
-              ],
-            )
-          : Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: isReversed
-                  ? [
-                      Expanded(flex: 3, child: _buildContent(context, isDark)),
-                      const SizedBox(width: 32),
-                      Expanded(flex: 2, child: _buildVisual(context, colors)),
-                    ]
-                  : [
-                      Expanded(flex: 2, child: _buildVisual(context, colors)),
-                      const SizedBox(width: 32),
-                      Expanded(flex: 3, child: _buildContent(context, isDark)),
-                    ],
-            ),
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => ProjectDetailPage(project: project)),
+      ),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GlassCard(
+          padding: EdgeInsets.all(isMobile ? 24 : 36),
+          child: isMobile
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildVisual(context, colors),
+                    const SizedBox(height: 24),
+                    _buildContent(context, isDark),
+                  ],
+                )
+              : Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: isReversed
+                      ? [
+                          Expanded(flex: 3, child: _buildContent(context, isDark)),
+                          const SizedBox(width: 32),
+                          Expanded(flex: 2, child: _buildVisual(context, colors)),
+                        ]
+                      : [
+                          Expanded(flex: 2, child: _buildVisual(context, colors)),
+                          const SizedBox(width: 32),
+                          Expanded(flex: 3, child: _buildContent(context, isDark)),
+                        ],
+                ),
+        ),
+      ),
     );
   }
 
   Widget _buildVisual(BuildContext context, List<Color> colors) {
     if (project.screenshots.isNotEmpty) {
       if (project.isScreenshotLandscape) {
-        // Web/landscape screenshot — horizontal, fit naturally
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: Image.asset(
-            project.screenshots.first,
-            width: double.infinity,
-            fit: BoxFit.fitWidth,
-            errorBuilder: (context, error, stackTrace) =>
-                _buildFallbackVisual(context, colors),
-          ),
-        );
-      } else {
-        // Mobile/portrait screenshot — show naturally without black bg
-        return Center(
+        return Align(
+          alignment: Alignment.center,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(
               project.screenshots.first,
-              height: 320,
+              width: double.infinity,
+              fit: BoxFit.fitWidth,
+              errorBuilder: (context, error, stackTrace) =>
+                  _buildFallbackVisual(context, colors),
+            ),
+          ),
+        );
+      } else {
+        return Align(
+          alignment: Alignment.center,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              project.screenshots.first,
+              height: 380,
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) =>
                   _buildFallbackVisual(context, colors),
