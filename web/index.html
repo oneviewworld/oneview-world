@@ -85,16 +85,14 @@
     .loading-logo {
       width: 48px;
       height: 48px;
-      background: linear-gradient(135deg, #6366F1, #8B5CF6, #06B6D4);
       border-radius: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 24px;
-      font-weight: 800;
       margin-bottom: 16px;
       animation: pulse 2s ease-in-out infinite;
+    }
+    .loading-logo img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
     }
     .loading-text {
       color: #9CA3AF;
@@ -110,7 +108,7 @@
 <body>
   <div class="loading" id="loading">
     <div class="loading-content">
-      <div class="loading-logo">O</div>
+      <div class="loading-logo"><img src="icons/Icon-192.png" alt="OneView"></div>
       <div class="loading-text">Loading OneView...</div>
     </div>
   </div>
