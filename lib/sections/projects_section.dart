@@ -11,18 +11,21 @@ import '../widgets/animations/fade_in_widget.dart';
 class ProjectsSection extends StatelessWidget {
   const ProjectsSection({super.key});
 
-  static const Map<String, List<Color>> _gradientColors = {
-    'health': [Color(0xFF10B981), Color(0xFF06B6D4)],
-    'productivity': [Color(0xFF6366F1), Color(0xFF8B5CF6)],
-    'retail': [Color(0xFFF59E0B), Color(0xFFEF4444)],
-    'education': [Color(0xFF3B82F6), Color(0xFF6366F1)],
-    'finance': [Color(0xFF10B981), Color(0xFF3B82F6)],
-    'games': [Color(0xFFEC4899), Color(0xFF8B5CF6)],
+  static const Map<String, List<Color>> _domainColors = {
+    'Gaming': [Color(0xFFEC4899), Color(0xFF8B5CF6)],
+    'AI & Security': [Color(0xFF6366F1), Color(0xFF06B6D4)],
+    'Hospitality': [Color(0xFFF59E0B), Color(0xFFEF4444)],
+    'Logistics': [Color(0xFF10B981), Color(0xFF3B82F6)],
+    'Healthcare': [Color(0xFF10B981), Color(0xFF06B6D4)],
+    'Communication': [Color(0xFF3B82F6), Color(0xFF6366F1)],
+    'Productivity': [Color(0xFF8B5CF6), Color(0xFFEC4899)],
   };
 
   @override
   Widget build(BuildContext context) {
     final padding = AppSpacing.sectionPadding(context);
+    final featuredProjects =
+        AppData.projects.where((p) => p.isFeatured).toList();
 
     return Container(
       padding: padding,
@@ -36,16 +39,16 @@ class ProjectsSection extends StatelessWidget {
                 title: 'Featured Work',
                 subtitle:
                     'A selection of projects where OneView delivered impactful '
-                    'digital solutions for clients across industries.',
+                    'digital solutions across industries.',
               ),
               const SizedBox(height: 64),
-              ...List.generate(AppData.projects.length, (index) {
+              ...List.generate(featuredProjects.length, (index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 32),
                   child: FadeInWidget(
                     delay: Duration(milliseconds: 100 * index),
                     child: _ProjectCard(
-                      project: AppData.projects[index],
+                      project: featuredProjects[index],
                       isReversed: index.isOdd,
                     ),
                   ),
@@ -69,7 +72,7 @@ class _ProjectCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isMobile = Responsive.isMobile(context);
-    final colors = ProjectsSection._gradientColors[project.gradient] ??
+    final colors = ProjectsSection._domainColors[project.domain] ??
         [AppColors.primary, AppColors.accent];
 
     return GlassCard(
@@ -101,6 +104,23 @@ class _ProjectCard extends StatelessWidget {
   }
 
   Widget _buildVisual(BuildContext context, List<Color> colors) {
+    if (project.screenshots.isNotEmpty) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.asset(
+          project.screenshots.first,
+          height: 220,
+          width: double.infinity,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) =>
+              _buildFallbackVisual(context, colors),
+        ),
+      );
+    }
+    return _buildFallbackVisual(context, colors);
+  }
+
+  Widget _buildFallbackVisual(BuildContext context, List<Color> colors) {
     return Container(
       height: 200,
       decoration: BoxDecoration(
@@ -110,22 +130,16 @@ class _ProjectCard extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: colors[0].withValues(alpha: 0.2),
-        ),
+        border: Border.all(color: colors[0].withValues(alpha: 0.2)),
       ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              _getCategoryIcon(project.category),
-              size: 48,
-              color: colors[0],
-            ),
+            Icon(_getDomainIcon(project.domain), size: 48, color: colors[0]),
             const SizedBox(height: 12),
             Text(
-              project.category,
+              project.domain,
               style: TextStyle(
                 color: colors[0],
                 fontWeight: FontWeight.w600,
@@ -149,7 +163,7 @@ class _ProjectCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(6),
           ),
           child: Text(
-            project.category,
+            project.domain,
             style: const TextStyle(
               color: AppColors.primary,
               fontSize: 12,
@@ -158,37 +172,30 @@ class _ProjectCard extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
+        Text(project.title, style: Theme.of(context).textTheme.headlineSmall),
+        const SizedBox(height: 4),
         Text(
-          project.title,
-          style: Theme.of(context).textTheme.headlineSmall,
+          project.subtitle,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: AppColors.primary,
+              ),
         ),
         const SizedBox(height: 12),
-        Text(
-          project.overview,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
+        Text(project.overview, style: Theme.of(context).textTheme.bodyMedium),
         const SizedBox(height: 16),
-        Text(
-          'Key Features',
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
+        Text('Key Features', style: Theme.of(context).textTheme.titleSmall),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: project.features.map((feature) {
+          children: project.features.take(4).map((feature) {
             return Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
-                  Icons.check_circle_outline,
-                  size: 14,
-                  color: AppColors.success,
-                ),
+                const Icon(Icons.check_circle_outline, size: 14, color: AppColors.success),
                 const SizedBox(width: 4),
-                Text(
-                  feature,
-                  style: Theme.of(context).textTheme.bodySmall,
+                Flexible(
+                  child: Text(feature, style: Theme.of(context).textTheme.bodySmall),
                 ),
               ],
             );
@@ -198,7 +205,7 @@ class _ProjectCard extends StatelessWidget {
         Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: project.technologies.map((tech) {
+          children: project.techStack.map((tech) {
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
@@ -209,31 +216,45 @@ class _ProjectCard extends StatelessWidget {
                   width: 0.5,
                 ),
               ),
-              child: Text(
-                tech,
-                style: Theme.of(context).textTheme.labelSmall,
-              ),
+              child: Text(tech, style: Theme.of(context).textTheme.labelSmall),
             );
           }).toList(),
         ),
+        if (project.appStoreUrl != null) ...[
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              const Icon(Icons.apple, size: 16, color: AppColors.primary),
+              const SizedBox(width: 4),
+              Text(
+                'Available on App Store',
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: AppColors.primary,
+                    ),
+              ),
+            ],
+          ),
+        ],
       ],
     );
   }
 
-  IconData _getCategoryIcon(String category) {
-    switch (category.toLowerCase()) {
+  IconData _getDomainIcon(String domain) {
+    switch (domain.toLowerCase()) {
+      case 'gaming':
+        return Icons.sports_esports;
+      case 'ai & security':
+        return Icons.visibility;
+      case 'hospitality':
+        return Icons.hotel;
+      case 'logistics':
+        return Icons.local_shipping;
       case 'healthcare':
         return Icons.local_hospital;
+      case 'communication':
+        return Icons.chat;
       case 'productivity':
-        return Icons.rocket_launch;
-      case 'retail':
-        return Icons.storefront;
-      case 'education':
-        return Icons.school;
-      case 'finance':
-        return Icons.account_balance;
-      case 'games':
-        return Icons.sports_esports;
+        return Icons.photo_library;
       default:
         return Icons.code;
     }

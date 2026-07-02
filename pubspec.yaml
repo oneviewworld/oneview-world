@@ -22,4 +22,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/projects/
+    - assets/projects/bounceup/
+    - assets/projects/reconvision/
+    - assets/projects/digital-butler/
+    - assets/projects/smartlogix/

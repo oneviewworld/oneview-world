@@ -1,27 +1,27 @@
 class ProjectModel {
+  final String id;
   final String title;
-  final String category;
+  final String subtitle;
+  final String domain;
   final String overview;
-  final String challenge;
-  final String solution;
+  final List<String> techStack;
   final List<String> features;
-  final List<String> technologies;
-  final String? playStoreUrl;
+  final List<String> keyDeliverables;
+  final List<String> screenshots;
   final String? appStoreUrl;
-  final String? webUrl;
-  final String gradient;
+  final bool isFeatured;
 
   const ProjectModel({
+    required this.id,
     required this.title,
-    required this.category,
+    required this.subtitle,
+    required this.domain,
     required this.overview,
-    required this.challenge,
-    required this.solution,
+    required this.techStack,
     required this.features,
-    required this.technologies,
-    this.playStoreUrl,
+    required this.keyDeliverables,
+    this.screenshots = const [],
     this.appStoreUrl,
-    this.webUrl,
-    required this.gradient,
+    this.isFeatured = false,
   });
 }

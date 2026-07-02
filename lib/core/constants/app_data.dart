@@ -194,159 +194,228 @@ class AppData {
 
   static const List<ProjectModel> projects = [
     ProjectModel(
-      title: 'QuickMed Healthcare',
-      category: 'Healthcare',
+      id: 'bounceup',
+      title: 'BounceUp',
+      subtitle: 'Arcade Paddle Ball Game',
+      domain: 'Gaming',
       overview:
-          'OneView designed and developed a comprehensive healthcare platform '
-          'enabling patients to connect with doctors, manage appointments, '
-          'and access medical records securely.',
-      challenge:
-          'The client needed a HIPAA-aware healthcare platform that could '
-          'handle real-time video consultations, secure messaging, and '
-          'electronic health records while maintaining a seamless user experience.',
-      solution:
-          'OneView delivered a cross-platform mobile application with end-to-end '
-          'encryption, real-time communication infrastructure, and an intuitive '
-          'patient-doctor interface.',
+          'OneView designed and developed a production-ready arcade paddle ball '
+          'game built with Flutter and Flame Engine. The app features '
+          'single-player and local two-player modes with neon visuals, '
+          'arcade sound effects, and haptic feedback. Published on both '
+          'the App Store and Google Play Store.',
+      techStack: ['Flutter', 'Dart', 'Flame Engine', 'Riverpod', 'Isar DB', 'GoRouter'],
       features: [
-        'Video consultations',
-        'Appointment scheduling',
-        'Secure messaging',
-        'Electronic health records',
-        'Prescription management',
-        'Payment integration',
+        'Single-player mode with progressive difficulty',
+        'Local two-player with simultaneous multi-touch',
+        'Neon dark theme with glowing visual effects',
+        'Arcade sound effects and haptic feedback',
+        'Persistent game history with Isar database',
+        'Responsive design for phones and tablets',
       ],
-      technologies: ['Flutter', 'Firebase', 'ASP.NET Core', 'SQL Server'],
-      playStoreUrl: null,
-      gradient: 'health',
+      keyDeliverables: [
+        'Published on Apple App Store and Google Play Store',
+        'Fully offline — zero network dependencies',
+        'Ad-free, no in-app purchases, no data collection',
+      ],
+      screenshots: [
+        'assets/projects/bounceup/screen_1.png',
+        'assets/projects/bounceup/screen_2.png',
+      ],
+      isFeatured: true,
     ),
     ProjectModel(
-      title: 'TaskFlow Pro',
-      category: 'Productivity',
+      id: 'reconvision',
+      title: 'ReconVision',
+      subtitle: 'AI Platform for Crime & Anomaly Detection',
+      domain: 'AI & Security',
       overview:
-          'OneView developed an enterprise task management solution with '
-          'real-time collaboration, project tracking, and team analytics.',
-      challenge:
-          'Enterprises needed a unified platform for managing complex projects '
-          'across distributed teams with real-time updates and comprehensive '
-          'reporting capabilities.',
-      solution:
-          'OneView delivered a feature-rich project management application '
-          'with intuitive drag-and-drop interfaces, real-time sync, and '
-          'powerful analytics dashboards.',
+          'OneView developed an advanced AI-powered surveillance and analytics '
+          'platform combining computer vision for crime detection, facial '
+          'recognition, violence detection, and behavioural analytics in '
+          'real-time video feeds.',
+      techStack: ['Flutter', 'Dart', 'Supabase', 'Python', 'FastAPI', 'Ollama', 'Computer Vision'],
       features: [
-        'Kanban boards',
-        'Real-time collaboration',
-        'Team analytics',
-        'Time tracking',
-        'File management',
-        'Integration APIs',
+        'Real-time video feed analysis with computer vision',
+        'Face detection and recognition with configurable alerts',
+        'Violence and behaviour detection using ML models',
+        'Analytics dashboard with heat maps and incident timelines',
+        'Multi-camera support with centralised monitoring',
+        'Historical incident search with evidence export',
       ],
-      technologies: ['Flutter', 'Supabase', 'Dart', 'PostgreSQL'],
-      gradient: 'productivity',
+      keyDeliverables: [
+        'Real-time video surveillance and analysis platform',
+        'Computer vision models for anomaly detection',
+        'Multi-camera centralised monitoring dashboard',
+      ],
+      screenshots: [
+        'assets/projects/reconvision/screen_1.png',
+        'assets/projects/reconvision/screen_2.png',
+      ],
+      isFeatured: true,
     ),
     ProjectModel(
-      title: 'RetailEdge POS',
-      category: 'Retail',
+      id: 'digital-butler',
+      title: 'Digital Butler',
+      subtitle: 'AI-Powered Hotel & Resort Guest Management',
+      domain: 'Hospitality',
       overview:
-          'OneView designed a modern point-of-sale system for retail businesses, '
-          'featuring inventory management, sales analytics, and multi-store support.',
-      challenge:
-          'Retail businesses required an affordable, reliable POS system that '
-          'could work offline, sync across multiple stores, and provide '
-          'actionable sales insights.',
-      solution:
-          'OneView delivered a robust POS application with offline-first '
-          'architecture, real-time inventory sync, and comprehensive business '
-          'intelligence features.',
+          'OneView delivered an intelligent hospitality platform leveraging AI '
+          'to provide personalised guest experiences — from smart room booking '
+          'and concierge services to AI-driven recommendations and real-time '
+          'guest-staff communication.',
+      techStack: ['Flutter', 'Dart', 'Supabase', 'Python', 'FastAPI', 'Ollama', 'Real-time DB'],
       features: [
-        'Offline-first architecture',
-        'Multi-store sync',
-        'Inventory management',
-        'Sales analytics',
-        'Customer management',
-        'Receipt generation',
+        'AI-powered concierge chatbot using Ollama LLM',
+        'Smart room booking with dynamic pricing',
+        'Guest preference learning for personalised service',
+        'Real-time communication between guests and staff',
+        'Multi-property support with centralised dashboard',
+        'Hotel PMS integration for room and housekeeping status',
       ],
-      technologies: ['Flutter', '.NET MAUI', 'SQL Server', 'Azure'],
-      gradient: 'retail',
+      keyDeliverables: [
+        'AI concierge with natural language understanding',
+        'Smart room booking with dynamic pricing',
+        'Guest preference learning and recommendation engine',
+      ],
+      screenshots: [
+        'assets/projects/digital-butler/screen_1.png',
+        'assets/projects/digital-butler/screen_2.png',
+      ],
+      isFeatured: true,
     ),
     ProjectModel(
-      title: 'EduConnect LMS',
-      category: 'Education',
+      id: 'smartlogix',
+      title: 'SmartLogix',
+      subtitle: 'AI-Powered Shipment & Logistics Tracking',
+      domain: 'Logistics',
       overview:
-          'OneView developed an interactive learning management system '
-          'for educational institutions, supporting live classes, '
-          'assessments, and student progress tracking.',
-      challenge:
-          'Educational institutions needed a platform that could support '
-          'both synchronous and asynchronous learning while maintaining '
-          'student engagement and comprehensive progress analytics.',
-      solution:
-          'OneView delivered a comprehensive LMS with live streaming, '
-          'interactive quizzes, gamification elements, and detailed '
-          'analytics for educators.',
+          'OneView developed an intelligent logistics platform that uses AI for '
+          'shipment registration, route optimisation, delivery prediction, and '
+          'real-time tracking — transforming traditional shipping workflows.',
+      techStack: ['Flutter', 'Dart', 'Supabase', 'Python', 'FastAPI', 'Ollama', 'OCR'],
       features: [
-        'Live streaming classes',
-        'Interactive assessments',
-        'Progress tracking',
-        'Gamification',
-        'Discussion forums',
-        'Certificate generation',
+        'AI-driven shipment registration with document OCR',
+        'Real-time GPS tracking with delivery predictions',
+        'Route optimisation using ML models',
+        'Automated status updates with smart notifications',
+        'Multi-carrier integration with unified tracking',
+        'Analytics dashboard with shipment performance metrics',
       ],
-      technologies: ['Flutter', 'Firebase', 'Cloud Functions', 'WebRTC'],
-      gradient: 'education',
+      keyDeliverables: [
+        'AI-powered shipment registration with document OCR',
+        'Route optimisation engine with ML models',
+        'Multi-carrier unified tracking platform',
+      ],
+      screenshots: [
+        'assets/projects/smartlogix/screen_1.png',
+        'assets/projects/smartlogix/screen_2.png',
+      ],
+      isFeatured: true,
     ),
     ProjectModel(
-      title: 'FinanceGuard',
-      category: 'Finance',
+      id: 'healthx-patients',
+      title: 'HealthxApp for Patients',
+      subtitle: 'Enterprise Healthcare Platform',
+      domain: 'Healthcare',
       overview:
-          'OneView designed and developed a personal finance management '
-          'application with budget tracking, investment monitoring, and '
-          'AI-powered financial insights.',
-      challenge:
-          'Users needed a comprehensive yet simple financial management tool '
-          'that could aggregate data from multiple accounts and provide '
-          'personalized financial advice.',
-      solution:
-          'OneView delivered an elegant finance application with bank '
-          'integration, automated categorization, and intelligent spending '
-          'pattern analysis.',
+          'OneView developed a comprehensive patient-facing mobile application '
+          'enabling appointment scheduling, secure document management, '
+          'HIPAA-compliant video consultations, and real-time chat with '
+          'healthcare providers.',
+      techStack: ['Xamarin.Forms', 'C#', 'ASP.NET Core', 'SQL Server', 'HL7', 'WebRTC'],
       features: [
-        'Budget management',
-        'Investment tracking',
-        'Expense categorization',
-        'Financial goals',
-        'Bill reminders',
-        'Spending insights',
+        'Appointment booking with provider availability sync',
+        'Secure video consultation with encrypted streams',
+        'Real-time chat with message history',
+        'HL7/FHIR standards for healthcare interoperability',
+        'Document upload with secure cloud storage',
+        'HIPAA-compliant data handling with encryption',
       ],
-      technologies: ['Flutter', 'ASP.NET Core', 'SQL Server', 'Azure'],
-      gradient: 'finance',
+      keyDeliverables: [
+        'Production-ready patient portal',
+        'HIPAA-compliant architecture with security audit clearance',
+        'HL7/FHIR integration layer for healthcare data exchange',
+      ],
+      isFeatured: true,
     ),
     ProjectModel(
-      title: 'GameVault Arcade',
-      category: 'Games',
+      id: 'smd-mobile',
+      title: 'SMD Mobile',
+      subtitle: 'Hospital & Clinic Management System',
+      domain: 'Healthcare',
       overview:
-          'OneView developed a collection of engaging casual mobile games '
-          'with social features, leaderboards, and cross-platform multiplayer.',
-      challenge:
-          'The client wanted to create a gaming platform that could host '
-          'multiple casual games with shared social features, unified '
-          'progression, and cross-platform play.',
-      solution:
-          'OneView delivered a modular gaming platform with shared services '
-          'for authentication, leaderboards, achievements, and social features '
-          'across all titles.',
+          'OneView delivered a comprehensive hospital and clinic management '
+          'mobile application covering patient records, medicine inventory, '
+          'appointment scheduling, and clinical workflow automation. '
+          'Successfully migrated from Xamarin.Forms to .NET MAUI.',
+      techStack: ['.NET MAUI', 'C#', 'SQLite', 'SQL Server', '.NET Core API', 'MVVM'],
       features: [
-        'Cross-platform multiplayer',
-        'Global leaderboards',
-        'Achievement system',
-        'Social features',
-        'In-app purchases',
-        'Daily challenges',
+        'Patient registration and record management',
+        'Medicine inventory tracking with stock alerts',
+        'Appointment scheduling with automated reminders',
+        'Full Xamarin.Forms to .NET MAUI migration',
+        'Improved startup time and memory efficiency',
+        'REST API integration for backend communication',
       ],
-      technologies: ['Flutter', 'Firebase', 'Dart', 'Game Engine'],
-      playStoreUrl: null,
-      gradient: 'games',
+      keyDeliverables: [
+        'Complete hospital management mobile application',
+        'Successful Xamarin to .NET MAUI migration',
+        'Performance-optimised cross-platform app',
+      ],
+      isFeatured: false,
+    ),
+    ProjectModel(
+      id: 'pinglet',
+      title: 'Pinglet',
+      subtitle: 'Real-Time Chat Application',
+      domain: 'Communication',
+      overview:
+          'OneView designed and developed a modern, performant real-time '
+          'messaging application with instant message delivery, presence '
+          'indicators, media sharing, and group conversation support.',
+      techStack: ['Flutter', 'Dart', 'Supabase', 'Realtime', 'Push Notifications'],
+      features: [
+        'Real-time messaging with sub-second delivery',
+        'Online/offline presence indicators',
+        'Media sharing — images, documents, voice messages',
+        'Group chat with admin controls',
+        'Message read receipts and typing indicators',
+        'Push notifications for background delivery',
+      ],
+      keyDeliverables: [
+        'Real-time messaging app with instant delivery',
+        'Presence and typing indicator system',
+        'Group chat with admin management',
+      ],
+      isFeatured: true,
+    ),
+    ProjectModel(
+      id: 'galleryhub',
+      title: 'GalleryHub',
+      subtitle: 'Cross-Platform Smart Gallery & Media Manager',
+      domain: 'Productivity',
+      overview:
+          'OneView developed a cross-platform gallery application ported from '
+          '.NET MAUI to Flutter. Features rich media browsing with grid/list '
+          'layouts, folder organisation, full-resolution viewing, native video '
+          'playback, camera capture, and batch operations.',
+      techStack: ['Flutter', 'Dart', 'Provider', 'photo_manager', 'video_player'],
+      features: [
+        'Gallery view with grid (2/3/4 columns) or list layout',
+        'Full-resolution image viewer with pinch-to-zoom',
+        'Native video player with progress scrubbing',
+        'Multi-select batch operations (delete, share)',
+        'Camera capture for photos and videos',
+        'Theme support with system, light, and dark modes',
+      ],
+      keyDeliverables: [
+        'Cross-platform gallery with grid and list browsing',
+        'Successful .NET MAUI to Flutter port',
+        'Batch operations with multi-select mode',
+      ],
+      appStoreUrl: 'https://apps.apple.com/in/app/galleryhub/id6766763174',
+      isFeatured: false,
     ),
   ];
 
