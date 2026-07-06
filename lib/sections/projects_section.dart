@@ -196,6 +196,24 @@ class _ProjectCard extends StatelessWidget {
             ),
           ),
         ),
+        if (project.isPreview) ...[
+          const SizedBox(height: 8),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF59E0B).withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: const Text(
+              'Coming Soon',
+              style: TextStyle(
+                color: Color(0xFFF59E0B),
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ],
         const SizedBox(height: 12),
         Text(project.title, style: Theme.of(context).textTheme.headlineSmall),
         const SizedBox(height: 4),

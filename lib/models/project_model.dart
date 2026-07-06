@@ -11,6 +11,7 @@ class ProjectModel {
   final String? appStoreUrl;
   final bool isFeatured;
   final bool isScreenshotLandscape;
+  final bool isPreview;
 
   const ProjectModel({
     required this.id,
@@ -25,5 +26,6 @@ class ProjectModel {
     this.appStoreUrl,
     this.isFeatured = false,
     this.isScreenshotLandscape = false,
+    this.isPreview = false,
   });
 }
