@@ -245,7 +245,6 @@ class AppData {
       ],
       isFeatured: true,
       isScreenshotLandscape: true,
-      isPreview: true,
     ),
     ProjectModel(
       id: 'bounceup',

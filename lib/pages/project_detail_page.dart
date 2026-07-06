@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../core/router/app_router.dart';
 import '../core/theme/app_colors.dart';
 import '../core/utils/responsive.dart';
 import '../models/project_model.dart';
@@ -64,7 +65,10 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
             isDark ? AppColors.darkBackground : AppColors.lightBackground,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            final delegate = Router.of(context).routerDelegate as AppRouterDelegate;
+            delegate.navigateTo(const AppRoutePath.home());
+          },
         ),
         title: Text(project.title),
         centerTitle: false,
@@ -97,25 +101,6 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                     ),
                   ),
                 ),
-                if (project.isPreview) ...[
-                  const SizedBox(height: 8),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF59E0B).withValues(alpha: 0.15),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Text(
-                      'Coming Soon',
-                      style: TextStyle(
-                        color: Color(0xFFF59E0B),
-                        fontWeight: FontWeight.w700,
-                        fontSize: 13,
-                      ),
-                    ),
-                  ),
-                ],
                 const SizedBox(height: 12),
                 Text(project.title,
                     style: Theme.of(context).textTheme.displaySmall),

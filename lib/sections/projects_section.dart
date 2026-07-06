@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../core/constants/app_data.dart';
 import '../core/constants/app_spacing.dart';
+import '../core/router/app_router.dart';
 import '../core/theme/app_colors.dart';
 import '../core/utils/responsive.dart';
 import '../models/project_model.dart';
-
 import '../widgets/common/section_header.dart';
 import '../widgets/common/glass_card.dart';
 import '../widgets/animations/fade_in_widget.dart';
@@ -55,6 +55,20 @@ class ProjectsSection extends StatelessWidget {
                   ),
                 );
               }),
+              const SizedBox(height: 24),
+              Center(
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    final delegate = Router.of(context).routerDelegate as AppRouterDelegate;
+                    delegate.navigateTo(const AppRoutePath.projects());
+                  },
+                  icon: const Icon(Icons.grid_view_rounded, size: 18),
+                  label: const Text('View All Projects'),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -77,7 +91,10 @@ class _ProjectCard extends StatelessWidget {
         [AppColors.primary, AppColors.accent];
 
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/projects/${project.id}'),
+      onTap: () {
+        final delegate = Router.of(context).routerDelegate as AppRouterDelegate;
+        delegate.navigateTo(AppRoutePath.projectDetail(project));
+      },
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GlassCard(
@@ -196,24 +213,6 @@ class _ProjectCard extends StatelessWidget {
             ),
           ),
         ),
-        if (project.isPreview) ...[
-          const SizedBox(height: 8),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(
-              color: const Color(0xFFF59E0B).withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: const Text(
-              'Coming Soon',
-              style: TextStyle(
-                color: Color(0xFFF59E0B),
-                fontSize: 11,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ],
         const SizedBox(height: 12),
         Text(project.title, style: Theme.of(context).textTheme.headlineSmall),
         const SizedBox(height: 4),
