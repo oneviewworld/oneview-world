@@ -4,7 +4,7 @@ import '../core/constants/app_spacing.dart';
 import '../core/theme/app_colors.dart';
 import '../core/utils/responsive.dart';
 import '../models/project_model.dart';
-import '../pages/project_detail_page.dart';
+
 import '../widgets/common/section_header.dart';
 import '../widgets/common/glass_card.dart';
 import '../widgets/animations/fade_in_widget.dart';
@@ -77,11 +77,7 @@ class _ProjectCard extends StatelessWidget {
         [AppColors.primary, AppColors.accent];
 
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (_) => ProjectDetailPage(project: project)),
-      ),
+      onTap: () => Navigator.pushNamed(context, '/projects/${project.id}'),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GlassCard(

@@ -118,5 +118,15 @@
   </div>
 
   <script src="flutter_bootstrap.js" async></script>
+  <script>
+    // Restore SPA path after 404.html redirect
+    (function() {
+      var redirect = sessionStorage.getItem('redirect');
+      if (redirect && redirect !== '/') {
+        sessionStorage.removeItem('redirect');
+        history.replaceState(null, '', redirect);
+      }
+    })();
+  </script>
 </body>
 </html>
