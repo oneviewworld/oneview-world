@@ -214,7 +214,15 @@ class _ProjectCard extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        Text(project.title, style: Theme.of(context).textTheme.headlineSmall),
+        Row(
+          children: [
+            Expanded(
+              child: Text(project.title, style: Theme.of(context).textTheme.headlineSmall),
+            ),
+            if (project.appStoreUrl != null)
+              Icon(Icons.apple, size: 22, color: isDark ? Colors.white70 : Colors.black54),
+          ],
+        ),
         const SizedBox(height: 4),
         Text(
           project.subtitle,

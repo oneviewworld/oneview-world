@@ -103,8 +103,23 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                Text(project.title,
-                    style: Theme.of(context).textTheme.displaySmall),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(project.title,
+                          style: Theme.of(context).textTheme.displaySmall),
+                    ),
+                    if (project.appStoreUrl != null)
+                      IconButton(
+                        onPressed: () => launchUrl(Uri.parse(project.appStoreUrl!)),
+                        icon: const Icon(Icons.apple, size: 28),
+                        tooltip: 'Download on App Store',
+                        style: IconButton.styleFrom(
+                          backgroundColor: AppColors.primary.withValues(alpha: 0.1),
+                        ),
+                      ),
+                  ],
+                ),
                 const SizedBox(height: 4),
                 Text(
                   project.subtitle,
@@ -197,16 +212,6 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                     );
                   }).toList(),
                 ),
-
-                // App Store link
-                if (project.appStoreUrl != null) ...[
-                  const SizedBox(height: 32),
-                  OutlinedButton.icon(
-                    onPressed: () => launchUrl(Uri.parse(project.appStoreUrl!)),
-                    icon: const Icon(Icons.apple),
-                    label: const Text('Download on App Store'),
-                  ),
-                ],
 
                 const SizedBox(height: 48),
               ],
