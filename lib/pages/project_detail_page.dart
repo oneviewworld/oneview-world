@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../core/router/app_router.dart';
 import '../core/theme/app_colors.dart';
 import '../core/utils/responsive.dart';
@@ -201,9 +202,9 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                 if (project.appStoreUrl != null) ...[
                   const SizedBox(height: 32),
                   OutlinedButton.icon(
-                    onPressed: () {},
+                    onPressed: () => launchUrl(Uri.parse(project.appStoreUrl!)),
                     icon: const Icon(Icons.apple),
-                    label: const Text('View on App Store'),
+                    label: const Text('Download on App Store'),
                   ),
                 ],
 

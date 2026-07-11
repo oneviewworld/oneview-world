@@ -243,6 +243,7 @@ class AppData {
         'assets/projects/hopix-valley/screen_8.png',
         'assets/projects/hopix-valley/screen_9.png',
       ],
+      appStoreUrl: 'https://apps.apple.com/in/app/hopix-valley/id6787487138',
       isFeatured: true,
       isScreenshotLandscape: true,
     ),
