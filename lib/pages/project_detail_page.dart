@@ -110,13 +110,10 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                           style: Theme.of(context).textTheme.displaySmall),
                     ),
                     if (project.appStoreUrl != null)
-                      IconButton(
+                      TextButton.icon(
                         onPressed: () => launchUrl(Uri.parse(project.appStoreUrl!)),
-                        icon: const Icon(Icons.apple, size: 28),
-                        tooltip: 'Download on App Store',
-                        style: IconButton.styleFrom(
-                          backgroundColor: AppColors.primary.withValues(alpha: 0.1),
-                        ),
+                        icon: const Icon(Icons.apple, size: 20),
+                        label: const Text('App Store'),
                       ),
                   ],
                 ),
