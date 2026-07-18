@@ -286,6 +286,7 @@ class AppData {
         'assets/projects/bounceup/screen_11.png',
       ],
       isFeatured: true,
+      appStoreUrl: 'https://apps.apple.com/us/app/bounceup-arcade-paddle-game/id6782346917',
     ),
     ProjectModel(
       id: 'reconvision',
