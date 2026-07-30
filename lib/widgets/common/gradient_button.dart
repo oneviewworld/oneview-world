@@ -3,7 +3,7 @@ import '../../core/theme/app_colors.dart';
 
 class GradientButton extends StatefulWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final IconData? icon;
   final bool isOutlined;
 
@@ -77,8 +77,10 @@ class _GradientButtonState extends State<GradientButton> {
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          gradient: AppColors.primaryGradient,
-          boxShadow: _isHovered
+          gradient: widget.onPressed == null
+              ? LinearGradient(colors: [Colors.grey.shade700, Colors.grey.shade600])
+              : AppColors.primaryGradient,
+          boxShadow: _isHovered && widget.onPressed != null
               ? [
                   BoxShadow(
                     color: AppColors.primary.withValues(alpha: 0.4),

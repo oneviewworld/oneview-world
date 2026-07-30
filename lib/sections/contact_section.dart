@@ -22,6 +22,11 @@ class _ContactSectionState extends State<ContactSection> {
   final _emailController = TextEditingController();
   final _messageController = TextEditingController();
 
+  static const int _cooldownSeconds = 60;
+  static const int _maxSubmissions = 3;
+  int _submissionCount = 0;
+  int _cooldownRemaining = 0;
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -30,13 +35,26 @@ class _ContactSectionState extends State<ContactSection> {
     super.dispose();
   }
 
+  void _startCooldown() {
+    setState(() => _cooldownRemaining = _cooldownSeconds);
+    Future.doWhile(() async {
+      await Future.delayed(const Duration(seconds: 1));
+      if (!mounted) return false;
+      setState(() => _cooldownRemaining--);
+      return _cooldownRemaining > 0;
+    });
+  }
+
   Future<void> _submitForm() async {
+    if (_cooldownRemaining > 0 || _submissionCount >= _maxSubmissions) return;
     if (_formKey.currentState!.validate()) {
       final subject = Uri.encodeComponent('Project Inquiry from ${_nameController.text}');
       final body = Uri.encodeComponent(_messageController.text);
       final uri = Uri.parse('mailto:${AppConstants.email}?subject=$subject&body=$body');
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri);
+        setState(() => _submissionCount++);
+        _startCooldown();
       }
     }
   }
@@ -192,11 +210,20 @@ class _ContactSectionState extends State<ContactSection> {
                 },
               ),
               const SizedBox(height: 24),
-              GradientButton(
-                text: 'Send Message',
-                onPressed: _submitForm,
-                icon: Icons.send_rounded,
-              ),
+              Builder(builder: (context) {
+                final blocked = _submissionCount >= _maxSubmissions;
+                final cooling = _cooldownRemaining > 0;
+                final label = blocked
+                    ? 'Limit reached'
+                    : cooling
+                        ? 'Wait ${_cooldownRemaining}s'
+                        : 'Send Message';
+                return GradientButton(
+                  text: label,
+                  onPressed: (cooling || blocked) ? null : _submitForm,
+                  icon: Icons.send_rounded,
+                );
+              }),
             ],
           ),
         ),
