@@ -24,6 +24,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/instagram/Posts/
     - assets/projects/bounceup/
     - assets/projects/reconvision/
     - assets/projects/digital-butler/

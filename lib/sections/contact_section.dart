@@ -174,10 +174,27 @@ class _ContactSectionState extends State<ContactSection> {
             isDark: isDark,
           ),
           const SizedBox(height: 16),
-          _ContactInfoItem(
-            icon: Icons.work_outline,
+          _ContactInfoItemImage(
+            iconAsset: 'assets/icons/instagram.png',
+            label: 'Instagram',
+            value: '@oneview.world',
+            onTap: () => launchUrl(Uri.parse('https://www.instagram.com/oneview.world/')),
+            isDark: isDark,
+          ),
+          const SizedBox(height: 16),
+          _ContactInfoItemImage(
+            iconAsset: 'assets/icons/linkedin.png',
             label: 'LinkedIn',
-            value: 'Coming Soon',
+            value: 'oneviewworld',
+            onTap: () => launchUrl(Uri.parse('https://www.linkedin.com/in/oneviewworld/')),
+            isDark: isDark,
+          ),
+          const SizedBox(height: 16),
+          _ContactInfoItemImage(
+            iconAsset: 'assets/icons/reddit.png',
+            label: 'Reddit',
+            value: 'u/Oneview-World',
+            onTap: () => launchUrl(Uri.parse('https://www.reddit.com/user/Oneview-World/')),
             isDark: isDark,
           ),
         ],
@@ -304,6 +321,67 @@ class _ContactInfoItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(icon, color: AppColors.primary, size: 20),
+        ),
+        const SizedBox(width: 16),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
+            Text(
+              value,
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: onTap != null ? AppColors.primary : null,
+                  ),
+            ),
+          ],
+        ),
+      ],
+    );
+
+    if (onTap != null) {
+      return MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: onTap,
+          child: content,
+        ),
+      );
+    }
+    return content;
+  }
+}
+
+class _ContactInfoItemImage extends StatelessWidget {
+  final String iconAsset;
+  final String label;
+  final String value;
+  final VoidCallback? onTap;
+  final bool isDark;
+
+  const _ContactInfoItemImage({
+    required this.iconAsset,
+    required this.label,
+    required this.value,
+    this.onTap,
+    required this.isDark,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final content = Row(
+      children: [
+        Container(
+          width: 40,
+          height: 40,
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: AppColors.primary.withValues(alpha: isDark ? 0.15 : 0.08),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Image.asset(iconAsset, fit: BoxFit.contain),
         ),
         const SizedBox(width: 16),
         Column(

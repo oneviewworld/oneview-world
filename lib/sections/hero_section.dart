@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../core/theme/app_colors.dart';
 import '../core/constants/app_constants.dart';
 import '../core/constants/app_data.dart';
@@ -12,11 +13,13 @@ import '../widgets/animations/fade_in_widget.dart';
 class HeroSection extends StatefulWidget {
   final VoidCallback onViewWork;
   final VoidCallback onStartProject;
+  final VoidCallback onBlog;
 
   const HeroSection({
     super.key,
     required this.onViewWork,
     required this.onStartProject,
+    required this.onBlog,
   });
 
   @override
@@ -103,40 +106,63 @@ class _HeroSectionState extends State<HeroSection>
       children: [
         FadeInWidget(
           delay: const Duration(milliseconds: 200),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.primary.withValues(alpha: isDark ? 0.15 : 0.08),
-                  AppColors.accent.withValues(alpha: isDark ? 0.1 : 0.05),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(
-                color: AppColors.primary.withValues(alpha: 0.2),
-              ),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 8,
-                  height: 8,
-                  decoration: const BoxDecoration(
-                    color: AppColors.success,
-                    shape: BoxShape.circle,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.primary.withValues(alpha: isDark ? 0.15 : 0.08),
+                      AppColors.accent.withValues(alpha: isDark ? 0.1 : 0.05),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(
+                    color: AppColors.primary.withValues(alpha: 0.2),
                   ),
                 ),
-                const SizedBox(width: 8),
-                Text(
-                  'Available for new projects',
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: AppColors.primary,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: const BoxDecoration(
+                        color: AppColors.success,
+                        shape: BoxShape.circle,
                       ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Available for new projects',
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            color: AppColors.primary,
+                          ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 12),
+              _SocialIconButton(
+                iconAsset: 'assets/icons/instagram.png',
+                tooltip: 'Instagram',
+                url: 'https://www.instagram.com/oneview.world/',
+              ),
+              const SizedBox(width: 8),
+              _SocialIconButton(
+                iconAsset: 'assets/icons/linkedin.png',
+                tooltip: 'LinkedIn',
+                url: 'https://www.linkedin.com/in/oneviewworld/',
+              ),
+              const SizedBox(width: 8),
+              _SocialIconButton(
+                iconAsset: 'assets/icons/reddit.png',
+                tooltip: 'Reddit',
+                url: 'https://www.reddit.com/user/Oneview-World/',
+              ),
+            ],
           ),
         ),
         const SizedBox(height: 32),
@@ -180,6 +206,12 @@ class _HeroSectionState extends State<HeroSection>
                 onPressed: widget.onStartProject,
                 isOutlined: true,
                 icon: Icons.rocket_launch_rounded,
+              ),
+              GradientButton(
+                text: 'Blog',
+                onPressed: widget.onBlog,
+                isOutlined: true,
+                icon: Icons.article_outlined,
               ),
             ],
           ),
@@ -232,6 +264,39 @@ class _HeroSectionState extends State<HeroSection>
           size: Size.infinite,
         );
       },
+    );
+  }
+}
+
+class _SocialIconButton extends StatelessWidget {
+  final String? iconAsset;
+  final String tooltip;
+  final String url;
+
+  const _SocialIconButton({
+    this.iconAsset,
+    required this.tooltip,
+    required this.url,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: tooltip,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () => launchUrl(Uri.parse(url)),
+          child: Container(
+            width: 32,
+            height: 32,
+            padding: const EdgeInsets.all(2),
+            child: iconAsset != null
+                ? Image.asset(iconAsset!, fit: BoxFit.contain)
+                : const SizedBox.shrink(),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -48,5 +48,6 @@ class AppConstants {
   static const String sectionProcess = 'process';
   static const String sectionAbout = 'about';
   static const String sectionFaq = 'faq';
+  static const String sectionBlog = 'blog';
   static const String sectionContact = 'contact';
 }

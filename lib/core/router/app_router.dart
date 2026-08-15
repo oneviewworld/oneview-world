@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import '../constants/app_data.dart';
+import '../data/instagram_posts_data.dart';
+import '../models/instagram_post.dart';
 import '../../models/project_model.dart';
 
 /// Route configuration representing the current navigation state.
 class AppRoutePath {
   final String location;
   final ProjectModel? project;
+  final InstagramPost? blogPost;
 
-  const AppRoutePath.home() : location = '/', project = null;
-  const AppRoutePath.projects() : location = '/projects', project = null;
-  AppRoutePath.projectDetail(this.project) : location = '/projects/${project!.id}';
+  const AppRoutePath.home() : location = '/', project = null, blogPost = null;
+  const AppRoutePath.projects() : location = '/projects', project = null, blogPost = null;
+  AppRoutePath.projectDetail(this.project) : location = '/projects/${project!.id}', blogPost = null;
+  AppRoutePath.blog(this.blogPost) : location = '/blog/${blogPost!.id}', project = null;
 
   bool get isHome => location == '/';
   bool get isProjects => location == '/projects';
   bool get isProjectDetail => project != null;
+  bool get isBlog => blogPost != null;
 }
 
 /// Parses browser URL into AppRoutePath.
@@ -31,6 +36,14 @@ class AppRouteParser extends RouteInformationParser<AppRoutePath> {
       final project = AppData.projects.where((p) => p.id == id).firstOrNull;
       if (project != null) {
         return AppRoutePath.projectDetail(project);
+      }
+    }
+
+    if (uri.pathSegments.length == 2 && uri.pathSegments[0] == 'blog') {
+      final id = uri.pathSegments[1];
+      final post = instagramPosts.where((p) => p.id == id).firstOrNull;
+      if (post != null) {
+        return AppRoutePath.blog(post);
       }
     }
 
@@ -52,6 +65,7 @@ class AppRouterDelegate extends RouterDelegate<AppRoutePath>
   final Widget Function() homeBuilder;
   final Widget Function() projectsBuilder;
   final Widget Function(ProjectModel) projectDetailBuilder;
+  final Widget Function(InstagramPost) blogDetailBuilder;
 
   AppRoutePath _currentPath = const AppRoutePath.home();
 
@@ -59,6 +73,7 @@ class AppRouterDelegate extends RouterDelegate<AppRoutePath>
     required this.homeBuilder,
     required this.projectsBuilder,
     required this.projectDetailBuilder,
+    required this.blogDetailBuilder,
   });
 
   @override
@@ -79,6 +94,8 @@ class AppRouterDelegate extends RouterDelegate<AppRoutePath>
           MaterialPage(child: projectsBuilder()),
         if (_currentPath.isProjectDetail)
           MaterialPage(child: projectDetailBuilder(_currentPath.project!)),
+        if (_currentPath.isBlog)
+          MaterialPage(child: blogDetailBuilder(_currentPath.blogPost!)),
       ],
       onDidRemovePage: (page) {
         if (_currentPath.isProjectDetail) {

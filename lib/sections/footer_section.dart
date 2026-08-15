@@ -173,18 +173,31 @@ class FooterSection extends StatelessWidget {
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(height: 16),
-        Text(
-          'LinkedIn — Coming Soon',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: isDark
-                    ? AppColors.darkTextSecondary
-                    : AppColors.lightTextSecondary,
-              ),
+        _SocialLink(
+          label: 'Instagram',
+          url: 'https://www.instagram.com/oneview.world/',
+          icon: Icons.camera_alt_outlined,
+          isDark: isDark,
+        ),
+        const SizedBox(height: 10),
+        _SocialLink(
+          label: 'LinkedIn',
+          url: 'https://www.linkedin.com/in/oneviewworld/',
+          icon: Icons.work_outline,
+          isDark: isDark,
+        ),
+        const SizedBox(height: 10),
+        _SocialLink(
+          label: 'Reddit',
+          url: 'https://www.reddit.com/user/Oneview-World/',
+          icon: Icons.forum_outlined,
+          isDark: isDark,
         ),
         const SizedBox(height: 10),
         _SocialLink(
           label: 'Email',
           url: 'mailto:${AppConstants.email}',
+          icon: Icons.email_outlined,
           isDark: isDark,
         ),
       ],
@@ -233,11 +246,13 @@ class FooterSection extends StatelessWidget {
 class _SocialLink extends StatelessWidget {
   final String label;
   final String url;
+  final IconData? icon;
   final bool isDark;
 
   const _SocialLink({
     required this.label,
     required this.url,
+    this.icon,
     required this.isDark,
   });
 
@@ -247,13 +262,28 @@ class _SocialLink extends StatelessWidget {
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: () => launchUrl(Uri.parse(url)),
-        child: Text(
-          label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (icon != null) ...[
+              Icon(
+                icon,
+                size: 16,
                 color: isDark
                     ? AppColors.darkTextSecondary
                     : AppColors.lightTextSecondary,
               ),
+              const SizedBox(width: 8),
+            ],
+            Text(
+              label,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: isDark
+                        ? AppColors.darkTextSecondary
+                        : AppColors.lightTextSecondary,
+                  ),
+            ),
+          ],
         ),
       ),
     );

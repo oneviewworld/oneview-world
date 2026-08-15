@@ -11,6 +11,7 @@ import '../sections/why_oneview_section.dart';
 import '../sections/process_section.dart';
 import '../sections/about_section.dart';
 import '../sections/faq_section.dart';
+import '../sections/instagram_section.dart';
 import '../sections/contact_section.dart';
 import '../sections/footer_section.dart';
 
@@ -37,6 +38,7 @@ class _HomePageState extends State<HomePage> {
     AppConstants.sectionProcess: GlobalKey(),
     AppConstants.sectionAbout: GlobalKey(),
     AppConstants.sectionFaq: GlobalKey(),
+    AppConstants.sectionBlog: GlobalKey(),
     AppConstants.sectionContact: GlobalKey(),
   };
 
@@ -91,6 +93,8 @@ class _HomePageState extends State<HomePage> {
                       _scrollToSection(AppConstants.sectionProjects),
                   onStartProject: () =>
                       _scrollToSection(AppConstants.sectionContact),
+                  onBlog: () =>
+                      _scrollToSection(AppConstants.sectionBlog),
                 )),
                 _buildSection(AppConstants.sectionServices,
                     const ServicesSection()),
@@ -100,6 +104,7 @@ class _HomePageState extends State<HomePage> {
                     const ProjectsSection()),
                 _buildSection(AppConstants.sectionTechnologies,
                     const TechnologiesSection()),
+                _buildSection(AppConstants.sectionBlog, const InstagramSection()),
                 _buildSection(AppConstants.sectionWhyOneView,
                     const WhyOneViewSection()),
                 _buildSection(

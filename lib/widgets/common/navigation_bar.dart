@@ -122,6 +122,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       (AppConstants.sectionWhyOneView, 'Why OneView'),
       (AppConstants.sectionProcess, 'Process'),
       (AppConstants.sectionAbout, 'About'),
+      (AppConstants.sectionBlog, 'Blog'),
       (AppConstants.sectionContact, 'Contact'),
     ];
 
@@ -181,6 +182,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       (AppConstants.sectionWhyOneView, 'Why OneView'),
       (AppConstants.sectionProcess, 'Process'),
       (AppConstants.sectionAbout, 'About'),
+      (AppConstants.sectionBlog, 'Blog'),
       (AppConstants.sectionContact, 'Contact'),
     ];
 
