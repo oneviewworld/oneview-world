@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../core/constants/app_constants.dart';
 import '../core/utils/emailjs_service.dart';
+import '../core/utils/recaptcha_service.dart';
 import '../core/constants/app_spacing.dart';
 import '../core/theme/app_colors.dart';
 import '../core/utils/responsive.dart';
@@ -53,6 +54,18 @@ class _ContactSectionState extends State<ContactSection> {
     if (_cooldownRemaining > 0 || _submissionCount >= _maxSubmissions) return;
     if (!_formKey.currentState!.validate()) return;
     setState(() => _isSending = true);
+
+    // Verify reCAPTCHA before sending
+    final token = await getRecaptchaToken();
+    if (token == null || token.isEmpty) {
+      if (!mounted) return;
+      setState(() => _isSending = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Security verification failed. Please try again.')),
+      );
+      return;
+    }
+
     final success = await sendEmailJS(
       name: _nameController.text,
       email: _emailController.text,
