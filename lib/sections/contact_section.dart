@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../core/constants/app_constants.dart';
+import '../core/utils/emailjs_service.dart';
 import '../core/constants/app_spacing.dart';
 import '../core/theme/app_colors.dart';
 import '../core/utils/responsive.dart';
@@ -20,17 +21,20 @@ class _ContactSectionState extends State<ContactSection> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _messageController = TextEditingController();
 
   static const int _cooldownSeconds = 60;
   static const int _maxSubmissions = 3;
   int _submissionCount = 0;
   int _cooldownRemaining = 0;
+  bool _isSending = false;
 
   @override
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
+    _phoneController.dispose();
     _messageController.dispose();
     super.dispose();
   }
@@ -47,15 +51,32 @@ class _ContactSectionState extends State<ContactSection> {
 
   Future<void> _submitForm() async {
     if (_cooldownRemaining > 0 || _submissionCount >= _maxSubmissions) return;
-    if (_formKey.currentState!.validate()) {
-      final subject = Uri.encodeComponent('Project Inquiry from ${_nameController.text}');
-      final body = Uri.encodeComponent(_messageController.text);
-      final uri = Uri.parse('mailto:${AppConstants.email}?subject=$subject&body=$body');
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri);
-        setState(() => _submissionCount++);
-        _startCooldown();
-      }
+    if (!_formKey.currentState!.validate()) return;
+    setState(() => _isSending = true);
+    final success = await sendEmailJS(
+      name: _nameController.text,
+      email: _emailController.text,
+      phone: _phoneController.text,
+      message: _messageController.text,
+    );
+    if (!mounted) return;
+    setState(() {
+      _isSending = false;
+      if (success) _submissionCount++;
+    });
+    if (success) {
+      _nameController.clear();
+      _emailController.clear();
+      _phoneController.clear();
+      _messageController.clear();
+      _startCooldown();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Message sent! We'll get back to you soon.")),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to send. Please try again.')),
+      );
     }
   }
 
@@ -195,6 +216,15 @@ class _ContactSectionState extends State<ContactSection> {
               ),
               const SizedBox(height: 20),
               TextFormField(
+                controller: _phoneController,
+                decoration: const InputDecoration(
+                  labelText: 'Phone (optional)',
+                  hintText: '+1 234 567 8900',
+                ),
+                keyboardType: TextInputType.phone,
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
                 controller: _messageController,
                 decoration: const InputDecoration(
                   labelText: 'Message',
@@ -217,10 +247,12 @@ class _ContactSectionState extends State<ContactSection> {
                     ? 'Limit reached'
                     : cooling
                         ? 'Wait ${_cooldownRemaining}s'
-                        : 'Send Message';
+                        : _isSending
+                            ? 'Sending...'
+                            : 'Send Message';
                 return GradientButton(
                   text: label,
-                  onPressed: (cooling || blocked) ? null : _submitForm,
+                  onPressed: (cooling || blocked || _isSending) ? null : _submitForm,
                   icon: Icons.send_rounded,
                 );
               }),

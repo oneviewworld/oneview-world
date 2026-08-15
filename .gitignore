@@ -16,6 +16,9 @@ Thumbs.db
 # Environment
 .env*
 
+# Amazon Q MCP (contains secrets)
+.amazonq/mcp.json
+
 # Generated
 *.dart.js
 *.info.json
