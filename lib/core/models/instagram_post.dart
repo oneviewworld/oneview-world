@@ -11,6 +11,8 @@ class InstagramPost {
   final String? metaDescription;
   final String? excerpt;
   final List<String> seoKeywords;
+  final String? ogTitle;
+  final String? ogDescription;
 
   const InstagramPost({
     required this.id,
@@ -25,6 +27,8 @@ class InstagramPost {
     this.metaDescription,
     this.excerpt,
     this.seoKeywords = const [],
+    this.ogTitle,
+    this.ogDescription,
   });
 
   /// URL segment — uses slug if set, otherwise falls back to id
