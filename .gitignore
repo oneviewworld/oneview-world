@@ -18,6 +18,7 @@ Thumbs.db
 
 # Amazon Q MCP (contains secrets)
 .amazonq/mcp.json
+.amazonq/agents/
 
 # Generated
 *.dart.js
