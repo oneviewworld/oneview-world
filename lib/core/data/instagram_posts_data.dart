@@ -128,7 +128,7 @@ final List<InstagramPost> instagramPosts = [
         'We believe technology should make complex things simpler. Software should solve problems '
         'rather than create new ones. And digital experiences should be designed around the people who use them.\n\n'
         'The Future Is Built, Not Predicted\n\n'
-        "Nobody can know exactly what the next decade of technology will look like.\n\n"
+        'Nobody can know exactly what the next decade of technology will look like.\n\n'
         'But we can build systems that are prepared for change. We can experiment with new technologies. '
         "We can solve today's problems while keeping tomorrow's possibilities in mind.\n\n"
         'The future does not simply arrive. It is designed. It is developed. It is tested. It is improved. '
