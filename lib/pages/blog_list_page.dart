@@ -91,7 +91,7 @@ class _BlogGridCardState extends State<_BlogGridCard> {
           duration: const Duration(milliseconds: 220),
           curve: Curves.easeOut,
           transform: _isHovered
-              ? (Matrix4.identity()..translate(0.0, -4.0))
+              ? Matrix4.translationValues(0, -4, 0)
               : Matrix4.identity(),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
