@@ -9,11 +9,13 @@ class AppRoutePath {
   final String location;
   final ProjectModel? project;
   final InstagramPost? blogPost;
+  final bool isBlogList;
 
-  const AppRoutePath.home() : location = '/', project = null, blogPost = null;
-  const AppRoutePath.projects() : location = '/projects', project = null, blogPost = null;
-  AppRoutePath.projectDetail(this.project) : location = '/projects/${project!.id}', blogPost = null;
-  AppRoutePath.blog(this.blogPost) : location = '/blog/${blogPost!.urlId}', project = null;
+  const AppRoutePath.home() : location = '/', project = null, blogPost = null, isBlogList = false;
+  const AppRoutePath.projects() : location = '/projects', project = null, blogPost = null, isBlogList = false;
+  const AppRoutePath.blogList() : location = '/blog', project = null, blogPost = null, isBlogList = true;
+  AppRoutePath.projectDetail(this.project) : location = '/projects/${project!.id}', blogPost = null, isBlogList = false;
+  AppRoutePath.blog(this.blogPost) : location = '/blog/${blogPost!.urlId}', project = null, isBlogList = false;
 
   bool get isHome => location == '/';
   bool get isProjects => location == '/projects';
@@ -29,6 +31,10 @@ class AppRouteParser extends RouteInformationParser<AppRoutePath> {
 
     if (uri.pathSegments.length == 1 && uri.pathSegments[0] == 'projects') {
       return const AppRoutePath.projects();
+    }
+
+    if (uri.pathSegments.length == 1 && uri.pathSegments[0] == 'blog') {
+      return const AppRoutePath.blogList();
     }
 
     if (uri.pathSegments.length == 2 && uri.pathSegments[0] == 'projects') {
@@ -64,6 +70,7 @@ class AppRouterDelegate extends RouterDelegate<AppRoutePath>
 
   final Widget Function() homeBuilder;
   final Widget Function() projectsBuilder;
+  final Widget Function() blogListBuilder;
   final Widget Function(ProjectModel) projectDetailBuilder;
   final Widget Function(InstagramPost) blogDetailBuilder;
 
@@ -72,6 +79,7 @@ class AppRouterDelegate extends RouterDelegate<AppRoutePath>
   AppRouterDelegate({
     required this.homeBuilder,
     required this.projectsBuilder,
+    required this.blogListBuilder,
     required this.projectDetailBuilder,
     required this.blogDetailBuilder,
   });
@@ -92,6 +100,8 @@ class AppRouterDelegate extends RouterDelegate<AppRoutePath>
         MaterialPage(child: homeBuilder()),
         if (_currentPath.isProjects)
           MaterialPage(child: projectsBuilder()),
+        if (_currentPath.isBlogList)
+          MaterialPage(child: blogListBuilder()),
         if (_currentPath.isProjectDetail)
           MaterialPage(child: projectDetailBuilder(_currentPath.project!)),
         if (_currentPath.isBlog)
@@ -100,6 +110,8 @@ class AppRouterDelegate extends RouterDelegate<AppRoutePath>
       onDidRemovePage: (page) {
         if (_currentPath.isProjectDetail) {
           _currentPath = const AppRoutePath.projects();
+        } else if (_currentPath.isBlog) {
+          _currentPath = const AppRoutePath.blogList();
         } else {
           _currentPath = const AppRoutePath.home();
         }

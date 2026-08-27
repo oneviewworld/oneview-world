@@ -7,6 +7,7 @@ import 'pages/home_page.dart';
 import 'pages/project_detail_page.dart';
 import 'pages/projects_list_page.dart';
 import 'pages/blog_detail_page.dart';
+import 'pages/blog_list_page.dart';
 
 void main() {
   usePathUrlStrategy();
@@ -32,6 +33,7 @@ class _OneViewAppState extends State<OneViewApp> {
     _routerDelegate = AppRouterDelegate(
       homeBuilder: () => HomePage(themeProvider: _themeProvider),
       projectsBuilder: () => const ProjectsListPage(),
+      blogListBuilder: () => const BlogListPage(),
       projectDetailBuilder: (project) => ProjectDetailPage(project: project),
       blogDetailBuilder: (post) => BlogDetailPage(post: post),
     );

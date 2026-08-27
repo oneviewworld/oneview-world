@@ -47,7 +47,7 @@ class _BlogDetailPageState extends State<BlogDetailPage> {
           onPressed: () {
             final delegate =
                 Router.of(context).routerDelegate as AppRouterDelegate;
-            delegate.navigateTo(const AppRoutePath.home());
+            delegate.navigateTo(const AppRoutePath.blogList());
           },
         ),
         title: const Text('Blog'),
