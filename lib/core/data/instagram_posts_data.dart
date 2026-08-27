@@ -107,4 +107,63 @@ final List<InstagramPost> instagramPosts = [
     likes: 0,
     date: DateTime(2026, 1, 20),
   ),
+  InstagramPost(
+    id: 'post_7',
+    imageAsset: 'assets/instagram/Posts/Post 7.1.png',
+    allImages: [
+      'assets/instagram/Posts/Post 7.1.png',
+      'assets/instagram/Posts/Post 7.2.png',
+      'assets/instagram/Posts/Post 7.3.png',
+      'assets/instagram/Posts/Post 7.4.png',
+      'assets/instagram/Posts/Post 7.5.png',
+      'assets/instagram/Posts/Post 7.6.png',
+      'assets/instagram/Posts/Post 7.7.png',
+      'assets/instagram/Posts/Post 7.8.png',
+    ],
+    postUrl: 'https://www.instagram.com/p/DcgN2fwguEH/',
+    caption: '🏥 Care Doesn\'t End at Checkout\n\n'
+        'The visit may be over, but the patient\'s care journey continues.\n\n'
+        'Healthcare is a journey, not just a visit.\n\n'
+        'A patient\'s experience with a clinic does not begin and end inside the '
+        'consultation room. From the first appointment to patient records, '
+        'consultation, prescriptions, investigations, billing, and follow-ups, '
+        'every step contributes to the overall care journey.\n\n'
+        'When these steps are disconnected, healthcare teams may spend '
+        'unnecessary time managing information, tracking follow-ups, and '
+        'coordinating what happens next.\n\n'
+        'OneView connects the journey.\n\n'
+        'Treatment Plans Keep Care Moving Forward\n\n'
+        'After meeting with a doctor, a patient may need to follow a treatment '
+        'plan, take prescribed medications, complete investigations, review '
+        'reports, or return for another consultation.\n\n'
+        'OneView helps keep these next steps connected to the patient record.\n\n'
+        'Follow-ups Are Part of the Journey\n\n'
+        'Follow-up appointments can be an important part of monitoring progress, '
+        'reviewing results, updating treatment plans, or continuing a patient\'s care.\n\n'
+        'OneView helps clinics organize upcoming follow-ups and connect them with '
+        'the patient\'s previous visits and treatment history.\n\n'
+        'Reminders Make the Next Step Clear\n\n'
+        'OneView helps healthcare teams organize reminders, including:\n'
+        '• Appointment reminders\n'
+        '• Medication reminders\n'
+        '• Investigation reminders\n'
+        '• Report review reminders\n'
+        '• Follow-up reminders\n\n'
+        'From Consultation to Continued Care\n\n'
+        'Consultation → Treatment Plan → Prescription → Investigation → Results → Follow-up → Continued Care\n\n'
+        'Each step builds on the previous one.\n\n'
+        'Better Continuity of Care\n\n'
+        'Good healthcare is not only about what happens during a consultation. '
+        'It is also about what happens afterward.\n\n'
+        'OneView helps keep this information connected, giving healthcare teams '
+        'a more organized way to manage ongoing patient care.\n\n'
+        'One Platform. Complete Patient Care. Better Health.\n\n'
+        'OneView connects appointments, patient records, consultations, '
+        'prescriptions, investigations, billing, and follow-ups into one platform.\n\n'
+        'Because every visit is part of something bigger.\n\n'
+        'The consultation may end. The care continues.\n\n'
+        '🌐 oneview.world',
+    likes: 0,
+    date: DateTime(2026, 8, 27),
+  ),
 ];
