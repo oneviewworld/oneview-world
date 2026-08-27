@@ -39,7 +39,7 @@ final List<InstagramPost> instagramPosts = [
         'corporations, or futuristic concepts. AI is already changing the way businesses operate, '
         'build products, serve customers, and make decisions.\n\n'
         'The question is no longer whether AI will become part of the digital world.\n\n'
-        "The real question is: Are you ready to build with it?\n\n"
+        'The real question is: Are you ready to build with it?\n\n'
         'AI Is Changing How Businesses Work\n\n'
         'From automating repetitive tasks to analyzing massive amounts of data, AI is helping '
         'businesses work faster and make smarter decisions.\n\n'
