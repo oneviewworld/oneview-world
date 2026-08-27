@@ -98,6 +98,24 @@ final List<InstagramPost> instagramPosts = [
   ),
   InstagramPost(
     id: 'post_6',
+    slug: 'mastering-rag-complete-architecture',
+    seoTitle: 'Mastering RAG: Complete Retrieval-Augmented Generation Architecture | OneView',
+    metaDescription:
+        'Learn how production-ready RAG systems work, from data ingestion and embeddings to hybrid search, re-ranking, context construction, LLM generation and evaluation.',
+    excerpt:
+        'RAG is more than a vector database and an LLM. Explore the complete Retrieval-Augmented Generation pipeline, from data ingestion and embeddings to retrieval, re-ranking, context construction, generation and continuous evaluation.',
+    seoKeywords: [
+      'Retrieval-Augmented Generation',
+      'RAG architecture',
+      'RAG pipeline',
+      'Generative AI',
+      'enterprise AI',
+      'AI applications',
+      'vector database',
+      'hybrid search',
+      'LLM',
+      'GenAI',
+    ],
     imageAsset: 'assets/instagram/Posts/Post 6.png',
     postUrl: 'https://www.instagram.com/p/DbyOEI5gsI8/',
     caption: '🧠 RAG isn\'t just a Vector Database + LLM.\n\n'

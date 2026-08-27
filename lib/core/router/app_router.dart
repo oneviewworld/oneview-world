@@ -13,7 +13,7 @@ class AppRoutePath {
   const AppRoutePath.home() : location = '/', project = null, blogPost = null;
   const AppRoutePath.projects() : location = '/projects', project = null, blogPost = null;
   AppRoutePath.projectDetail(this.project) : location = '/projects/${project!.id}', blogPost = null;
-  AppRoutePath.blog(this.blogPost) : location = '/blog/${blogPost!.id}', project = null;
+  AppRoutePath.blog(this.blogPost) : location = '/blog/${blogPost!.urlId}', project = null;
 
   bool get isHome => location == '/';
   bool get isProjects => location == '/projects';
@@ -41,7 +41,7 @@ class AppRouteParser extends RouteInformationParser<AppRoutePath> {
 
     if (uri.pathSegments.length == 2 && uri.pathSegments[0] == 'blog') {
       final id = uri.pathSegments[1];
-      final post = instagramPosts.where((p) => p.id == id).firstOrNull;
+      final post = instagramPosts.where((p) => p.urlId == id).firstOrNull;
       if (post != null) {
         return AppRoutePath.blog(post);
       }

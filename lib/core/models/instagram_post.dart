@@ -6,6 +6,11 @@ class InstagramPost {
   final String caption;
   final int likes;
   final DateTime date;
+  final String? slug;
+  final String? seoTitle;
+  final String? metaDescription;
+  final String? excerpt;
+  final List<String> seoKeywords;
 
   const InstagramPost({
     required this.id,
@@ -15,7 +20,15 @@ class InstagramPost {
     required this.caption,
     required this.likes,
     required this.date,
+    this.slug,
+    this.seoTitle,
+    this.metaDescription,
+    this.excerpt,
+    this.seoKeywords = const [],
   });
+
+  /// URL segment — uses slug if set, otherwise falls back to id
+  String get urlId => slug ?? id;
 
   /// All images for this post (uses allImages if provided, otherwise just the thumbnail)
   List<String> get images => allImages.isNotEmpty ? allImages : [imageAsset];
