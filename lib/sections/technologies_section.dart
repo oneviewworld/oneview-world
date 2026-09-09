@@ -28,8 +28,8 @@ class TechnologiesSection extends StatelessWidget {
                 badge: 'Technologies',
                 title: 'Built With Modern\nTechnology Stack',
                 subtitle:
-                    'OneView leverages industry-leading technologies to deliver '
-                    'robust, scalable, and maintainable solutions.',
+                    'The stack we use to build your product quickly — and '
+                    'without locking you in later.',
               ),
               const SizedBox(height: 64),
               _buildGrid(context, isDark),

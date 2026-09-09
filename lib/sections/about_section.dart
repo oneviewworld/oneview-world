@@ -26,8 +26,7 @@ class AboutSection extends StatelessWidget {
                 badge: 'About',
                 title: 'About OneView',
                 subtitle:
-                    'A software development studio focused on building digital '
-                    'products that make a difference.',
+                    'The people who will design, build, and ship your product.',
               ),
               const SizedBox(height: 48),
               FadeInWidget(
@@ -66,7 +65,7 @@ class AboutSection extends StatelessWidget {
                           'Security',
                           'Scalability',
                           'Reliability',
-                          'Long-term Partnership',
+                          'Support After Launch',
                         ].map((value) {
                           return Container(
                             padding: const EdgeInsets.symmetric(
@@ -99,11 +98,11 @@ class AboutSection extends StatelessWidget {
                       ),
                       const SizedBox(height: 32),
                       Text(
-                        'OneView partners with organizations that need a reliable '
-                        'technology partner to bring their vision to life. From '
-                        'initial concept through deployment and beyond, OneView '
-                        'delivers end-to-end development services with a focus on '
-                        'craft, performance, and long-term maintainability.',
+                        'Bring your idea — even a rough sketch on paper. OneView '
+                        'takes it from concept through design, development, and '
+                        'launch, then stays on afterwards for fixes and new '
+                        'features. You own the code and the accounts at every '
+                        'step.',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               height: 1.7,
                             ),

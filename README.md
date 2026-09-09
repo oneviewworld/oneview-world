@@ -1,8 +1,8 @@
 # OneView
 
-**Building Mobile Apps, Games & Digital Solutions**
+**Mobile apps, games and software — built and shipped for you**
 
-OneView helps startups, enterprises and growing businesses design, build and scale mobile applications, enterprise software, backend systems, games and digital experiences.
+You bring the idea; OneView designs it, builds it, and ships it to the App Store and Play Store — iOS, Android, web, and the backend behind them. Marketing site for founders and businesses looking to hire a team to build their product.
 
 ## 🌐 Live Site
 

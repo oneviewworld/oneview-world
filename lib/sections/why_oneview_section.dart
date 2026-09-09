@@ -34,10 +34,10 @@ class WhyOneViewSection extends StatelessWidget {
             children: [
               const SectionHeader(
                 badge: 'Why OneView',
-                title: 'Why Teams Choose\nOneView',
+                title: 'Why Founders\nChoose OneView',
                 subtitle:
-                    'A commitment to engineering excellence, scalable design, '
-                    'and long-term partnership sets OneView apart.',
+                    'Senior engineers on your project, honest timelines, and a '
+                    'codebase you fully own and can hand to anyone later.',
               ),
               const SizedBox(height: 64),
               _buildGrid(context),

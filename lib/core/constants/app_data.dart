@@ -89,8 +89,9 @@ class AppData {
     ServiceModel(
       title: 'Enterprise Software',
       description:
-          'Custom enterprise solutions tailored to streamline operations, '
-          'automate workflows, and drive digital transformation initiatives.',
+          'Custom internal software that cuts manual work, replaces the '
+          'spreadsheets your team lives in, and connects the tools you '
+          'already use.',
       icon: Icons.business,
       benefits: [
         'Process automation',
@@ -194,14 +195,15 @@ class AppData {
     ServiceModel(
       title: 'Software Consulting',
       description:
-          'Strategic technology consulting to help organizations make '
-          'informed decisions about architecture, technology stack, and delivery.',
+          'Not sure what to build or which stack to pick? Get a senior review '
+          'of your plan and a realistic cost and timeline before you commit '
+          'any budget.',
       icon: Icons.psychology,
       benefits: [
-        'Technology assessment',
+        'Idea validation',
         'Architecture review',
-        'Team augmentation',
-        'Technical leadership',
+        'Build vs. buy advice',
+        'Realistic cost & timeline',
       ],
     ),
   ];
@@ -748,7 +750,7 @@ class AppData {
     {
       'title': 'Discovery',
       'description':
-          'Understanding your business goals, user needs, and technical requirements through collaborative workshops.',
+          'A straightforward conversation about what you want to build, who it is for, and why it matters.',
       'number': '01',
     },
     {
@@ -832,9 +834,9 @@ class AppData {
           'Clean, well-documented, and testable code that your team can confidently maintain and extend.',
     },
     {
-      'title': 'Long-term Support',
+      'title': 'Support After Launch',
       'description':
-          'Committed partnerships beyond delivery, with ongoing support, updates, and strategic guidance.',
+          'We do not disappear at launch. Ongoing fixes, updates, and new features as your product grows.',
     },
   ];
 
@@ -845,9 +847,9 @@ class AppData {
           'OneView specializes in Flutter, .NET MAUI, ASP.NET Core, Firebase, Supabase, Azure, and AWS. Our primary focus is building cross-platform mobile applications and scalable backend systems.',
     },
     {
-      'question': 'How does the engagement process work?',
+      'question': 'How do we get started?',
       'answer':
-          'Every project begins with a discovery phase to understand your goals and requirements. We then provide a detailed proposal with scope, timeline, and investment. Development follows an agile methodology with regular updates and demonstrations.',
+          'It starts with a call about what you want to build. You get a written proposal with scope, timeline, and a fixed price range. Once you approve it, we build in short cycles with a working demo you can try every week or two.',
     },
     {
       'question': 'Do you work with startups or enterprises?',
@@ -862,7 +864,7 @@ class AppData {
     {
       'question': 'Do you provide ongoing support after launch?',
       'answer':
-          'Yes. OneView offers ongoing maintenance, performance monitoring, feature development, and technical support. We believe in long-term partnerships, not one-time deliveries.',
+          'Yes. OneView handles monitoring, fixes, and new features after launch. You are never locked in — you hold all the code and accounts, and can take the project elsewhere at any time.',
     },
     {
       'question': 'Can you migrate our existing Xamarin app to .NET MAUI or Flutter?',

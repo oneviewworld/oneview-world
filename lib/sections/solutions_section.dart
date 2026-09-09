@@ -43,8 +43,8 @@ class SolutionsSection extends StatelessWidget {
                 badge: 'Solutions',
                 title: 'Industry-Specific\nDigital Solutions',
                 subtitle:
-                    'OneView builds tailored solutions for diverse industries, '
-                    'leveraging deep domain knowledge and technical expertise.',
+                    'Whatever you are building, chances are we have already '
+                    'shipped something close to it.',
               ),
               const SizedBox(height: 64),
               _buildGrid(context),

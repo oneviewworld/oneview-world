@@ -2,24 +2,25 @@ class AppConstants {
   AppConstants._();
 
   static const String companyName = 'OneView';
-  static const String tagline = 'Building Mobile Apps, Games & Digital Solutions';
+  static const String tagline =
+      'Mobile apps, games and software — built and shipped for you';
   static const String website = 'https://oneview.world';
   static const String email = 'hello@oneview.world';
   static const String location = 'India';
 
   static const String heroHeadline =
-      'Building Digital Products\nThat Businesses Trust.';
+      'You Bring the Idea.\nWe Build and Ship It.';
   static const String heroDescription =
-      'OneView helps startups, enterprises and growing businesses design, build '
-      'and scale mobile applications, enterprise software, backend systems, '
-      'games and digital experiences.';
+      'Have an app or software idea? OneView designs it, builds it, and ships '
+      'it to the App Store and Play Store for you — iOS, Android, web, and the '
+      'backend behind them. From first wireframe to launch day.';
 
   static const String aboutDescription =
-      'OneView is a software development studio specializing in building modern '
-      'digital products for startups and enterprises. With deep expertise in '
-      'cross-platform development, enterprise architecture, and scalable cloud '
-      'solutions, OneView delivers products that are reliable, performant, and '
-      'built to grow with your business.';
+      'OneView is a small, senior team that builds digital products for '
+      'founders and businesses. You work directly with the people writing the '
+      'code — engineers who have shipped real apps to the App Store, into '
+      'hospitals, and into live logistics operations — with no sales layer in '
+      'between.';
 
   // Social links
   static const String linkedinUrl = 'coming-soon';

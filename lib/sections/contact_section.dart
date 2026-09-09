@@ -110,8 +110,8 @@ class _ContactSectionState extends State<ContactSection> {
                 badge: 'Contact',
                 title: 'Start Your\nProject Today',
                 subtitle:
-                    'Ready to build something remarkable? Reach out to discuss '
-                    'your project requirements.',
+                    'Tell us what you want to build. You will get a real reply '
+                    'with scope, timeline, and a price range — not a sales pitch.',
               ),
               const SizedBox(height: 48),
               isMobile
@@ -154,8 +154,9 @@ class _ContactSectionState extends State<ContactSection> {
           ),
           const SizedBox(height: 16),
           Text(
-            'OneView is always open to discussing new projects, partnerships, '
-            'and opportunities to build impactful digital products.',
+            'Send over your idea, even a rough one. We will tell you honestly '
+            'whether we are the right fit, what it will take, and what it will '
+            'cost.',
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           const SizedBox(height: 32),

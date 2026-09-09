@@ -30,8 +30,8 @@ class ProcessSection extends StatelessWidget {
                 badge: 'Our Process',
                 title: 'From Idea to\nDelivery',
                 subtitle:
-                    'A structured, transparent process that keeps you informed '
-                    'and in control at every stage of development.',
+                    'You always know what is being built, what it costs, and '
+                    'when it ships.',
               ),
               const SizedBox(height: 64),
               _buildTimeline(context, isDark),
