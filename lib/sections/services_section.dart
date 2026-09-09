@@ -23,10 +23,10 @@ class ServicesSection extends StatelessWidget {
             children: [
               const SectionHeader(
                 badge: 'Services',
-                title: 'End-to-End Digital\nDevelopment Services',
+                title: 'One Team for the\nWhole Build',
                 subtitle:
-                    'From concept to deployment, OneView delivers comprehensive '
-                    'software development services tailored to your business needs.',
+                    'Design, apps, backend, AI, and launch — handled by the same '
+                    'people, so nothing gets lost between handoffs.',
               ),
               const SizedBox(height: 64),
               _buildGrid(context, columns),

@@ -39,8 +39,8 @@ class ProjectsSection extends StatelessWidget {
                 badge: 'Projects',
                 title: 'Featured Work',
                 subtitle:
-                    'A selection of projects where OneView delivered impactful '
-                    'digital solutions across industries.',
+                    'Real products on the App Store and in daily production '
+                    'use — built by OneView.',
               ),
               const SizedBox(height: 64),
               ...List.generate(featuredProjects.length, (index) {
