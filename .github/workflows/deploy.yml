@@ -23,39 +23,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: subosito/flutter-action@v2
+      - uses: actions/setup-node@v4
         with:
-          channel: stable
-          cache: true
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: astro-site/package-lock.json
 
-      - name: Get dependencies
-        run: flutter pub get
+      - name: Install dependencies
+        working-directory: astro-site
+        run: npm ci
 
-      - name: Analyze
-        run: flutter analyze
+      - name: Build
+        working-directory: astro-site
+        run: npm run build
 
-      - name: Build web
-        run: flutter build web --release --base-href "/"
-
-      - name: Inject EmailJS secrets
+      - name: Inject EmailJS + reCAPTCHA secrets
+        working-directory: astro-site/dist
         run: |
-          sed -i "s|EMAILJS_PUBLIC_KEY_PLACEHOLDER|${{ secrets.EMAILJS_PUBLIC_KEY }}|g" build/web/index.html
-          sed -i "s|EMAILJS_SERVICE_ID_PLACEHOLDER|${{ secrets.EMAILJS_SERVICE_ID }}|g" build/web/main.dart.js
-          sed -i "s|EMAILJS_TEMPLATE_ID_PLACEHOLDER|${{ secrets.EMAILJS_TEMPLATE_ID }}|g" build/web/main.dart.js
-          sed -i "s|RECAPTCHA_SITE_KEY_PLACEHOLDER|${{ secrets.RECAPTCHA_SITE_KEY }}|g" build/web/index.html
-          sed -i "s|RECAPTCHA_SITE_KEY_PLACEHOLDER|${{ secrets.RECAPTCHA_SITE_KEY }}|g" build/web/main.dart.js
+          find . -name "*.html" -exec sed -i "s|RECAPTCHA_SITE_KEY_PLACEHOLDER|${{ secrets.RECAPTCHA_SITE_KEY }}|g" {} +
+          find . -name "*.html" -exec sed -i "s|EMAILJS_PUBLIC_KEY_PLACEHOLDER|${{ secrets.EMAILJS_PUBLIC_KEY }}|g" {} +
+          sed -i "s|EMAILJS_SERVICE_ID_PLACEHOLDER|${{ secrets.EMAILJS_SERVICE_ID }}|g" index.html
+          sed -i "s|EMAILJS_TEMPLATE_ID_PLACEHOLDER|${{ secrets.EMAILJS_TEMPLATE_ID }}|g" index.html
 
       - name: Copy CNAME
-        run: cp CNAME build/web/CNAME
-
-      - name: Copy robots.txt
-        run: cp web/robots.txt build/web/robots.txt
-
-      - name: Copy sitemap.xml
-        run: cp web/sitemap.xml build/web/sitemap.xml
-
-      - name: Create 404.html fallback
-        run: cp build/web/index.html build/web/404.html
+        run: cp CNAME astro-site/dist/CNAME
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -63,7 +54,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build/web
+          path: astro-site/dist
 
       - name: Deploy to GitHub Pages
         id: deployment

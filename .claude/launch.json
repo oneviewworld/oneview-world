@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "astro-site",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "astro-site", "run", "dev", "--", "--port", "4321", "--host", "localhost"],
+      "port": 4321
+    },
+    {
+      "name": "oneview-web",
+      "runtimeExecutable": "flutter",
+      "runtimeArgs": ["run", "-d", "web-server", "--web-port", "8080", "--web-hostname", "localhost"],
+      "port": 8080
+    }
+  ]
+}

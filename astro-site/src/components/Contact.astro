@@ -1,0 +1,225 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+
+<section id="contact">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Contact</span>
+      <h2>Start Your<br />Project Today</h2>
+      <p>Tell us what you want to build. You will get a real reply with scope, timeline, and a price range — not a sales pitch.</p>
+    </div>
+
+    <div class="contact-grid fade-in">
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <p class="info-text">Send over your idea, even a rough one. We will tell you honestly whether we are the right fit, what it will take, and what it will cost.</p>
+
+        <a class="info-item" href={`mailto:${site.email}`}>
+          <span class="icon-badge"><Icon name="mail" size={18} /></span>
+          <div><div class="info-label">Email</div><div>{site.email}</div></div>
+        </a>
+        <div class="info-item">
+          <span class="icon-badge"><Icon name="location" size={18} /></span>
+          <div><div class="info-label">Location</div><div>{site.location}</div></div>
+        </div>
+        <a class="info-item" href={site.social.instagram} target="_blank" rel="noopener">
+          <span class="icon-badge"><Icon name="instagram" size={18} /></span>
+          <div><div class="info-label">Instagram</div><div>@oneview.world</div></div>
+        </a>
+        <a class="info-item" href={site.social.linkedin} target="_blank" rel="noopener">
+          <span class="icon-badge"><Icon name="linkedin" size={18} /></span>
+          <div><div class="info-label">LinkedIn</div><div>oneviewworld</div></div>
+        </a>
+      </div>
+
+      <form id="contact-form" class="contact-form card" novalidate>
+        <label>
+          Name
+          <input type="text" name="name" required placeholder="Your name" />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required placeholder="you@company.com" />
+        </label>
+        <label>
+          Phone (optional)
+          <input type="tel" name="phone" placeholder="+1 234 567 8900" />
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="5" required placeholder="Tell us about your project..."></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary" id="contact-submit">
+          <span id="contact-submit-label">Send Message</span> <Icon name="send" size={16} />
+        </button>
+        <p id="contact-status" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .contact-info h3 {
+    font-size: 1.3rem;
+    margin: 0 0 16px;
+  }
+  .info-text {
+    color: var(--text-secondary);
+    margin: 0 0 32px;
+  }
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .info-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 32px;
+  }
+  .contact-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+  #contact-status {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    min-height: 1.2em;
+  }
+  #contact-status.error {
+    color: var(--color-error);
+  }
+  #contact-status.success {
+    color: var(--color-success);
+  }
+  @media (max-width: 860px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const COOLDOWN_SECONDS = 60;
+  const MAX_SUBMISSIONS = 3;
+  let submissionCount = 0;
+  let cooling = false;
+
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
+  const submitLabel = document.getElementById('contact-submit-label');
+  const status = document.getElementById('contact-status');
+
+  function setStatus(msg: string, kind: 'error' | 'success' | '' = '') {
+    if (!status) return;
+    status.textContent = msg;
+    status.className = kind;
+  }
+
+  function startCooldown() {
+    cooling = true;
+    let remaining = COOLDOWN_SECONDS;
+    const tick = () => {
+      if (!submitBtn || !submitLabel) return;
+      if (remaining <= 0) {
+        cooling = false;
+        submitBtn.disabled = submissionCount >= MAX_SUBMISSIONS;
+        submitLabel.textContent = 'Send Message';
+        return;
+      }
+      submitBtn.disabled = true;
+      submitLabel.textContent = `Wait ${remaining}s`;
+      remaining -= 1;
+      setTimeout(tick, 1000);
+    };
+    tick();
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (cooling || submissionCount >= MAX_SUBMISSIONS || !submitBtn || !submitLabel) return;
+
+    const data = new FormData(form);
+    const name = String(data.get('name') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const phone = String(data.get('phone') || '').trim();
+    const message = String(data.get('message') || '').trim();
+
+    if (!name) return setStatus('Please enter your name', 'error');
+    if (!email || !email.includes('@') || !email.includes('.'))
+      return setStatus('Please enter a valid email', 'error');
+    if (!message) return setStatus('Please enter a message', 'error');
+
+    submitBtn.disabled = true;
+    submitLabel.textContent = 'Sending...';
+    setStatus('');
+
+    try {
+      // @ts-ignore - grecaptcha loaded via external script
+      const token = await grecaptcha.execute('RECAPTCHA_SITE_KEY_PLACEHOLDER', { action: 'submit' });
+      if (!token) throw new Error('recaptcha-failed');
+
+      const now = new Date();
+      const submitted = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()} ${now.getHours()}:${String(
+        now.getMinutes()
+      ).padStart(2, '0')}`;
+
+      // @ts-ignore - emailjs loaded via external script
+      const result = await emailjs.send('EMAILJS_SERVICE_ID_PLACEHOLDER', 'EMAILJS_TEMPLATE_ID_PLACEHOLDER', {
+        name,
+        email,
+        phone: phone || 'Not provided',
+        message,
+        submitted_at: submitted,
+        source: 'oneview.world',
+      });
+
+      if (result.status === 200) {
+        submissionCount += 1;
+        form.reset();
+        setStatus("Message sent! We'll get back to you soon.", 'success');
+        startCooldown();
+      } else {
+        throw new Error('send-failed');
+      }
+    } catch (err) {
+      setStatus('Failed to send. Please try again.', 'error');
+      submitBtn.disabled = false;
+      submitLabel.textContent = 'Send Message';
+    }
+  });
+</script>

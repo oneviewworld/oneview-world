@@ -1,0 +1,58 @@
+---
+title: "SmartLogix"
+subtitle: "AI-Powered Shipment & Logistics Tracking"
+domain: "Logistics"
+techStack: ["Flutter", "Dart", "Supabase", "Python", "FastAPI", "Ollama", "OCR"]
+features:
+  - "AI-driven shipment registration with document OCR"
+  - "Real-time GPS tracking with delivery predictions"
+  - "Route optimisation using ML models"
+  - "Automated status updates with smart notifications"
+  - "Multi-carrier integration with unified tracking"
+  - "Analytics dashboard with shipment performance metrics"
+keyDeliverables:
+  - "AI-powered shipment registration with document OCR"
+  - "Route optimisation engine with ML models"
+  - "Multi-carrier unified tracking platform"
+screenshots:
+  - "/assets/projects/smartlogix/screen_1.png"
+  - "/assets/projects/smartlogix/screen_2.png"
+  - "/assets/projects/smartlogix/screen_3.png"
+  - "/assets/projects/smartlogix/screen_4.png"
+  - "/assets/projects/smartlogix/screen_5.png"
+  - "/assets/projects/smartlogix/screen_6.png"
+  - "/assets/projects/smartlogix/screen_7.png"
+  - "/assets/projects/smartlogix/screen_8.png"
+  - "/assets/projects/smartlogix/screen_9.png"
+  - "/assets/projects/smartlogix/screen_10.png"
+  - "/assets/projects/smartlogix/screen_11.png"
+  - "/assets/projects/smartlogix/screen_12.png"
+  - "/assets/projects/smartlogix/screen_13.png"
+  - "/assets/projects/smartlogix/screen_14.png"
+  - "/assets/projects/smartlogix/screen_15.png"
+  - "/assets/projects/smartlogix/screen_16.png"
+  - "/assets/projects/smartlogix/screen_17.png"
+  - "/assets/projects/smartlogix/screen_18.png"
+  - "/assets/projects/smartlogix/screen_19.png"
+  - "/assets/projects/smartlogix/screen_20.png"
+  - "/assets/projects/smartlogix/screen_21.png"
+  - "/assets/projects/smartlogix/screen_22.png"
+  - "/assets/projects/smartlogix/screen_23.png"
+  - "/assets/projects/smartlogix/screen_24.png"
+  - "/assets/projects/smartlogix/screen_25.png"
+  - "/assets/projects/smartlogix/screen_26.png"
+  - "/assets/projects/smartlogix/screen_27.png"
+  - "/assets/projects/smartlogix/screen_28.png"
+  - "/assets/projects/smartlogix/screen_29.png"
+  - "/assets/projects/smartlogix/screen_30.png"
+  - "/assets/projects/smartlogix/screen_31.png"
+  - "/assets/projects/smartlogix/screen_32.png"
+  - "/assets/projects/smartlogix/screen_33.png"
+  - "/assets/projects/smartlogix/screen_34.png"
+  - "/assets/projects/smartlogix/screen_35.png"
+  - "/assets/projects/smartlogix/screen_36.png"
+isFeatured: true
+isScreenshotLandscape: true
+---
+
+OneView developed an intelligent logistics platform that uses AI for shipment registration, route optimisation, delivery prediction, and real-time tracking — transforming traditional shipping workflows.

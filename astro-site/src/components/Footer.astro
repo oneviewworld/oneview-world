@@ -1,0 +1,106 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container-wide footer-top">
+    <div>
+      <a href="/" class="brand">
+        <span class="brand-mark"></span>
+        <span>OneView</span>
+      </a>
+      <p class="tagline">{site.tagline}</p>
+    </div>
+
+    <div>
+      <div class="col-title">Company</div>
+      {site.navItems.slice(0, 6).map((item) => <a class="col-link" href={item.href}>{item.label}</a>)}
+    </div>
+
+    <div>
+      <div class="col-title">Connect</div>
+      <a class="col-link" href={site.social.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={16} /> Instagram</a>
+      <a class="col-link" href={site.social.linkedin} target="_blank" rel="noopener"><Icon name="linkedin" size={16} /> LinkedIn</a>
+      <a class="col-link" href={site.social.reddit} target="_blank" rel="noopener"><Icon name="reddit" size={16} /> Reddit</a>
+      <a class="col-link" href={`mailto:${site.email}`}><Icon name="mail" size={16} /> Email</a>
+    </div>
+  </div>
+
+  <div class="container-wide footer-bottom">
+    <span>© {year} OneView. All rights reserved.</span>
+    <span class="legal-links">
+      <span class="legal-text">Privacy Policy</span>
+      <span class="legal-text">Terms of Service</span>
+    </span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 56px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 40px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: var(--gradient-primary);
+  }
+  .tagline {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    max-width: 280px;
+  }
+  .col-title {
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .col-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+  }
+  .legal-links {
+    display: flex;
+    gap: 20px;
+  }
+  .legal-text {
+    cursor: pointer;
+  }
+  @media (max-width: 640px) {
+    .footer-top {
+      grid-template-columns: 1fr;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+  }
+</style>

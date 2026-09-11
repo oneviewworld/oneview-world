@@ -1,0 +1,52 @@
+---
+title: "Digital Butler"
+subtitle: "AI-Powered Hotel & Resort Guest Management"
+domain: "Hospitality"
+techStack: ["Flutter", "Dart", "Supabase", "Python", "FastAPI", "Ollama", "Real-time DB"]
+features:
+  - "AI-powered concierge chatbot using Ollama LLM"
+  - "Smart room booking with dynamic pricing"
+  - "Guest preference learning for personalised service"
+  - "Real-time communication between guests and staff"
+  - "Multi-property support with centralised dashboard"
+  - "Hotel PMS integration for room and housekeeping status"
+keyDeliverables:
+  - "AI concierge with natural language understanding"
+  - "Smart room booking with dynamic pricing"
+  - "Guest preference learning and recommendation engine"
+screenshots:
+  - "/assets/projects/digital-butler/screen_1.png"
+  - "/assets/projects/digital-butler/screen_2.png"
+  - "/assets/projects/digital-butler/screen_3.png"
+  - "/assets/projects/digital-butler/screen_4.png"
+  - "/assets/projects/digital-butler/screen_5.png"
+  - "/assets/projects/digital-butler/screen_6.png"
+  - "/assets/projects/digital-butler/screen_7.png"
+  - "/assets/projects/digital-butler/screen_8.png"
+  - "/assets/projects/digital-butler/screen_9.png"
+  - "/assets/projects/digital-butler/screen_10.png"
+  - "/assets/projects/digital-butler/screen_11.png"
+  - "/assets/projects/digital-butler/screen_12.png"
+  - "/assets/projects/digital-butler/screen_13.png"
+  - "/assets/projects/digital-butler/screen_14.png"
+  - "/assets/projects/digital-butler/screen_15.png"
+  - "/assets/projects/digital-butler/screen_16.png"
+  - "/assets/projects/digital-butler/screen_17.png"
+  - "/assets/projects/digital-butler/screen_18.png"
+  - "/assets/projects/digital-butler/screen_19.png"
+  - "/assets/projects/digital-butler/screen_20.png"
+  - "/assets/projects/digital-butler/screen_21.png"
+  - "/assets/projects/digital-butler/screen_22.png"
+  - "/assets/projects/digital-butler/screen_23.png"
+  - "/assets/projects/digital-butler/screen_24.png"
+  - "/assets/projects/digital-butler/screen_25.png"
+  - "/assets/projects/digital-butler/screen_26.png"
+  - "/assets/projects/digital-butler/screen_27.png"
+  - "/assets/projects/digital-butler/screen_28.png"
+  - "/assets/projects/digital-butler/screen_29.png"
+  - "/assets/projects/digital-butler/screen_30.png"
+  - "/assets/projects/digital-butler/screen_31.png"
+isFeatured: true
+---
+
+OneView delivered an intelligent hospitality platform leveraging AI to provide personalised guest experiences — from smart room booking and concierge services to AI-driven recommendations and real-time guest-staff communication.

@@ -1,0 +1,44 @@
+---
+import Icon from './Icon.astro';
+import { services } from '../data/services';
+---
+
+<section id="services">
+  <div class="container-wide">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Services</span>
+      <h2>One Team for the<br />Whole Build</h2>
+      <p>Design, apps, backend, AI, and launch — handled by the same people, so nothing gets lost between handoffs.</p>
+    </div>
+
+    <div class="grid grid-3">
+      {services.map((s) => (
+        <div class="card fade-in">
+          <div class="icon-badge"><Icon name={s.icon} /></div>
+          <h3 class="card-title">{s.title}</h3>
+          <p class="card-desc">{s.description}</p>
+          <div class="chips">
+            {s.benefits.map((b) => <span class="chip">{b}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .card-title {
+    font-size: 1.1rem;
+    margin: 20px 0 10px;
+  }
+  .card-desc {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    margin: 0 0 16px;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+</style>

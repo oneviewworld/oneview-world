@@ -1,0 +1,148 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+
+<section id="home" class="hero">
+  <div class="container hero-inner">
+    <div class="fade-in">
+      <div class="badge-row">
+        <span class="available-badge">
+          <span class="dot"></span> Available for new projects
+        </span>
+        <a href={site.social.instagram} aria-label="Instagram" target="_blank" rel="noopener"><Icon name="instagram" size={18} /></a>
+        <a href={site.social.linkedin} aria-label="LinkedIn" target="_blank" rel="noopener"><Icon name="linkedin" size={18} /></a>
+        <a href={site.social.reddit} aria-label="Reddit" target="_blank" rel="noopener"><Icon name="reddit" size={18} /></a>
+      </div>
+
+      <h1 class="hero-headline gradient-text">{site.heroHeadline}</h1>
+      <p class="hero-description">{site.heroDescription}</p>
+
+      <div class="hero-actions">
+        <a href="/projects" class="btn btn-primary">View Our Work <Icon name="arrow-right" size={18} /></a>
+        <a href="#contact" class="btn btn-outline">Start Your Project <Icon name="rocket" size={18} /></a>
+        <a href="/blog" class="btn btn-outline">Blog</a>
+      </div>
+
+      <div class="stats">
+        {site.stats.map((s) => (
+          <div>
+            <div class="stat-value gradient-text">{s.value}</div>
+            <div class="stat-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 140px 0 96px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 600px;
+    background: radial-gradient(
+      ellipse at top,
+      color-mix(in srgb, var(--color-primary) 18%, transparent),
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .badge-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .available-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-success);
+  }
+
+  .badge-row a {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+  }
+
+  .hero-headline {
+    font-size: clamp(2.25rem, 6vw, 3.75rem);
+    white-space: pre-line;
+    margin: 0 0 24px;
+  }
+
+  .hero-description {
+    max-width: 620px;
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    margin: 0 0 40px;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 56px;
+  }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+  }
+
+  .stat-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding-top: 110px;
+      text-align: center;
+    }
+    .badge-row,
+    .hero-actions {
+      justify-content: center;
+    }
+    .stats {
+      justify-content: center;
+    }
+  }
+</style>

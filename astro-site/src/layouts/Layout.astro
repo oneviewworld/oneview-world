@@ -1,0 +1,110 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  image?: string;
+  canonicalPath?: string;
+}
+
+const {
+  title,
+  description,
+  keywords = 'hire app developer, build my app, turn app idea into reality, MVP development, app developer for startups, mobile app developer for hire, iOS Android app development, custom software development, Flutter developer, AI app development',
+  image = 'https://oneview.world/icons/Icon-512.png',
+  canonicalPath = '/',
+} = Astro.props;
+
+const canonical = new URL(canonicalPath, 'https://oneview.world').toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="OneView" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="OneView" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/icons/Icon-192.png" />
+    <meta name="theme-color" content="#6366F1" />
+
+    <script type="application/ld+json" set:html={JSON.stringify([
+      { '@context': 'https://schema.org', '@type': 'WebSite', name: 'OneView', url: 'https://oneview.world/' },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'OneView',
+        url: 'https://oneview.world',
+        logo: 'https://oneview.world/icons/Icon-512.png',
+        description: 'OneView designs, builds and ships mobile apps, games and custom software for founders and businesses — iOS, Android, web and backend.',
+        address: { '@type': 'PostalAddress', addressCountry: 'IN' },
+        contactPoint: { '@type': 'ContactPoint', email: 'hello@oneview.world', contactType: 'customer service' },
+      },
+    ])} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- reCAPTCHA v3 (site key injected at build time by GitHub Actions) -->
+    <script src="https://www.google.com/recaptcha/api.js?render=RECAPTCHA_SITE_KEY_PLACEHOLDER" is:inline></script>
+    <!-- EmailJS (public key injected at build time by GitHub Actions) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" is:inline></script>
+    <script is:inline>emailjs.init('EMAILJS_PUBLIC_KEY_PLACEHOLDER');</script>
+
+    <script is:inline>
+      // Apply saved/system theme before paint to avoid a flash.
+      (function () {
+        var saved = localStorage.getItem('theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Scroll fade-in for elements marked .fade-in
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.15 }
+      );
+      document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

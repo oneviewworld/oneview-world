@@ -1,0 +1,36 @@
+---
+import Icon from './Icon.astro';
+import { whyReasons } from '../data/why';
+---
+
+<section id="why-oneview" class="section-alt">
+  <div class="container-wide">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Why OneView</span>
+      <h2>Why Founders<br />Choose OneView</h2>
+      <p>Senior engineers on your project, honest timelines, and a codebase you fully own and can hand to anyone later.</p>
+    </div>
+
+    <div class="grid grid-4">
+      {whyReasons.map((r) => (
+        <div class="card fade-in">
+          <div class="icon-badge"><Icon name={r.icon} /></div>
+          <h3 class="card-title">{r.title}</h3>
+          <p class="card-desc">{r.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .card-title {
+    font-size: 1rem;
+    margin: 16px 0 8px;
+  }
+  .card-desc {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+</style>

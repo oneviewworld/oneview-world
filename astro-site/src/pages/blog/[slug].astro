@@ -1,0 +1,94 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout
+  title={`${post.data.title} | OneView`}
+  description={post.data.metaDescription}
+  keywords={post.data.seoKeywords.join(', ')}
+  canonicalPath={`/blog/${post.slug}`}
+>
+  <Nav />
+  <main>
+    <article class="post">
+      <div class="container-narrow">
+        <a href="/blog" class="back-link">← All posts</a>
+        <time datetime={post.data.date.toISOString()}>
+          {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+        <h1>{post.data.title}</h1>
+        <div class="post-content">
+          <Content />
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .post {
+    padding: 140px 0 40px;
+  }
+  .back-link {
+    display: inline-block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+  .post time {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+  .post h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: 40px;
+  }
+  .post-content {
+    line-height: 1.85;
+    color: var(--text);
+  }
+  .post-content :global(h2) {
+    font-size: 1.4rem;
+    margin: 40px 0 16px;
+  }
+  .post-content :global(h3) {
+    font-size: 1.15rem;
+    margin: 28px 0 12px;
+  }
+  .post-content :global(p) {
+    margin: 0 0 20px;
+    color: var(--text-secondary);
+  }
+  .post-content :global(ul) {
+    margin: 0 0 20px;
+    padding-left: 22px;
+    color: var(--text-secondary);
+  }
+  .post-content :global(li) {
+    margin-bottom: 8px;
+  }
+  .post-content :global(strong) {
+    color: var(--text);
+  }
+</style>

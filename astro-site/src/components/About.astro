@@ -1,0 +1,65 @@
+---
+import { site } from '../data/site';
+---
+
+<section id="about" class="section-alt">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="eyebrow">About</span>
+      <h2>About OneView</h2>
+      <p>The people who will design, build, and ship your product.</p>
+    </div>
+
+    <div class="about-card card fade-in">
+      <p class="about-text">{site.aboutDescription}</p>
+
+      <h3 class="values-title">Core Values</h3>
+      <div class="values">
+        {site.coreValues.map((v) => <span class="chip">{v}</span>)}
+      </div>
+
+      <p class="about-text about-closing">{site.aboutClosing}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-card {
+    padding: 40px;
+  }
+  .about-text {
+    line-height: 1.8;
+    color: var(--text);
+    margin: 0 0 32px;
+  }
+  .about-closing {
+    color: var(--text-secondary);
+    margin-bottom: 0;
+  }
+  .values-title {
+    font-size: 1.1rem;
+    margin: 0 0 16px;
+  }
+  .values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .values .chip {
+    padding: 10px 16px;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-primary) 10%, transparent),
+      color-mix(in srgb, var(--color-accent) 6%, transparent)
+    );
+    color: var(--color-primary);
+    border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+    font-weight: 500;
+  }
+  @media (max-width: 640px) {
+    .about-card {
+      padding: 24px;
+    }
+  }
+</style>
