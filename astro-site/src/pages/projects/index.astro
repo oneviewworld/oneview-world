@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const domainGradients: Record<string, [string, string]> = {
+  Gaming: ['#EC4899', '#8B5CF6'],
+  'AI & Security': ['#6366F1', '#06B6D4'],
+  Hospitality: ['#F59E0B', '#EF4444'],
+  Logistics: ['#10B981', '#3B82F6'],
+  Healthcare: ['#10B981', '#06B6D4'],
+  Communication: ['#3B82F6', '#6366F1'],
+  Productivity: ['#8B5CF6', '#EC4899'],
+};
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => Number(b.data.isFeatured) - Number(a.data.isFeatured)
+);
+---
+
+<Layout
+  title="Featured Work | OneView"
+  description="Real products on the App Store and in daily production use — built by OneView. Games, AI platforms, healthcare software, logistics, and more."
+  canonicalPath="/projects"
+>
+  <Nav />
+  <main>
+    <section class="projects-page">
+      <div class="container-wide">
+        <div class="section-header fade-in">
+          <span class="eyebrow">Projects</span>
+          <h1>Featured Work</h1>
+          <p>Real products on the App Store and in daily production use — built by OneView.</p>
+        </div>
+
+        <div class="grid grid-3 fade-in">
+          {projects.map((p) => {
+            const [c1, c2] = domainGradients[p.data.domain] ?? ['#6366F1', '#06B6D4'];
+            const cover = p.data.screenshots[0];
+            return (
+              <a href={`/projects/${p.slug}`} class="project-card">
+                <div class="cover" style={`background: linear-gradient(135deg, ${c1}, ${c2})`}>
+                  {cover && <img src={cover} alt={p.data.title} loading="lazy" />}
+                </div>
+                <div class="project-body">
+                  <span class="domain-badge" style={`color:${c1}; border-color:${c1}55`}>{p.data.domain}</span>
+                  <h2>{p.data.title}</h2>
+                  <p>{p.data.subtitle}</p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .projects-page {
+    padding-top: 140px;
+  }
+  .project-card {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--card);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-primary) 40%, var(--border));
+  }
+  .cover {
+    aspect-ratio: 16 / 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .project-body {
+    padding: 22px;
+  }
+  .domain-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .project-body h2 {
+    font-size: 1.15rem;
+    margin: 0 0 6px;
+  }
+  .project-body p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Layout
+  title="Blog | OneView"
+  description="Insights on AI, software development, UI design, and building digital products — from the OneView team."
+  canonicalPath="/blog"
+>
+  <Nav />
+  <main>
+    <section class="blog-list">
+      <div class="container-narrow">
+        <div class="section-header fade-in">
+          <span class="eyebrow">Blog</span>
+          <h1>Insights & Ideas</h1>
+          <p>Notes on AI, software development, and building digital products.</p>
+        </div>
+
+        <div class="posts fade-in">
+          {posts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="post-card">
+              <time datetime={post.data.date.toISOString()}>
+                {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.excerpt}</p>
+              <span class="read-more">Read more →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .blog-list {
+    padding-top: 140px;
+  }
+  .posts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .post-card {
+    display: block;
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--card);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .post-card:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--color-primary) 40%, var(--border));
+  }
+  .post-card time {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+  .post-card h2 {
+    font-size: 1.3rem;
+    margin: 10px 0;
+  }
+  .post-card p {
+    color: var(--text-secondary);
+    margin: 0 0 12px;
+  }
+  .read-more {
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+</style>
