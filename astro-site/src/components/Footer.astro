@@ -31,8 +31,8 @@ const year = new Date().getFullYear();
   <div class="container-wide footer-bottom">
     <span>© {year} OneView. All rights reserved.</span>
     <span class="legal-links">
-      <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms of Service</a>
+      <span class="legal-text">Privacy Policy</span>
+      <span class="legal-text">Terms of Service</span>
     </span>
   </div>
 </footer>
@@ -89,6 +89,9 @@ const year = new Date().getFullYear();
   .legal-links {
     display: flex;
     gap: 20px;
+  }
+  .legal-text {
+    cursor: pointer;
   }
   @media (max-width: 640px) {
     .footer-top {
