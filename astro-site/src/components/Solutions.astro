@@ -1,0 +1,39 @@
+---
+import Icon from './Icon.astro';
+import { solutions } from '../data/solutions';
+---
+
+<section id="solutions" class="section-alt">
+  <div class="container-wide">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Solutions</span>
+      <h2>Industry-Specific<br />Digital Solutions</h2>
+      <p>Whatever you are building, chances are we have already shipped something close to it.</p>
+    </div>
+
+    <div class="grid grid-4">
+      {solutions.map((s) => (
+        <div class="card fade-in solution-card">
+          <div class="icon-badge"><Icon name={s.icon} /></div>
+          <h3 class="card-title">{s.title}</h3>
+          <p class="card-desc">{s.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .solution-card {
+    padding: 24px;
+  }
+  .card-title {
+    font-size: 1.05rem;
+    margin: 16px 0 8px;
+  }
+  .card-desc {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    margin: 0;
+  }
+</style>

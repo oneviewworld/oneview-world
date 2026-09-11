@@ -1,0 +1,67 @@
+---
+import { technologies } from '../data/technologies';
+const categories = [...new Set(technologies.map((t) => t.category))];
+---
+
+<section id="technologies">
+  <div class="container-wide">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Technologies</span>
+      <h2>Built With Modern<br />Technology Stack</h2>
+      <p>The stack we use to build your product quickly — and without locking you in later.</p>
+    </div>
+
+    <div class="tech-groups fade-in">
+      {categories.map((cat) => (
+        <div class="tech-group">
+          <div class="tech-cat">{cat}</div>
+          <div class="tech-badges">
+            {technologies.filter((t) => t.category === cat).map((t) => (
+              <span class="tech-badge" style={`--dot:${t.color}`}>
+                <span class="dot"></span>{t.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tech-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .tech-cat {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--dot);
+  }
+</style>

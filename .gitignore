@@ -31,3 +31,9 @@ doc/api/
 .flutter-plugins
 .flutter-plugins-dependencies
 .metadata
+
+# Astro (astro-site/)
+astro-site/node_modules/
+astro-site/dist/
+astro-site/.astro/
+

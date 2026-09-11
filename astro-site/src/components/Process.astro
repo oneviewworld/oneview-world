@@ -1,0 +1,40 @@
+---
+import { processSteps } from '../data/process';
+---
+
+<section id="process">
+  <div class="container-wide">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Our Process</span>
+      <h2>From Idea to<br />Delivery</h2>
+      <p>You always know what is being built, what it costs, and when it ships.</p>
+    </div>
+
+    <div class="grid grid-4">
+      {processSteps.map((step) => (
+        <div class="card fade-in process-card">
+          <div class="process-number gradient-text">{step.number}</div>
+          <h3 class="card-title">{step.title}</h3>
+          <p class="card-desc">{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .process-number {
+    font-size: 2rem;
+    font-weight: 800;
+    opacity: 0.5;
+  }
+  .card-title {
+    font-size: 1.05rem;
+    margin: 12px 0 8px;
+  }
+  .card-desc {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    margin: 0;
+  }
+</style>
