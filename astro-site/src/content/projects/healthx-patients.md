@@ -14,6 +14,15 @@ keyDeliverables:
   - "Production-ready patient portal"
   - "HIPAA-compliant architecture with security audit clearance"
   - "HL7/FHIR integration layer for healthcare data exchange"
+screenshots:
+  - "/assets/projects/healthx-patients/screen_1.jpg"
+  - "/assets/projects/healthx-patients/screen_2.jpg"
+  - "/assets/projects/healthx-patients/screen_3.jpg"
+  - "/assets/projects/healthx-patients/screen_4.jpg"
+  - "/assets/projects/healthx-patients/screen_5.jpg"
+  - "/assets/projects/healthx-patients/screen_6.jpg"
+  - "/assets/projects/healthx-patients/screen_7.png"
+  - "/assets/projects/healthx-patients/screen_8.jpg"
 isFeatured: true
 ---
 
