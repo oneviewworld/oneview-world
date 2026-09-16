@@ -8,7 +8,7 @@ const year = new Date().getFullYear();
   <div class="container-wide footer-top">
     <div>
       <a href="/" class="brand">
-        <span class="brand-mark"></span>
+        <img class="brand-mark" src="/icons/icon-mark.png" alt="" width="28" height="28" />
         <span>OneView</span>
       </a>
       <p class="tagline">{site.tagline}</p>
@@ -58,8 +58,7 @@ const year = new Date().getFullYear();
   .brand-mark {
     width: 28px;
     height: 28px;
-    border-radius: 7px;
-    background: var(--gradient-primary);
+    object-fit: contain;
   }
   .tagline {
     color: var(--text-secondary);
