@@ -21,7 +21,7 @@ screenshots:
   - "/assets/projects/healthx-patients/screen_4.jpg"
   - "/assets/projects/healthx-patients/screen_5.jpg"
   - "/assets/projects/healthx-patients/screen_6.jpg"
-  - "/assets/projects/healthx-patients/screen_7.png"
+  - "/assets/projects/healthx-patients/screen_7.jpg"
   - "/assets/projects/healthx-patients/screen_8.jpg"
 isFeatured: true
 ---
