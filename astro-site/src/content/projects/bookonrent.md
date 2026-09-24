@@ -23,7 +23,7 @@ screenshots:
   - "/assets/projects/bookonrent/screen_6.jpg"
   - "/assets/projects/bookonrent/screen_7.jpg"
   - "/assets/projects/bookonrent/screen_8.jpg"
-isFeatured: false
+isFeatured: true
 ---
 
 OneView designed and built an offline-first Flutter app for independent book rental owners who were tracking their entire business through WhatsApp and Excel. BookOnRent gives a single owner a fast, practical way to manage a book catalog, issue and return rentals, chase overdue returns via WhatsApp, and see revenue and business trends at a glance — all running on-device with SQLite and zero cloud dependency.
