@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Icon from './Icon.astro';
+import Carousel from './Carousel.astro';
 
 const domainGradients: Record<string, [string, string]> = {
   Gaming: ['#EC4899', '#8B5CF6'],
@@ -25,19 +26,7 @@ const featured = (await getCollection('projects'))
       <p>Real apps on the App Store and in daily production use — not mockups.</p>
     </div>
 
-    <div class="carousel-head fade-in">
-      <span class="hint">Swipe or drag to browse</span>
-      <div class="arrows">
-        <button type="button" class="arrow prev" aria-label="Previous project" data-carousel-prev disabled>
-          <Icon name="arrow-right" size={18} />
-        </button>
-        <button type="button" class="arrow next" aria-label="Next project" data-carousel-next>
-          <Icon name="arrow-right" size={18} />
-        </button>
-      </div>
-    </div>
-
-    <div class="carousel" data-carousel tabindex="0" role="region" aria-label="Featured projects, scrollable">
+    <Carousel label="Featured projects, scrollable">
       {featured.map((p) => {
         const [c1, c2] = domainGradients[p.data.domain] ?? ['#6366F1', '#06B6D4'];
         return (
@@ -53,7 +42,7 @@ const featured = (await getCollection('projects'))
           </a>
         );
       })}
-    </div>
+    </Carousel>
 
     <div class="more fade-in">
       <a href="/projects" class="btn btn-outline">See all projects <Icon name="arrow-right" size={16} /></a>
@@ -62,62 +51,12 @@ const featured = (await getCollection('projects'))
 </section>
 
 <style>
-  .carousel-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 4px;
-  }
-  .hint {
-    color: var(--text-tertiary);
-    font-size: 0.85rem;
-    font-weight: 500;
-  }
-  .arrows { display: flex; gap: 10px; }
-  .arrow {
-    width: 44px; height: 44px; border-radius: 50%;
-    display: grid; place-items: center; cursor: pointer;
-    background: var(--surface); color: var(--text);
-    border: 1.5px solid color-mix(in srgb, var(--text) 22%, transparent);
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.25s var(--ease), background 0.2s ease, color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
-  }
-  .arrow:hover:not(:disabled) {
-    background: var(--gradient-primary); color: #fff; border-color: transparent; transform: scale(1.06);
-  }
-  .arrow:active:not(:disabled) { transform: scale(0.94); }
-  .arrow:disabled { opacity: 0.35; cursor: default; }
-  .arrow.prev :global(svg) { transform: rotate(180deg); }
-
-  /* One row, scrolls sideways with snap. Padding gives the lift/shadow room (overflow clips them). */
-  .carousel {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: 24px;
-    margin: 0 -24px;
-    padding: 20px 24px 36px;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    cursor: grab;
-    outline-offset: -4px;
-  }
-  .carousel::-webkit-scrollbar { display: none; }
-  .carousel.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
-  .carousel.dragging .work-card { pointer-events: none; }
-
   .work-card {
-    flex: 0 0 clamp(270px, 29vw, 420px);
-    scroll-snap-align: start;
     display: block;
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     overflow: hidden;
     background: var(--card);
-    user-select: none;
-    -webkit-user-drag: none;
   }
   .cover { aspect-ratio: 16 / 10; overflow: hidden; }
   .cover img {
@@ -142,67 +81,5 @@ const featured = (await getCollection('projects'))
   .work-body h3 { font-size: 1.15rem; margin: 0 0 6px; }
   .work-body p { color: var(--text-secondary); font-size: 0.9rem; margin: 0; }
   .more { text-align: center; margin-top: 8px; }
-
-  @media (max-width: 640px) {
-    .work-card { flex-basis: 80%; scroll-snap-align: center; }
-    .carousel { margin: 0 -20px; padding: 16px 20px 28px; scroll-padding-inline: 20px; }
-    .arrows { display: none; }
-  }
-  @media (hover: none) {
-    .arrows { display: none; }
-    .carousel { cursor: auto; }
-  }
 </style>
 
-<script>
-  const sc = document.querySelector<HTMLElement>('[data-carousel]');
-  const prev = document.querySelector<HTMLButtonElement>('[data-carousel-prev]');
-  const next = document.querySelector<HTMLButtonElement>('[data-carousel-next]');
-
-  if (sc) {
-    const step = () => {
-      const card = sc.querySelector<HTMLElement>('.work-card');
-      return card ? card.getBoundingClientRect().width + 20 : 320;
-    };
-    const update = () => {
-      if (prev) prev.disabled = sc.scrollLeft <= 4;
-      if (next) next.disabled = sc.scrollLeft + sc.clientWidth >= sc.scrollWidth - 4;
-    };
-    prev?.addEventListener('click', () => sc.scrollBy({ left: -step(), behavior: 'smooth' }));
-    next?.addEventListener('click', () => sc.scrollBy({ left: step(), behavior: 'smooth' }));
-    sc.addEventListener('scroll', update, { passive: true });
-    sc.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { sc.scrollBy({ left: step(), behavior: 'smooth' }); e.preventDefault(); }
-      if (e.key === 'ArrowLeft') { sc.scrollBy({ left: -step(), behavior: 'smooth' }); e.preventDefault(); }
-    });
-    addEventListener('resize', update);
-    update();
-
-    // Mouse drag-to-scroll (touch and trackpads already scroll natively).
-    let down = false, moved = false, startX = 0, startLeft = 0;
-    sc.addEventListener('pointerdown', (e) => {
-      if (e.pointerType !== 'mouse' || e.button !== 0) return;
-      down = true; moved = false; startX = e.clientX; startLeft = sc.scrollLeft;
-    });
-    addEventListener('pointermove', (e) => {
-      if (!down) return;
-      const dx = e.clientX - startX;
-      if (!moved && Math.abs(dx) > 6) { moved = true; sc.classList.add('dragging'); }
-      if (moved) sc.scrollLeft = startLeft - dx;
-    });
-    const end = () => {
-      if (!down) return;
-      down = false;
-      if (moved) {
-        // snap to the nearest card once released
-        const s = step();
-        sc.classList.remove('dragging');
-        sc.scrollTo({ left: Math.round(sc.scrollLeft / s) * s, behavior: 'smooth' });
-      }
-    };
-    addEventListener('pointerup', end);
-    addEventListener('pointercancel', end);
-    // A drag must not count as a click on a card link.
-    sc.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
-  }
-</script>

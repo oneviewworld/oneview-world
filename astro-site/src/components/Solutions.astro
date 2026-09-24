@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import Carousel from './Carousel.astro';
 import { solutions } from '../data/solutions';
 ---
 
@@ -11,7 +12,7 @@ import { solutions } from '../data/solutions';
       <p>Whatever you are building, chances are we have already shipped something close to it.</p>
     </div>
 
-    <div class="grid grid-4">
+    <Carousel label="Industries we serve, scrollable" cardWidth="clamp(250px, 23vw, 300px)" cardWidthMobile="74%">
       {solutions.map((s) => (
         <div class="card fade-in solution-card">
           <div class="icon-badge"><Icon name={s.icon} /></div>
@@ -19,7 +20,7 @@ import { solutions } from '../data/solutions';
           <p class="card-desc">{s.description}</p>
         </div>
       ))}
-    </div>
+    </Carousel>
   </div>
 </section>
 

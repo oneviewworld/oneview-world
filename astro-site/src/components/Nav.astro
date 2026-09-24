@@ -10,6 +10,8 @@ import { site } from '../data/site';
       <span>OneView</span>
     </a>
 
+    <div class="scrim" id="nav-scrim" aria-hidden="true"></div>
+
     <nav class="nav-links" id="nav-links" aria-label="Primary">
       {site.navItems.map((item, i) => (
         <a href={item.href} class={item.primary ? '' : 'drawer-only'} style={`--i:${i}`}>{item.label}</a>
@@ -156,25 +158,31 @@ import { site } from '../data/site';
   .nav-menu-btn[aria-expanded='true'] .burger i:first-child { top: 5px; transform: rotate(45deg); }
   .nav-menu-btn[aria-expanded='true'] .burger i:last-child { top: 5px; transform: rotate(-45deg); }
 
+  /* Compact dropdown card anchored under the menu button (not a full-screen takeover). */
   @media (max-width: 960px) {
     .nav-menu-btn { display: flex; }
     .drawer-only { display: block !important; }
+
     .nav-links {
       position: fixed;
-      inset: 72px 0 0 0;
+      top: 80px;
+      right: 16px;
+      width: min(300px, calc(100vw - 32px));
+      max-height: calc(100dvh - 96px);
       flex-direction: column;
-      justify-content: center;
       align-items: stretch;
       gap: 2px;
-      padding: 24px 28px calc(28px + env(safe-area-inset-bottom));
-      background: color-mix(in srgb, var(--bg) 94%, transparent);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow-lg);
+      overflow-y: auto;
+      transform-origin: top right;
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-8px);
-      transition: opacity 0.35s ease, transform 0.45s var(--ease), visibility 0s 0.35s;
-      overflow-y: auto;
+      transform: translateY(-6px) scale(0.96);
+      transition: opacity 0.18s ease, transform 0.28s var(--ease), visibility 0s 0.18s;
     }
     .nav-links.open {
       opacity: 1;
@@ -183,20 +191,30 @@ import { site } from '../data/site';
       transition-delay: 0s;
     }
     .nav-links a:not(.btn) {
-      font-size: clamp(1.4rem, 6.4vw, 1.9rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      padding: 10px 6px;
+      display: block;
+      padding: 12px 14px;
       border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+    .nav-links a:not(.btn):hover { background: color-mix(in srgb, var(--color-primary) 8%, transparent); }
+    .nav-links a.active {
+      color: var(--color-primary);
+      background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    }
+
+    /* Dim + click-away layer behind the open menu. */
+    .scrim {
+      position: fixed;
+      inset: 72px 0 0 0;
+      background: rgba(17, 24, 39, 0.28);
       opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), color 0.2s ease, background 0.2s ease;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0s 0.2s;
     }
-    .nav-links.open a {
-      opacity: 1;
-      transform: none;
-      transition-delay: calc(var(--i) * 40ms + 80ms);
-    }
+    .scrim.show { opacity: 1; visibility: visible; transition-delay: 0s; }
   }
 
   /* The header CTA stays visible at every width, sitting beside the theme toggle. */
@@ -228,10 +246,11 @@ import { site } from '../data/site';
   const setOpen = (open: boolean) => {
     links?.classList.toggle('open', open);
     btn?.setAttribute('aria-expanded', String(open));
-    document.body.style.overflow = open ? 'hidden' : '';
+    document.getElementById('nav-scrim')?.classList.toggle('show', open);
   };
   btn?.addEventListener('click', () => setOpen(!links?.classList.contains('open')));
   links?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.getElementById('nav-scrim')?.addEventListener('click', () => setOpen(false));
   addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
   matchMedia('(min-width: 961px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
 </script>

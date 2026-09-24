@@ -92,6 +92,9 @@ button {
   font-family: inherit;
 }
 
+/* The hidden attribute must always win over component display rules (filters rely on it). */
+[hidden] { display: none !important; }
+
 /* ===== Layout ===== */
 .container {
   max-width: var(--max-width);
