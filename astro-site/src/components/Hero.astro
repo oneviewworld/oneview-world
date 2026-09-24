@@ -50,8 +50,7 @@ const lines = site.heroHeadline.split('\n');
       <div class="orb"></div>
       <div class="phone phone-1" style="--depth:14; --fd:-1s"><img src="/assets/projects/bounceup/screen_1.jpg" alt="" width="414" height="900" loading="eager" /></div>
       <div class="phone phone-2" style="--depth:30; --fd:-3s"><img src="/assets/projects/digital-butler/screen_1.jpg" alt="" width="414" height="900" loading="eager" /></div>
-      <div class="phone phone-3" style="--depth:18; --fd:-5s"><img src="/assets/projects/healthx-patients/screen_1.jpg" alt="" width="540" height="1170" loading="eager" /></div>
-      <div class="chip-float"><span class="star">★</span> Live on the App Store</div>
+      <div class="phone phone-3" style="--depth:18; --fd:-5s"><img src="/assets/projects/bookonrent/screen_1.jpg" alt="" width="416" height="900" loading="eager" /></div>
     </div>
   </div>
 </section>
@@ -170,23 +169,11 @@ const lines = site.heroHeadline.split('\n');
   .phone-3 { transform: translateY(38px) rotate(4deg); }
   @keyframes float { 0%, 100% { --float: 0px; } 50% { --float: -14px; } }
 
-  .chip-float {
-    position: absolute; left: 4%; bottom: 8%; z-index: 3;
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 16px; border-radius: 14px; font-size: 0.82rem; font-weight: 600;
-    background: color-mix(in srgb, var(--surface) 82%, transparent);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--border); box-shadow: var(--shadow-md);
-    animation: float 6s ease-in-out infinite; animation-delay: -2s;
-    translate: 0 var(--float, 0px);
-  }
-  .star { color: #f59e0b; }
 
   @media (max-width: 900px) {
     .hero { padding-top: 104px; }
     .hero-inner { grid-template-columns: 1fr; gap: 28px; }
     .hero-visual { min-height: 0; padding: 20px 0 32px; }
-    .chip-float { left: 50%; translate: -50% var(--float, 0px); bottom: 0; }
   }
   @media (max-width: 640px) {
     .b1 { width: 300px; height: 300px; top: -130px; left: -110px; opacity: 0.45; }
@@ -201,7 +188,7 @@ const lines = site.heroHeadline.split('\n');
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .blob, .phone, .chip-float, .dot i { animation: none; }
+    .blob, .phone, .dot i { animation: none; }
     .hero-copy > *, .line-inner { animation: none; }
   }
 </style>
