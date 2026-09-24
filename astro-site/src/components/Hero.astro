@@ -113,6 +113,7 @@ const lines = site.heroHeadline.split('\n');
   .line { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
   .line-inner {
     display: inline-block;
+    text-wrap: balance;
     animation: lineUp 1.1s var(--ease) both;
     animation-delay: calc(0.12s + var(--l) * 0.14s);
   }
@@ -180,11 +181,21 @@ const lines = site.heroHeadline.split('\n');
     .b2 { width: 260px; height: 260px; top: -50px; right: -120px; opacity: 0.3; }
     .b3 { display: none; }
     .hero-copy { text-align: center; }
-    .badge-row, .hero-actions, .stats { justify-content: center; }
+    .hero-actions, .stats { justify-content: center; }
+    /* One row: status badge left, social icons right; headline is centered on the next row */
+    .badge-row { flex-wrap: nowrap; justify-content: flex-start; gap: 6px; margin-bottom: 26px; }
+    .available-badge { padding: 6px 11px; gap: 7px; font-size: 0.74rem; white-space: nowrap; margin-right: auto; }
+    .badge-row a { width: 30px; height: 30px; flex: 0 0 auto; }
+    .badge-row a :global(svg) { width: 15px; height: 15px; }
     .hero-description { margin-left: auto; margin-right: auto; }
     .phone { border-radius: 20px; padding: 4px; }
     .phone img { border-radius: 16px; }
     .hero-actions .btn { flex: 1 1 100%; justify-content: center; }
+  }
+
+  @media (max-width: 360px) {
+    .available-badge { padding: 5px 9px; font-size: 0.68rem; }
+    .badge-row a { width: 27px; height: 27px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
