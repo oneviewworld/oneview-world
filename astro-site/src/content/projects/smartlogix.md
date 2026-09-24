@@ -52,6 +52,7 @@ screenshots:
   - "/assets/projects/smartlogix/screen_35.jpg"
   - "/assets/projects/smartlogix/screen_36.jpg"
 isFeatured: true
+featuredOrder: 99
 isScreenshotLandscape: true
 ---
 

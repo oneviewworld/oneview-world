@@ -23,7 +23,7 @@ screenshots:
   - "/assets/projects/healthx-patients/screen_6.jpg"
   - "/assets/projects/healthx-patients/screen_7.jpg"
   - "/assets/projects/healthx-patients/screen_8.jpg"
-isFeatured: true
+isFeatured: false
 ---
 
 OneView developed a comprehensive patient-facing mobile application enabling appointment scheduling, secure document management, HIPAA-compliant video consultations, and real-time chat with healthcare providers.

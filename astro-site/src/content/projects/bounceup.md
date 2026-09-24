@@ -28,6 +28,7 @@ screenshots:
   - "/assets/projects/bounceup/screen_11.jpg"
 appStoreUrl: "https://apps.apple.com/us/app/bounceup-arcade-paddle-game/id6782346917"
 isFeatured: true
+featuredOrder: 1
 ---
 
 OneView designed and developed a production-ready arcade paddle ball game built with Flutter and Flame Engine. The app features single-player and local two-player modes with neon visuals, arcade sound effects, and haptic feedback. Published on both the App Store and Google Play Store.

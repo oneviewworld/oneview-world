@@ -29,6 +29,7 @@ screenshots:
   - "/assets/projects/reconvision/screen_12.jpg"
   - "/assets/projects/reconvision/screen_13.jpg"
 isFeatured: true
+featuredOrder: 7
 isScreenshotLandscape: true
 ---
 

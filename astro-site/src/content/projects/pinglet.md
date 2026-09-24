@@ -15,6 +15,7 @@ keyDeliverables:
   - "Presence and typing indicator system"
   - "Group chat with admin management"
 isFeatured: true
+featuredOrder: 6
 ---
 
 OneView designed and developed a modern, performant real-time messaging application with instant message delivery, presence indicators, media sharing, and group conversation support.

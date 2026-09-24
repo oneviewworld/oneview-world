@@ -12,6 +12,7 @@ const projects = defineCollection({
     screenshots: z.array(z.string()).default([]),
     appStoreUrl: z.string().optional(),
     isFeatured: z.boolean().default(false),
+    featuredOrder: z.number().default(50),
     isScreenshotLandscape: z.boolean().default(false),
   }),
 });
