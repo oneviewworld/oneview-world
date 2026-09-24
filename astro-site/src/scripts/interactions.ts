@@ -5,24 +5,14 @@ const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
-// ---------- scroll progress + nav state + mobile CTA ----------
+// ---------- scroll progress + nav state ----------
 const bar = document.getElementById('scroll-progress');
 const nav = document.getElementById('site-nav');
-const cta = document.getElementById('mobile-cta');
-const contact = document.getElementById('contact');
 let ticking = false;
 function onScroll() {
   const max = document.documentElement.scrollHeight - innerHeight;
   if (bar) bar.style.transform = `scaleX(${max > 0 ? clamp(scrollY / max) : 0})`;
   nav?.classList.toggle('scrolled', scrollY > 8);
-  if (cta) {
-    let nearContact = false;
-    if (contact) {
-      const r = contact.getBoundingClientRect();
-      nearContact = r.top < innerHeight * 0.6 && r.bottom > 0;
-    }
-    cta.classList.toggle('show', scrollY > 560 && !nearContact);
-  }
   updateTimeline();
   ticking = false;
 }
