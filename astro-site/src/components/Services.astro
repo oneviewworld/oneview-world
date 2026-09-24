@@ -1,6 +1,14 @@
 ---
 import Icon from './Icon.astro';
 import { services } from '../data/services';
+
+const cats = [
+  { key: 'all', label: 'All', count: services.length },
+  { key: 'apps', label: 'Apps & Games' },
+  { key: 'platform', label: 'Platform & Cloud' },
+  { key: 'ai', label: 'AI & Automation' },
+  { key: 'design', label: 'Design & Strategy' },
+].map((c) => ({ ...c, count: c.key === 'all' ? services.length : services.filter((s) => s.category === c.key).length }));
 ---
 
 <section id="services">
@@ -11,9 +19,17 @@ import { services } from '../data/services';
       <p>Design, apps, backend, AI, and launch — handled by the same people, so nothing gets lost between handoffs.</p>
     </div>
 
+    <div class="filters fade-in" role="group" aria-label="Filter services by category" data-filter-group=".svc-card">
+      {cats.map((c) => (
+        <button type="button" class="filter" data-filter={c.key} aria-pressed={c.key === 'all'}>
+          {c.label} <span class="count">{c.count}</span>
+        </button>
+      ))}
+    </div>
+
     <div class="grid grid-3">
       {services.map((s) => (
-        <div class="card fade-in">
+        <div class="card svc-card fade-in" data-cat={s.category}>
           <div class="icon-badge"><Icon name={s.icon} /></div>
           <h3 class="card-title">{s.title}</h3>
           <p class="card-desc">{s.description}</p>
@@ -27,18 +43,30 @@ import { services } from '../data/services';
 </section>
 
 <style>
-  .card-title {
-    font-size: 1.1rem;
-    margin: 20px 0 10px;
+  .filters {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    margin: -24px auto 40px;
   }
-  .card-desc {
-    color: var(--text-secondary);
-    font-size: 0.92rem;
-    margin: 0 0 16px;
+  .filter {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 16px; border-radius: 999px; cursor: pointer;
+    font-size: 0.88rem; font-weight: 600; color: var(--text-secondary);
+    background: var(--surface); border: 1px solid var(--border);
+    transition: all 0.25s var(--ease);
   }
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+  .filter:hover { color: var(--text); border-color: color-mix(in srgb, var(--color-primary) 45%, var(--border)); transform: translateY(-1px); }
+  .filter[aria-pressed='true'] {
+    color: #fff; border-color: transparent;
+    background: var(--gradient-primary);
+    box-shadow: 0 8px 22px color-mix(in srgb, var(--color-primary) 32%, transparent);
+  }
+  .count { font-size: 0.72rem; opacity: 0.7; font-variant-numeric: tabular-nums; }
+  .card-title { font-size: 1.1rem; margin: 20px 0 10px; }
+  .card-desc { color: var(--text-secondary); font-size: 0.92rem; margin: 0 0 16px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  @media (max-width: 640px) {
+    .filters { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin-left: -20px; margin-right: -20px; padding: 0 20px 6px; scrollbar-width: none; }
+    .filters::-webkit-scrollbar { display: none; }
+    .filter { flex: 0 0 auto; }
   }
 </style>

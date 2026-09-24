@@ -2,12 +2,14 @@ export interface Service {
   title: string;
   description: string;
   icon: string;
+  category: 'apps' | 'platform' | 'ai' | 'design';
   benefits: string[];
 }
 
 export const services: Service[] = [
   {
     title: 'Flutter Development',
+    category: 'apps',
     description:
       'High-performance cross-platform applications built with Flutter, ' +
       'delivering native experiences on iOS, Android, Web, and Desktop ' +
@@ -22,6 +24,7 @@ export const services: Service[] = [
   },
   {
     title: 'Android Development',
+    category: 'apps',
     description:
       'Native Android applications built with modern architecture patterns, ' +
       'Kotlin, and Jetpack Compose for optimal performance and user experience.',
@@ -35,6 +38,7 @@ export const services: Service[] = [
   },
   {
     title: 'iOS Development',
+    category: 'apps',
     description:
       "Premium iOS applications crafted with Swift and SwiftUI, following Apple's " +
       'Human Interface Guidelines for an exceptional user experience.',
@@ -48,6 +52,7 @@ export const services: Service[] = [
   },
   {
     title: 'Cross-Platform Development',
+    category: 'apps',
     description:
       'Unified cross-platform solutions using Flutter and .NET MAUI, ' +
       'maximizing code reuse while maintaining platform-native behavior.',
@@ -61,6 +66,7 @@ export const services: Service[] = [
   },
   {
     title: '.NET MAUI & Xamarin',
+    category: 'apps',
     description:
       'Enterprise-grade cross-platform applications using .NET MAUI, ' +
       'including Xamarin migration to modern .NET architectures.',
@@ -74,6 +80,7 @@ export const services: Service[] = [
   },
   {
     title: 'Backend & API Development',
+    category: 'platform',
     description:
       'Scalable RESTful APIs and backend services built with ASP.NET Core, ' +
       'designed for high availability, security, and performance.',
@@ -87,6 +94,7 @@ export const services: Service[] = [
   },
   {
     title: 'Enterprise Software',
+    category: 'platform',
     description:
       'Custom internal software that cuts manual work, replaces the ' +
       'spreadsheets your team lives in, and connects the tools you already use.',
@@ -100,6 +108,7 @@ export const services: Service[] = [
   },
   {
     title: 'Healthcare Software',
+    category: 'platform',
     description:
       'HIPAA-aware healthcare applications designed for patient engagement, ' +
       'clinical workflows, and health data management.',
@@ -113,6 +122,7 @@ export const services: Service[] = [
   },
   {
     title: 'AI & ML Integration',
+    category: 'ai',
     description:
       'Intelligent AI-powered solutions integrating LLMs, computer vision, ' +
       'and machine learning pipelines into production applications using ' +
@@ -127,6 +137,7 @@ export const services: Service[] = [
   },
   {
     title: 'Game Development',
+    category: 'apps',
     description:
       'Engaging mobile games and interactive experiences built with ' +
       'Flutter, Unity, and custom game engines for captivating gameplay.',
@@ -140,6 +151,7 @@ export const services: Service[] = [
   },
   {
     title: 'Database Design',
+    category: 'platform',
     description:
       'Optimized database architectures using SQL Server, Firebase, ' +
       'and Supabase for reliable, performant data management.',
@@ -153,6 +165,7 @@ export const services: Service[] = [
   },
   {
     title: 'Cloud Integration',
+    category: 'platform',
     description:
       'End-to-end cloud solutions leveraging Azure and AWS for ' +
       'hosting, storage, authentication, and scalable infrastructure.',
@@ -166,6 +179,7 @@ export const services: Service[] = [
   },
   {
     title: 'UI/UX Design',
+    category: 'design',
     description:
       'Research-driven user experience design and pixel-perfect user ' +
       'interfaces that delight users and drive engagement.',
@@ -179,6 +193,7 @@ export const services: Service[] = [
   },
   {
     title: 'Business Automation',
+    category: 'ai',
     description:
       'Intelligent automation solutions that reduce manual effort, ' +
       'minimize errors, and accelerate business processes.',
@@ -192,6 +207,7 @@ export const services: Service[] = [
   },
   {
     title: 'Software Consulting',
+    category: 'design',
     description:
       'Not sure what to build or which stack to pick? Get a senior review ' +
       'of your plan and a realistic cost and timeline before you commit ' +

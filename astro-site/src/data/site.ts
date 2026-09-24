@@ -35,16 +35,16 @@ export const site = {
   ],
 
   navItems: [
-    { label: 'Home', href: '#home' },
-    { label: 'Services', href: '#services' },
-    { label: 'Solutions', href: '#solutions' },
+    { label: 'Home', href: '/#home' },
+    { label: 'Services', href: '/#services' },
+    { label: 'Solutions', href: '/#solutions' },
     { label: 'Projects', href: '/projects' },
-    { label: 'Technologies', href: '#technologies' },
-    { label: 'Why OneView', href: '#why-oneview' },
-    { label: 'Process', href: '#process' },
-    { label: 'About', href: '#about' },
+    { label: 'Technologies', href: '/#technologies' },
+    { label: 'Why OneView', href: '/#why-oneview' },
+    { label: 'Process', href: '/#process' },
+    { label: 'About', href: '/#about' },
     { label: 'Blog', href: '/blog' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Contact', href: '/#contact' },
   ],
 
   social: {

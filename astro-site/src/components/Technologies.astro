@@ -1,67 +1,65 @@
 ---
 import { technologies } from '../data/technologies';
-const categories = [...new Set(technologies.map((t) => t.category))];
+
+const rowA = technologies.filter((_, i) => i % 2 === 0);
+const rowB = technologies.filter((_, i) => i % 2 === 1);
 ---
 
-<section id="technologies">
+<section id="technologies" class="section-alt">
   <div class="container-wide">
     <div class="section-header fade-in">
       <span class="eyebrow">Technologies</span>
       <h2>Built With Modern<br />Technology Stack</h2>
       <p>The stack we use to build your product quickly — and without locking you in later.</p>
     </div>
+  </div>
 
-    <div class="tech-groups fade-in">
-      {categories.map((cat) => (
-        <div class="tech-group">
-          <div class="tech-cat">{cat}</div>
-          <div class="tech-badges">
-            {technologies.filter((t) => t.category === cat).map((t) => (
-              <span class="tech-badge" style={`--dot:${t.color}`}>
-                <span class="dot"></span>{t.name}
-              </span>
-            ))}
-          </div>
+  <div class="marquees fade-in" role="list" aria-label="Technologies we use">
+    {[rowA, rowB].map((row, r) => (
+      <div class={`marquee ${r === 1 ? 'rev' : ''}`}>
+        <div class="track">
+          {row.map((t) => (
+            <span class="tech" role="listitem" style={`--dot:${t.color}`}><i></i>{t.name}<small>{t.category}</small></span>
+          ))}
+          {row.map((t) => (
+            <span class="tech" aria-hidden="true" style={`--dot:${t.color}`}><i></i>{t.name}<small>{t.category}</small></span>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    ))}
   </div>
 </section>
 
 <style>
-  .tech-groups {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  .marquees { display: flex; flex-direction: column; gap: 16px; }
+  .marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
   }
-  .tech-cat {
-    font-weight: 600;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 12px;
+  .track {
+    display: flex; width: max-content; gap: 14px; padding-right: 14px;
+    animation: scroll 46s linear infinite;
   }
-  .tech-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  .marquee.rev .track { animation-direction: reverse; animation-duration: 54s; }
+  .marquee:hover .track { animation-play-state: paused; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  .tech {
+    display: inline-flex; align-items: center; gap: 10px; white-space: nowrap;
+    padding: 14px 22px; border-radius: 16px;
+    background: var(--card); border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    font-weight: 600; font-size: 0.98rem;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s ease, border-color 0.3s ease;
   }
-  .tech-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: var(--card);
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--dot);
+  .tech:hover { transform: translateY(-4px) scale(1.03); box-shadow: var(--shadow-md); border-color: var(--dot); }
+  .tech i { width: 10px; height: 10px; border-radius: 50%; background: var(--dot); box-shadow: 0 0 0 4px color-mix(in srgb, var(--dot) 18%, transparent); }
+  .tech small { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-tertiary); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; padding: 0 20px; }
+    .tech[aria-hidden='true'] { display: none; }
+    .marquee { -webkit-mask-image: none; mask-image: none; }
   }
 </style>

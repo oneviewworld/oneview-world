@@ -5,24 +5,26 @@ import { site } from '../data/site';
 
 <header class="nav" id="site-nav">
   <div class="container-wide nav-inner">
-    <a href="/" class="brand">
+    <a href="/" class="brand" aria-label="OneView home">
       <img class="brand-mark" src="/icons/icon-mark.png" alt="" width="30" height="30" />
       <span>OneView</span>
     </a>
 
-    <nav class="nav-links" id="nav-links">
-      {site.navItems.map((item) => (
-        <a href={item.href}>{item.label}</a>
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+      {site.navItems.map((item, i) => (
+        <a href={item.href} style={`--i:${i}`}>{item.label}</a>
       ))}
+      <a href="/#contact" class="btn btn-primary drawer-cta" style={`--i:${site.navItems.length}`}>Start your project</a>
     </nav>
 
     <div class="nav-actions">
+      <a href="/#contact" class="btn btn-primary nav-cta">Start a project</a>
       <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">
         <span class="icon-sun"><Icon name="sun" size={18} /></span>
         <span class="icon-moon"><Icon name="moon" size={18} /></span>
       </button>
-      <button id="nav-menu-btn" class="icon-btn nav-menu-btn" aria-label="Open menu">
-        <Icon name="menu" size={20} />
+      <button id="nav-menu-btn" class="icon-btn nav-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="burger"><i></i><i></i></span>
       </button>
     </div>
   </div>
@@ -32,10 +34,24 @@ import { site } from '../data/site';
   .nav {
     position: sticky;
     top: 0;
-    z-index: 50;
-    background: color-mix(in srgb, var(--bg) 85%, transparent);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
+    z-index: 70;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  /* Blur lives on a pseudo-element: backdrop-filter on the header itself would make it the
+     containing block for the fixed-position mobile drawer and clip it to 72px. */
+  .nav::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    backdrop-filter: saturate(180%) blur(16px);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+  }
+  .nav.scrolled {
+    border-color: var(--border);
+    box-shadow: 0 8px 30px rgba(17, 24, 39, 0.05);
   }
 
   .nav-inner {
@@ -43,6 +59,7 @@ import { site } from '../data/site';
     align-items: center;
     justify-content: space-between;
     height: 72px;
+    gap: 24px;
   }
 
   .brand {
@@ -51,40 +68,55 @@ import { site } from '../data/site';
     gap: 10px;
     font-weight: 700;
     font-size: 1.1rem;
+    letter-spacing: -0.02em;
   }
-
   .brand-mark {
     width: 30px;
     height: 30px;
     object-fit: contain;
+    transition: transform 0.5s var(--ease);
+  }
+  .brand:hover .brand-mark {
+    transform: rotate(-12deg) scale(1.08);
   }
 
   .nav-links {
     display: flex;
-    gap: 28px;
-    font-size: 0.92rem;
+    gap: 4px;
+    font-size: 0.9rem;
     font-weight: 500;
   }
-
-  .nav-links a {
+  .nav-links a:not(.btn) {
+    position: relative;
+    padding: 8px 12px;
+    border-radius: 999px;
     color: var(--text-secondary);
-    transition: color 0.15s ease;
+    transition: color 0.2s ease, background 0.2s ease;
   }
-
-  .nav-links a:hover {
+  .nav-links a:not(.btn):hover {
     color: var(--text);
+    background: color-mix(in srgb, var(--color-primary) 8%, transparent);
   }
+  .nav-links a.active {
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  }
+  .drawer-cta { display: none; }
 
   .nav-actions {
     display: flex;
     align-items: center;
     gap: 8px;
   }
+  .nav-cta {
+    padding: 10px 18px;
+    font-size: 0.88rem;
+  }
 
   .icon-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
     border: 1px solid var(--border);
     background: var(--surface);
     color: var(--text);
@@ -92,55 +124,98 @@ import { site } from '../data/site';
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: transform 0.25s var(--ease), border-color 0.2s ease;
   }
+  .icon-btn:hover { border-color: var(--color-primary); }
+  .icon-btn:active { transform: scale(0.92); }
 
-  .icon-moon {
-    display: none;
-  }
-  :root[data-theme='dark'] .icon-sun {
-    display: none;
-  }
-  :root[data-theme='dark'] .icon-moon {
-    display: flex;
-  }
+  .icon-moon { display: none; }
+  :root[data-theme='dark'] .icon-sun { display: none; }
+  :root[data-theme='dark'] .icon-moon { display: flex; }
 
-  .nav-menu-btn {
-    display: none;
+  .nav-menu-btn { display: none; }
+  .burger { position: relative; width: 18px; height: 12px; display: block; }
+  .burger i {
+    position: absolute; left: 0; right: 0; height: 2px; border-radius: 2px;
+    background: currentColor; transition: transform 0.4s var(--ease), top 0.4s var(--ease);
+  }
+  .burger i:first-child { top: 1px; }
+  .burger i:last-child { top: 9px; }
+  .nav-menu-btn[aria-expanded='true'] .burger i:first-child { top: 5px; transform: rotate(45deg); }
+  .nav-menu-btn[aria-expanded='true'] .burger i:last-child { top: 5px; transform: rotate(-45deg); }
+
+  @media (max-width: 1180px) {
+    .nav-cta { display: none; }
   }
 
   @media (max-width: 860px) {
+    .nav-menu-btn { display: flex; }
     .nav-links {
       position: fixed;
-      inset: 72px 0 auto 0;
+      inset: 72px 0 0 0;
       flex-direction: column;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 24px 24px;
-      gap: 16px;
-      transform: translateY(-120%);
-      transition: transform 0.25s ease;
+      justify-content: center;
+      align-items: stretch;
+      gap: 2px;
+      padding: 24px 28px calc(28px + env(safe-area-inset-bottom));
+      background: color-mix(in srgb, var(--bg) 94%, transparent);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity 0.35s ease, transform 0.45s var(--ease), visibility 0s 0.35s;
+      overflow-y: auto;
     }
     .nav-links.open {
-      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition-delay: 0s;
     }
-    .nav-menu-btn {
-      display: flex;
+    .nav-links a:not(.btn) {
+      font-size: clamp(1.4rem, 6.4vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      padding: 10px 6px;
+      border-radius: 12px;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), color 0.2s ease, background 0.2s ease;
     }
+    .nav-links.open a {
+      opacity: 1;
+      transform: none;
+      transition-delay: calc(var(--i) * 40ms + 80ms);
+    }
+    .drawer-cta {
+      display: inline-flex;
+      justify-content: center;
+      margin-top: 18px;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    .nav-links.open .drawer-cta { opacity: 1; transform: none; }
   }
 </style>
 
 <script>
-  const toggle = document.getElementById('theme-toggle');
-  toggle?.addEventListener('click', () => {
-    const root = document.documentElement;
-    const current = root.getAttribute('data-theme') || 'light';
-    const next = current === 'dark' ? 'light' : 'dark';
+  const root = document.documentElement;
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    const next = (root.getAttribute('data-theme') || 'light') === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
   });
 
-  const menuBtn = document.getElementById('nav-menu-btn');
+  const btn = document.getElementById('nav-menu-btn');
   const links = document.getElementById('nav-links');
-  menuBtn?.addEventListener('click', () => links?.classList.toggle('open'));
-  links?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => links.classList.remove('open')));
+  const setOpen = (open: boolean) => {
+    links?.classList.toggle('open', open);
+    btn?.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  btn?.addEventListener('click', () => setOpen(!links?.classList.contains('open')));
+  links?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  matchMedia('(min-width: 861px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
 </script>
