@@ -12,13 +12,13 @@ import { site } from '../data/site';
 
     <nav class="nav-links" id="nav-links" aria-label="Primary">
       {site.navItems.map((item, i) => (
-        <a href={item.href} style={`--i:${i}`}>{item.label}</a>
+        <a href={item.href} class={item.primary ? '' : 'drawer-only'} style={`--i:${i}`}>{item.label}</a>
       ))}
-      <a href="/#contact" class="btn btn-primary drawer-cta" style={`--i:${site.navItems.length}`}>Start your project</a>
+      <a href="/#contact" class="btn btn-primary drawer-cta" style={`--i:${site.navItems.length}`}>Let's talk</a>
     </nav>
 
     <div class="nav-actions">
-      <a href="/#contact" class="btn btn-primary nav-cta">Start a project</a>
+      <a href="/#contact" class="btn btn-primary nav-cta">Let's talk <span class="wave" aria-hidden="true">👋</span></a>
       <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">
         <span class="icon-sun"><Icon name="sun" size={18} /></span>
         <span class="icon-moon"><Icon name="moon" size={18} /></span>
@@ -82,13 +82,14 @@ import { site } from '../data/site';
 
   .nav-links {
     display: flex;
-    gap: 4px;
-    font-size: 0.9rem;
+    gap: 6px;
+    font-size: 0.92rem;
     font-weight: 500;
   }
   .nav-links a:not(.btn) {
     position: relative;
-    padding: 8px 12px;
+    white-space: nowrap;
+    padding: 8px 14px;
     border-radius: 999px;
     color: var(--text-secondary);
     transition: color 0.2s ease, background 0.2s ease;
@@ -102,6 +103,7 @@ import { site } from '../data/site';
     background: color-mix(in srgb, var(--color-primary) 12%, transparent);
   }
   .drawer-cta { display: none; }
+  .drawer-only { display: none !important; }
 
   .nav-actions {
     display: flex;
@@ -109,8 +111,20 @@ import { site } from '../data/site';
     gap: 8px;
   }
   .nav-cta {
-    padding: 10px 18px;
-    font-size: 0.88rem;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    gap: 8px;
+  }
+  .wave { display: inline-block; transform-origin: 70% 70%; }
+  .nav-cta:hover .wave { animation: wave 0.9s ease-in-out; }
+  @keyframes wave {
+    0%, 100% { transform: rotate(0); }
+    20% { transform: rotate(16deg); }
+    40% { transform: rotate(-10deg); }
+    60% { transform: rotate(14deg); }
+    80% { transform: rotate(-6deg); }
   }
 
   .icon-btn {
@@ -144,12 +158,10 @@ import { site } from '../data/site';
   .nav-menu-btn[aria-expanded='true'] .burger i:first-child { top: 5px; transform: rotate(45deg); }
   .nav-menu-btn[aria-expanded='true'] .burger i:last-child { top: 5px; transform: rotate(-45deg); }
 
-  @media (max-width: 1180px) {
-    .nav-cta { display: none; }
-  }
-
-  @media (max-width: 860px) {
+  @media (max-width: 960px) {
     .nav-menu-btn { display: flex; }
+    .nav-cta { display: none; }
+    .drawer-only { display: block !important; }
     .nav-links {
       position: fixed;
       inset: 72px 0 0 0;
@@ -217,5 +229,5 @@ import { site } from '../data/site';
   btn?.addEventListener('click', () => setOpen(!links?.classList.contains('open')));
   links?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
   addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
-  matchMedia('(min-width: 861px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+  matchMedia('(min-width: 961px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
 </script>
