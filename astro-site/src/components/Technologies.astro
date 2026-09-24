@@ -5,7 +5,7 @@ const rowA = technologies.filter((_, i) => i % 2 === 0);
 const rowB = technologies.filter((_, i) => i % 2 === 1);
 ---
 
-<section id="technologies" class="section-alt">
+<section id="technologies" data-bg="wash" class="section-alt">
   <div class="container-wide">
     <div class="section-header fade-in">
       <span class="eyebrow">Technologies</span>
@@ -34,6 +34,9 @@ const rowB = technologies.filter((_, i) => i % 2 === 1);
   .marquees { display: flex; flex-direction: column; gap: 16px; }
   .marquee {
     overflow: hidden;
+    /* room for the hover lift + shadow inside the clip; margins hand the space back */
+    padding: 10px 0 14px;
+    margin: -10px 0 -14px;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
     mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
   }

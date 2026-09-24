@@ -2,7 +2,7 @@
 import { processSteps } from '../data/process';
 ---
 
-<section id="process">
+<section id="process" data-bg="grid">
   <div class="container">
     <div class="section-header fade-in">
       <span class="eyebrow">Our Process</span>
@@ -35,8 +35,10 @@ import { processSteps } from '../data/process';
     padding: 0;
     max-width: 980px;
     display: grid;
-    gap: 28px;
+    gap: 0;
   }
+  /* Cards alternate sides, so each row is half empty; pull rows up so they interlock. */
+  .step + .step { margin-top: -44px; }
   .rail {
     position: absolute; top: 24px; bottom: 24px; left: 50%; width: 3px; margin-left: -1.5px;
     border-radius: 3px; background: var(--border); overflow: hidden;
@@ -67,6 +69,8 @@ import { processSteps } from '../data/process';
   .step-card p { color: var(--text-secondary); font-size: 0.9rem; margin: 0; }
 
   @media (max-width: 760px) {
+    .timeline { gap: 18px; }
+    .step + .step { margin-top: 0; }
     .rail { left: 22px; }
     .step { grid-template-columns: 44px 1fr; column-gap: 16px; }
     .node { grid-column: 1; justify-self: start; }

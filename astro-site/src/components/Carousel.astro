@@ -81,11 +81,12 @@ const { label, cardWidth = 'clamp(270px, 29vw, 420px)', cardWidthMobile = '80%' 
     display: flex;
     gap: 20px;
     overflow-x: auto;
+    overflow-y: hidden; /* horizontal only: hover lift/tilt must never create a vertical scrollbar */
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: 24px;
     margin: 0 -24px;
-    padding: 20px 24px 36px;
+    padding: 14px 24px 24px;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     cursor: grab;

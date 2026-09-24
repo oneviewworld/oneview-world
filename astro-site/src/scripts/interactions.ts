@@ -22,7 +22,7 @@ addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimat
 document.querySelectorAll<HTMLElement>('.fade-in').forEach((el) => {
   const sibs = el.parentElement ? [...el.parentElement.children].filter((c) => c.classList.contains('fade-in')) : [];
   const i = Math.max(0, sibs.indexOf(el));
-  if (i > 0) el.style.transitionDelay = `${Math.min(i, 8) * 70}ms`;
+  if (i > 0) el.style.setProperty('--stagger', `${Math.min(i, 8) * 70}ms`);
 });
 
 // ---------- cursor glow + card spotlight + tilt (fine pointers only) ----------
@@ -38,7 +38,8 @@ if (finePointer && !reduce) {
   document.addEventListener('pointerleave', () => glow.classList.remove('on'));
 
   document.querySelectorAll<HTMLElement>('.card, .work-card, .project-card, .post-card').forEach((card) => {
-    const tilt = card.matches('.work-card, .project-card');
+    // every card tilts like Featured Work, except full-width panels where a tilt looks off
+    const tilt = !card.matches('.about-card, .contact-form');
     card.addEventListener('pointermove', (e) => {
       const r = card.getBoundingClientRect();
       const x = e.clientX - r.left, y = e.clientY - r.top;

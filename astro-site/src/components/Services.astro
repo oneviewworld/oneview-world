@@ -12,7 +12,7 @@ const cats = [
 ].map((c) => ({ ...c, count: c.key === 'all' ? services.length : services.filter((s) => s.category === c.key).length }));
 ---
 
-<section id="services">
+<section id="services" data-bg="grid">
   <div class="container-wide">
     <div class="section-header fade-in">
       <span class="eyebrow">Services</span>
@@ -46,7 +46,7 @@ const cats = [
 <style>
   .filters {
     display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
-    margin: -24px auto 40px;
+    margin: -16px auto 20px;
   }
   .filter {
     display: inline-flex; align-items: center; gap: 8px;

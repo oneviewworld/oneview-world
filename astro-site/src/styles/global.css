@@ -115,16 +115,19 @@ button {
 }
 
 section {
-  padding: var(--space-section) 0;
+  padding: 56px 0;
+  position: relative;
+  isolation: isolate;
 }
 
 .section-alt {
   background: color-mix(in srgb, var(--surface) 60%, transparent);
 }
+.section-alt[data-bg] { background: none; }
 
 @media (max-width: 640px) {
   section {
-    padding: 64px 0;
+    padding: 40px 0;
   }
   .container,
   .container-wide,
@@ -166,7 +169,7 @@ h4 {
 .section-header {
   text-align: center;
   max-width: 640px;
-  margin: 0 auto 64px;
+  margin: 0 auto 36px;
 }
 
 .section-header h2 {
@@ -226,7 +229,7 @@ h4 {
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  /* lift + tilt come from the shared card rule below so every card behaves like Featured Work */
   border-color: color-mix(in srgb, var(--color-primary) 40%, var(--border));
 }
 
@@ -291,19 +294,19 @@ h4 {
 /* ===== Scroll fade-in ===== */
 .fade-in {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  translate: 0 16px;
+  transition: opacity 0.6s ease, translate 0.6s ease;
 }
 
 .fade-in.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  translate: 0 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .fade-in {
     opacity: 1;
-    transform: none;
+    translate: none;
     transition: none;
   }
   html {
@@ -371,11 +374,11 @@ h1, h2, h3, h4 { letter-spacing: -0.025em; }
   isolation: isolate;
   box-shadow: var(--shadow-sm);
   transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
-  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s ease;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s ease, opacity 0.6s ease, translate 0.6s ease;
   will-change: transform;
 }
 .card:hover, .work-card:hover, .project-card:hover, .post-card:hover {
-  --lift: -4px;
+  --lift: -6px;
   box-shadow: var(--shadow-md);
 }
 .card::after, .work-card::after, .project-card::after, .post-card::after {
@@ -399,12 +402,63 @@ h1, h2, h3, h4 { letter-spacing: -0.025em; }
 
 /* ---- richer reveal: blur + rise, stagger set by JS ---- */
 .fade-in {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  opacity: 0; translate: 0 24px;
+  transition: opacity 0.7s var(--ease) var(--stagger, 0ms), translate 0.7s var(--ease) var(--stagger, 0ms);
 }
-.fade-in.is-visible { opacity: 1; transform: none; }
+/* Cards that also fade in: this later rule replaced the card transition, so hover jumped. Keep both. */
+.fade-in:is(.card, .work-card, .project-card, .post-card) {
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s ease, opacity 0.7s var(--ease) var(--stagger, 0ms), translate 0.7s var(--ease) var(--stagger, 0ms);
+}
+.fade-in.is-visible { opacity: 1; translate: 0 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .scroll-progress, .cursor-glow { display: none; }
   .card, .work-card, .project-card, .post-card { transform: none !important; }
+}
+
+
+/* =====================================================================
+   Section backgrounds — quiet, content-related texture instead of blank space.
+   Set with data-bg on a <section>. Decorative only (::before, no content).
+   ===================================================================== */
+[data-bg]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* full-width texture that fades in/out vertically, so adjacent sections blend with no hard edge */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+}
+/* Blueprint grid + glows: engineering / planning sections */
+[data-bg='grid']::before {
+  background:
+    radial-gradient(700px 420px at 8% 20%, color-mix(in srgb, var(--color-primary) 16%, transparent), transparent 70%),
+    radial-gradient(700px 420px at 94% 80%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 70%),
+    linear-gradient(to right, color-mix(in srgb, var(--text) 8%, transparent) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(to bottom, color-mix(in srgb, var(--text) 8%, transparent) 1px, transparent 1px) 0 0 / 56px 56px,
+    color-mix(in srgb, var(--color-primary) 3.5%, transparent);
+}
+/* Dot field + glows: breadth / industries */
+[data-bg='dots']::before {
+  background:
+    radial-gradient(700px 420px at 90% 15%, color-mix(in srgb, #c084fc 16%, transparent), transparent 70%),
+    radial-gradient(700px 420px at 6% 85%, color-mix(in srgb, var(--color-accent) 14%, transparent), transparent 70%),
+    radial-gradient(color-mix(in srgb, var(--text) 22%, transparent) 1.2px, transparent 1.5px) 0 0 / 24px 24px,
+    color-mix(in srgb, var(--color-accent) 3%, transparent);
+}
+/* Brand wash: soft colour bands left and right */
+[data-bg='wash']::before {
+  background:
+    radial-gradient(760px 460px at 12% 30%, color-mix(in srgb, var(--color-primary) 18%, transparent), transparent 70%),
+    radial-gradient(760px 460px at 90% 70%, color-mix(in srgb, var(--color-accent) 16%, transparent), transparent 70%),
+    color-mix(in srgb, var(--color-primary) 3%, transparent);
+}
+/* Closing section echoes the hero aurora */
+[data-bg='aurora']::before {
+  background:
+    radial-gradient(760px 480px at 12% 25%, color-mix(in srgb, var(--color-primary) 24%, transparent), transparent 70%),
+    radial-gradient(680px 440px at 92% 35%, color-mix(in srgb, var(--color-accent) 22%, transparent), transparent 70%),
+    radial-gradient(640px 420px at 55% 100%, color-mix(in srgb, #c084fc 22%, transparent), transparent 70%);
 }
