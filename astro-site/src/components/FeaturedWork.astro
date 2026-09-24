@@ -15,6 +15,7 @@ const domainGradients: Record<string, [string, string]> = {
 
 const featured = (await getCollection('projects'))
   .filter((p) => p.data.isFeatured && p.data.screenshots.length > 0)
+  .sort((a, b) => a.data.featuredOrder - b.data.featuredOrder)
   .slice(0, 8);
 ---
 

@@ -15,7 +15,8 @@ const domainGradients: Record<string, [string, string]> = {
 };
 
 const projects = (await getCollection('projects')).sort(
-  (a, b) => Number(b.data.isFeatured) - Number(a.data.isFeatured)
+  (a, b) =>
+    Number(b.data.isFeatured) - Number(a.data.isFeatured) || a.data.featuredOrder - b.data.featuredOrder
 );
 ---
 

@@ -26,6 +26,7 @@ screenshots:
   - "/assets/projects/hopix-valley/screen_9.jpg"
 appStoreUrl: "https://apps.apple.com/in/app/hopix-valley/id6787487138"
 isFeatured: true
+featuredOrder: 5
 isScreenshotLandscape: true
 ---
 
