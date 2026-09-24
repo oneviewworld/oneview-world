@@ -103,14 +103,6 @@ import { site } from '../data/site';
   :root[data-theme='dark'] .icon-moon {
     display: flex;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) .icon-sun {
-      display: none;
-    }
-    :root:not([data-theme='light']) .icon-moon {
-      display: flex;
-    }
-  }
 
   .nav-menu-btn {
     display: none;
@@ -141,9 +133,7 @@ import { site } from '../data/site';
   const toggle = document.getElementById('theme-toggle');
   toggle?.addEventListener('click', () => {
     const root = document.documentElement;
-    const current =
-      root.getAttribute('data-theme') ||
-      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const current = root.getAttribute('data-theme') || 'light';
     const next = current === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);

@@ -5,7 +5,7 @@ import { site } from '../data/site';
 
 <section id="home" class="hero">
   <div class="container hero-inner">
-    <div class="fade-in">
+    <div class="hero-copy fade-in">
       <div class="badge-row">
         <span class="available-badge">
           <span class="dot"></span> Available for new projects
@@ -32,6 +32,12 @@ import { site } from '../data/site';
           </div>
         ))}
       </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="phone phone-1"><img src="/assets/projects/bounceup/screen_1.jpg" alt="" width="414" height="900" loading="eager" /></div>
+      <div class="phone phone-2"><img src="/assets/projects/digital-butler/screen_1.jpg" alt="" width="414" height="900" loading="eager" /></div>
+      <div class="phone phone-3"><img src="/assets/projects/healthx-patients/screen_1.jpg" alt="" width="540" height="1170" loading="eager" /></div>
     </div>
   </div>
 </section>
@@ -96,6 +102,46 @@ import { site } from '../data/site';
     color: var(--text-secondary);
   }
 
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    min-height: 520px;
+  }
+
+  .phone {
+    width: 30%;
+    max-width: 190px;
+    border-radius: 26px;
+    padding: 6px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: 0 24px 60px color-mix(in srgb, var(--color-primary) 22%, transparent),
+      0 4px 14px rgba(17, 24, 39, 0.08);
+  }
+
+  .phone img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9 / 19.5;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 20px;
+  }
+
+  .phone-1 { transform: translateY(36px) rotate(-3deg); }
+  .phone-2 { transform: translateY(-24px); z-index: 2; max-width: 210px; width: 34%; }
+  .phone-3 { transform: translateY(36px) rotate(3deg); }
+
   .hero-headline {
     font-size: clamp(2.25rem, 6vw, 3.75rem);
     white-space: pre-line;
@@ -132,11 +178,24 @@ import { site } from '../data/site';
     font-size: 0.9rem;
   }
 
+  @media (max-width: 900px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .hero-visual {
+      min-height: 0;
+      padding-bottom: 24px;
+    }
+  }
+
   @media (max-width: 640px) {
     .hero {
       padding-top: 110px;
       text-align: center;
     }
+    .phone { border-radius: 18px; padding: 4px; }
+    .phone img { border-radius: 14px; }
     .badge-row,
     .hero-actions {
       justify-content: center;

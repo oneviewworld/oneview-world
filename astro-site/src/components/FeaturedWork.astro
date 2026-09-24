@@ -1,0 +1,116 @@
+---
+import { getCollection } from 'astro:content';
+import Icon from './Icon.astro';
+
+const domainGradients: Record<string, [string, string]> = {
+  Gaming: ['#EC4899', '#8B5CF6'],
+  'AI & Security': ['#6366F1', '#06B6D4'],
+  Hospitality: ['#F59E0B', '#EF4444'],
+  Logistics: ['#10B981', '#3B82F6'],
+  Healthcare: ['#10B981', '#06B6D4'],
+  Communication: ['#3B82F6', '#6366F1'],
+  Productivity: ['#8B5CF6', '#EC4899'],
+};
+
+const featured = (await getCollection('projects'))
+  .filter((p) => p.data.isFeatured && p.data.screenshots.length > 0)
+  .slice(0, 6);
+---
+
+<section id="featured-work">
+  <div class="container-wide">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Featured Work</span>
+      <h2>Products We Have<br />Built and Shipped</h2>
+      <p>Real apps on the App Store and in daily production use — not mockups.</p>
+    </div>
+
+    <div class="grid grid-3">
+      {featured.map((p) => {
+        const [c1, c2] = domainGradients[p.data.domain] ?? ['#6366F1', '#06B6D4'];
+        return (
+          <a href={`/projects/${p.slug}`} class="work-card fade-in">
+            <div class={`cover ${p.data.isScreenshotLandscape ? '' : 'portrait'}`} style={`background: linear-gradient(135deg, ${c1}, ${c2})`}>
+              <img src={p.data.screenshots[0]} alt={`${p.data.title} screenshot`} loading="lazy" />
+            </div>
+            <div class="work-body">
+              <span class="domain" style={`color:${c1}; border-color:${c1}55`}>{p.data.domain}</span>
+              <h3>{p.data.title}</h3>
+              <p>{p.data.subtitle}</p>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+
+    <div class="more fade-in">
+      <a href="/projects" class="btn btn-outline">See all projects <Icon name="arrow-right" size={16} /></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .work-card {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--card);
+    box-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .work-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(17, 24, 39, 0.1);
+    border-color: color-mix(in srgb, var(--color-primary) 40%, var(--border));
+  }
+  .cover {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+  .cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+  .cover.portrait {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 22px;
+  }
+  .cover.portrait img {
+    width: 42%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 10px 30px rgba(17, 24, 39, 0.28);
+  }
+  .work-body {
+    padding: 22px;
+  }
+  .domain {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .work-body h3 {
+    font-size: 1.15rem;
+    margin: 0 0 6px;
+  }
+  .work-body p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .more {
+    text-align: center;
+    margin-top: 40px;
+  }
+</style>

@@ -83,7 +83,7 @@ const canonical = new URL(canonicalPath, 'https://oneview.world').toString();
     <script is:inline>emailjs.init('EMAILJS_PUBLIC_KEY_PLACEHOLDER');</script>
 
     <script is:inline>
-      // Apply saved/system theme before paint to avoid a flash.
+      // Light is the default; only apply dark if the visitor chose it. Runs before paint to avoid a flash.
       (function () {
         var saved = localStorage.getItem('theme');
         if (saved) document.documentElement.setAttribute('data-theme', saved);
