@@ -110,9 +110,13 @@ const lines = site.heroHeadline.split('\n');
     margin: 0 0 24px;
   }
   @media (min-width: 1000px) { .line { white-space: nowrap; } }
-  .line { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+  /* Descender room: background-clip:text only paints inside the element's own box, so the inline-block
+     needs bottom padding (g, y, p). The wrapper's overflow keeps the slide-up reveal clipped, and the
+     negative margins hand the extra height back so line spacing is unchanged. */
+  .line { display: block; overflow: hidden; padding-bottom: 0.2em; margin-bottom: -0.36em; }
   .line-inner {
     display: inline-block;
+    padding-bottom: 0.16em;
     text-wrap: balance;
     animation: lineUp 1.1s var(--ease) both;
     animation-delay: calc(0.12s + var(--l) * 0.14s);
