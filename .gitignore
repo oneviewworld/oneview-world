@@ -1,9 +1,3 @@
-# Flutter/Dart
-.dart_tool/
-.packages
-build/
-pubspec.lock
-
 # IDE
 .idea/
 *.iml
@@ -18,19 +12,6 @@ Thumbs.db
 
 # Amazon Q (contains secrets/config)
 .amazonq/
-
-# Generated
-*.dart.js
-*.info.json
-*.js_
-*.js.deps
-*.js.map
-doc/api/
-
-# Flutter plugins
-.flutter-plugins
-.flutter-plugins-dependencies
-.metadata
 
 # Astro (astro-site/)
 astro-site/node_modules/

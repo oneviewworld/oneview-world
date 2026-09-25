@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://oneview.world/sitemap.xml
