@@ -10,31 +10,28 @@ You bring the idea; OneView designs it, builds it, and ships it to the App Store
 
 ## Tech Stack
 
-- **Framework:** Flutter Web
-- **Language:** Dart
-- **Fonts:** Google Fonts (Inter)
-- **Animations:** Custom painters, scroll-triggered animations
-- **Deployment:** GitHub Pages with GitHub Actions
+- **Framework:** Astro (static site, in `astro-site/`)
+- **Content:** Markdown project pages in `astro-site/src/content/projects/`
+- **Deployment:** GitHub Pages via GitHub Actions
 
 ## Development
 
 ```bash
-# Get dependencies
-flutter pub get
+cd astro-site
 
-# Run locally
-flutter run -d chrome
+# Install dependencies
+npm ci
 
-# Build for production
-flutter build web --release --base-href "/"
+# Run locally (http://localhost:4321)
+npm run dev
 
-# Analyze code
-flutter analyze
+# Build for production (outputs to astro-site/dist)
+npm run build
 ```
 
 ## Deployment
 
-The site automatically deploys to GitHub Pages via GitHub Actions on push to `main`.
+Work happens on `development`. The site deploys to GitHub Pages when `development` is merged into `deployment` and pushed (`.github/workflows/deploy.yml`).
 
 ### Custom Domain Configuration
 
@@ -43,20 +40,20 @@ The site is configured to serve at `oneview.world` with:
 - Proper DNS configuration (A records + CNAME)
 - SSL via GitHub Pages
 
-## Architecture
+## Structure
 
 ```
-lib/
-├── core/
-│   ├── constants/    # App data, spacing, constants
-│   ├── theme/        # Colors, typography, theme provider
-│   └── utils/        # Responsive utilities
-├── models/           # Data models
-├── pages/            # Page widgets
-├── sections/         # Homepage sections
-└── widgets/
-    ├── animations/   # Animation widgets
-    └── common/       # Reusable components
+astro-site/
+├── public/           # Static files (images, favicon, robots.txt, sitemap.xml)
+└── src/
+    ├── components/   # Page sections and UI components
+    ├── content/      # Project case studies (Markdown)
+    ├── data/         # Site data
+    ├── layouts/      # Page layouts
+    ├── pages/        # Routes
+    ├── scripts/      # Client-side scripts
+    └── styles/       # Global styles
+assets/               # Brand logos and Instagram material (not used by the site build)
 ```
 
 ## License
