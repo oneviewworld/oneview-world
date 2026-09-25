@@ -14,6 +14,10 @@ keyDeliverables:
   - "Real-time messaging app with instant delivery"
   - "Presence and typing indicator system"
   - "Group chat with admin management"
+screenshots:
+  - "/assets/projects/pinglet/screen_1.jpg"
+  - "/assets/projects/pinglet/screen_2.jpg"
+  - "/assets/projects/pinglet/screen_3.jpg"
 isFeatured: true
 featuredOrder: 6
 ---
