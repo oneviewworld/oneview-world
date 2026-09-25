@@ -14,6 +14,9 @@ keyDeliverables:
   - "Cross-platform gallery with grid and list browsing"
   - "Successful .NET MAUI to Flutter port"
   - "Batch operations with multi-select mode"
+screenshots:
+  - "/assets/projects/galleryhub/screen_1.jpg"
+  - "/assets/projects/galleryhub/screen_2.jpg"
 appStoreUrl: "https://apps.apple.com/app/apple-store/id6766763174?pt=128861739&ct=oneview-website&mt=8"
 isFeatured: false
 ---
