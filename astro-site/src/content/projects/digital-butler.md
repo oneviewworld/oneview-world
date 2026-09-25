@@ -46,8 +46,7 @@ screenshots:
   - "/assets/projects/digital-butler/screen_29.jpg"
   - "/assets/projects/digital-butler/screen_30.jpg"
   - "/assets/projects/digital-butler/screen_31.jpg"
-isFeatured: true
-featuredOrder: 2
+isFeatured: false
 ---
 
 OneView delivered an intelligent hospitality platform leveraging AI to provide personalised guest experiences — from smart room booking and concierge services to AI-driven recommendations and real-time guest-staff communication.

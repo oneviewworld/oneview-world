@@ -19,7 +19,7 @@ screenshots:
   - "/assets/projects/pinglet/screen_2.jpg"
   - "/assets/projects/pinglet/screen_3.jpg"
 isFeatured: true
-featuredOrder: 6
+featuredOrder: 2
 ---
 
 OneView designed and developed a modern, performant real-time messaging application with instant message delivery, presence indicators, media sharing, and group conversation support.
