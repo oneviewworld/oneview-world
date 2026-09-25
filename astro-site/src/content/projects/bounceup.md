@@ -26,7 +26,7 @@ screenshots:
   - "/assets/projects/bounceup/screen_9.jpg"
   - "/assets/projects/bounceup/screen_10.jpg"
   - "/assets/projects/bounceup/screen_11.jpg"
-appStoreUrl: "https://apps.apple.com/us/app/bounceup-arcade-paddle-game/id6782346917"
+appStoreUrl: "https://apps.apple.com/app/apple-store/id6782346917?pt=128861739&ct=oneview-website&mt=8"
 isFeatured: true
 featuredOrder: 1
 ---
