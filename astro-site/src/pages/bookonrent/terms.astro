@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/BookOnRentLayout.astro';
+import { BOR } from '../../data/bookonrent';
+---
+
+<Layout title="Terms of Service" narrow>
+  <article class="legal">
+    <h1>Terms of Service</h1>
+    <p class="muted">Effective {BOR.effectiveDate}</p>
+
+    <p>BookOnRent is a book rental management service for library and book store owners, provided by {BOR.business}, {BOR.country} ("we", "us"). By creating an account or buying a plan, you agree to these terms.</p>
+
+    <h2>1. Your account</h2>
+    <ul>
+      <li>You sign in with your email address and a one-time code. Keep access to that email safe; anyone who can read it can sign in.</li>
+      <li>You must be at least 18 years old and use BookOnRent for a lawful business.</li>
+      <li>You are responsible for the information you enter about your books and customers, and for having your customers' permission to store their details.</li>
+    </ul>
+
+    <h2>2. Plans and payment</h2>
+    <ul>
+      <li>The Free plan allows up to 50 books. Paid plans raise the limit as shown on the <a href="/bookonrent">pricing page</a>.</li>
+      <li>Monthly plans are billed in advance each month and renew automatically until cancelled. The Lifetime plan is a single payment.</li>
+      <li>Payments are processed by Razorpay. We never see or store your card or bank details.</li>
+      <li>We may change prices for future billing periods. We will email you at least 30 days before a change affects you. Lifetime purchases are not affected.</li>
+      <li>Cancellations and refunds follow our <a href="/bookonrent/refund">Refund &amp; Cancellation Policy</a>.</li>
+    </ul>
+
+    <h2>3. Your data</h2>
+    <ul>
+      <li>Your library data (books, customers, rentals) belongs to you. We store it only to provide the service, as described in our <a href="/bookonrent/privacy">Privacy Policy</a>.</li>
+      <li>If your paid plan ends, nothing is deleted. You can keep using everything you already have; only adding books above the Free limit is paused.</li>
+      <li>You can ask us to export or delete your data at any time.</li>
+    </ul>
+
+    <h2>4. Acceptable use</h2>
+    <p>Do not misuse the service: no attempts to access other accounts, overload or break the service, resell it, or use it to store unlawful content.</p>
+
+    <h2>5. Availability</h2>
+    <p>We work to keep BookOnRent available and your data backed up, but we cannot promise it will never be interrupted. We are not liable for indirect losses such as lost business or profits. Our total liability is limited to the amount you paid us in the 12 months before the claim.</p>
+
+    <h2>6. Ending the service</h2>
+    <p>You can stop using BookOnRent and cancel anytime. We may suspend accounts that break these terms, after notice where reasonable.</p>
+
+    <h2>7. Changes to these terms</h2>
+    <p>If we change these terms, we will update this page and, for important changes, email you.</p>
+
+    <h2>8. Law</h2>
+    <p>These terms are governed by the laws of India.</p>
+
+    <h2>Contact</h2>
+    <p>{BOR.business} · <a href={`mailto:${BOR.email}`}>{BOR.email}</a></p>
+  </article>
+</Layout>

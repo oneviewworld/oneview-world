@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/BookOnRentLayout.astro';
+import { BOR } from '../../data/bookonrent';
+---
+
+<Layout title="Privacy Policy" narrow>
+  <article class="legal">
+    <h1>Privacy Policy</h1>
+    <p class="muted">Effective {BOR.effectiveDate}</p>
+
+    <p>This policy explains what the BookOnRent app and website collect and how {BOR.business} ("we") uses it.</p>
+
+    <h2>What we collect</h2>
+    <ul>
+      <li><strong>Account:</strong> your email address, and the name, library name and phone number you add to your profile.</li>
+      <li><strong>Library data you enter:</strong> books (and cover photos), customers (name, phone, and optional email, address and ID proof details), and rental records.</li>
+      <li><strong>Plan and payment records:</strong> your plan, its status and renewal date, and Razorpay reference IDs. Card, UPI and bank details are handled by Razorpay only; we never receive them.</li>
+      <li><strong>Basic technical data:</strong> sign-in times and error logs needed to keep the service secure and working.</li>
+    </ul>
+    <p>We do not use advertising, ad tracking, or sell any data.</p>
+
+    <h2>How we use it</h2>
+    <ul>
+      <li>To run BookOnRent for you: store your library, sync it to your devices, and enforce your plan's book limit.</li>
+      <li>To send service emails: sign-in codes, receipts, plan reminders and important changes. You can unsubscribe from plan reminders.</li>
+      <li>To provide support when you contact us.</li>
+    </ul>
+
+    <h2>Where it is stored</h2>
+    <p>Data is stored with Supabase in its Mumbai, India region (ap-south-1), encrypted in transit and at rest. Each account's data is private and isolated from other accounts.</p>
+
+    <h2>Who we share it with</h2>
+    <ul>
+      <li><strong>Supabase</strong> (database, sign-in and file storage) and <strong>Razorpay</strong> (payments), only as needed to provide the service.</li>
+      <li>Authorities, only where Indian law requires it.</li>
+    </ul>
+
+    <h2>Your customers' data</h2>
+    <p>You control the customer details you store. Only enter what you need, and tell your customers you keep their details to manage rentals. We process that data only on your instructions.</p>
+
+    <h2>How long we keep it</h2>
+    <p>While your account is open. If you ask us to delete your account, we delete your library data within 30 days, except payment records we must keep under Indian tax law.</p>
+
+    <h2>Your choices</h2>
+    <p>You can view and edit your data in the app, and ask us to export or delete it by emailing <a href={`mailto:${BOR.email}`}>{BOR.email}</a> from your account email.</p>
+
+    <h2>Children</h2>
+    <p>BookOnRent is a business tool for adults and is not meant for children.</p>
+
+    <h2>Changes</h2>
+    <p>We will update this page when this policy changes and email you about important changes.</p>
+
+    <h2>Contact</h2>
+    <p>{BOR.business} · <a href={`mailto:${BOR.email}`}>{BOR.email}</a></p>
+  </article>
+</Layout>

@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/BookOnRentLayout.astro';
+---
+
+<Layout title="Payment received" narrow>
+  <div class="card pad done">
+    <div id="waiting">
+      <div class="spinner" aria-hidden="true"></div>
+      <h1>Confirming your payment…</h1>
+      <p class="muted">This usually takes a few seconds. Please don't close this page.</p>
+    </div>
+
+    <div id="ok" class="hidden">
+      <div class="tick" aria-hidden="true">✓</div>
+      <h1>Payment successful</h1>
+      <p class="muted">Your <strong id="plan"></strong> plan is now active for <strong id="email"></strong>.</p>
+      <ul class="rows card-rows" id="rows"></ul>
+      <div class="info">
+        <strong>Next: open BookOnRent on your phone.</strong><br />
+        Your plan updates automatically. If it doesn't, go to Settings → My Plan → Refresh plan status.
+      </div>
+      <a class="btn btn-primary" href="/bookonrent/account">Go to my account</a>
+      <p class="muted small">Razorpay has emailed you a receipt.</p>
+    </div>
+
+    <div id="slow" class="hidden">
+      <h1>Payment received</h1>
+      <p class="muted">Razorpay is still confirming it with your bank. This can take a few minutes for UPI Autopay.
+        Your plan will switch on by itself. No need to pay again.</p>
+      <a class="btn btn-outline" href="/bookonrent/account">Check my account</a>
+    </div>
+  </div>
+</Layout>
+
+<script type="module" is:inline>
+  import { requireSession, getEntitlement, formatDate, show } from '/bookonrent/bor.js';
+
+  const $ = (id) => document.getElementById(id);
+  const wanted = new URLSearchParams(location.search).get('plan');
+  const session = await requireSession();
+
+  if (session) {
+    let ent = null;
+    for (let i = 0; i < 20; i++) {
+      ent = await getEntitlement().catch(() => null);
+      if (ent && ent.plan_id === wanted) break;
+      await new Promise((r) => setTimeout(r, 2000));
+    }
+    show($('waiting'), false);
+    if (ent && ent.plan_id === wanted) {
+      $('plan').textContent = ent.plan_name;
+      $('email').textContent = session.user.email;
+      const rows = [
+        ['Plan', ent.plan_name],
+        ['Book limit', ent.book_limit ? ent.book_limit.toLocaleString('en-IN') + ' books' : 'Unlimited'],
+        ent.billing === 'monthly' ? ['Next renewal', formatDate(ent.current_period_end)] : ['Valid till', 'Forever'],
+      ];
+      $('rows').innerHTML = rows.map(([a, b]) => `<li><span>${a}</span><span>${b}</span></li>`).join('');
+      show($('ok'));
+    } else {
+      show($('slow'));
+    }
+  }
+</script>
+
+<style>
+  .done { text-align: center; margin: 20px auto; max-width: 560px; }
+  .done h1 { font-size: 1.8rem; }
+  .tick { width: 72px; height: 72px; margin: 4px auto 16px; border-radius: 50%; background: var(--green); color: #fff; font-size: 2.2rem; line-height: 72px; box-shadow: 0 0 0 12px #e3f6e7; }
+  .card-rows { text-align: left; background: #f7fafc; border: 1px solid var(--border); border-radius: 12px; padding: 4px 18px; margin: 20px 0; }
+  .info { text-align: left; margin-bottom: 20px; }
+  .small { font-size: .88rem; }
+  .spinner { width: 42px; height: 42px; margin: 8px auto 18px; border: 4px solid #d7eef2; border-top-color: var(--teal); border-radius: 50%; animation: spin 0.9s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
