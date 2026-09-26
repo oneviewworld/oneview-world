@@ -26,4 +26,4 @@ export const policies: AppPolicy[] = [
   },
 ];
 
-export const policyContactEmail = 'oneviewapps@gmail.com';
+export const policyContactEmail = 'hello@oneview.world';
