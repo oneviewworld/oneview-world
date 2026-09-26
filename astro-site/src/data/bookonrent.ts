@@ -5,8 +5,8 @@ export const BOR = {
   business: 'OneView',
   country: 'India',
   email: 'hello@oneview.world',
-  // TODO: add the business address exactly as registered with Razorpay (required for KYC).
-  address: '',
+  // City/state only; no street address is published.
+  address: 'Vadodara, Gujarat, India',
   effectiveDate: '26 September 2026',
 };
 
