@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/BookOnRentLayout.astro';
+import { BOR } from '../../data/bookonrent';
+---
+
+<Layout title="Refund & Cancellation Policy" narrow>
+  <article class="legal">
+    <h1>Refund &amp; Cancellation Policy</h1>
+    <p class="muted">Effective {BOR.effectiveDate}</p>
+
+    <p>This policy applies to BookOnRent plans sold by {BOR.business} ("we", "us"). All prices are in Indian Rupees (₹) and payments are processed by Razorpay.</p>
+
+    <h2>Monthly plans (Starter, Growth, Pro)</h2>
+    <ul>
+      <li>Monthly plans renew automatically every month through UPI Autopay or a card mandate until you cancel.</li>
+      <li>You can cancel anytime from <a href="/bookonrent/account">My account</a> or by emailing <a href={`mailto:${BOR.email}`}>{BOR.email}</a>.</li>
+      <li>After you cancel, your plan keeps working until the end of the month you have already paid for. You will not be charged again.</li>
+      <li>We do not refund the current month once it has been charged, including partly used months.</li>
+      <li>When a paid month ends without renewal, your account returns to the Free plan (50 books). Your books, customers and rentals are not deleted.</li>
+    </ul>
+
+    <h2>Lifetime plan</h2>
+    <ul>
+      <li>The Lifetime plan is a one-time payment. It does not renew and is never charged again.</li>
+      <li>If you are not satisfied, you can ask for a full refund within <strong>7 days</strong> of purchase by emailing us from your account email. After 7 days the Lifetime plan is non-refundable.</li>
+      <li>After a Lifetime refund, your account returns to the Free plan.</li>
+    </ul>
+
+    <h2>Payment problems</h2>
+    <ul>
+      <li>If you were charged twice, or charged but your plan did not activate within 24 hours, email us with your Razorpay payment ID. We will activate the plan or refund the extra amount.</li>
+    </ul>
+
+    <h2>How refunds are paid</h2>
+    <p>Approved refunds go back to the original payment method (UPI, card or bank account) within <strong>5–7 working days</strong> after we approve them. Your bank may take a few more days to show it.</p>
+
+    <h2>Contact</h2>
+    <p>Email <a href={`mailto:${BOR.email}`}>{BOR.email}</a>. We reply within 2 working days.</p>
+  </article>
+</Layout>
