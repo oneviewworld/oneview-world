@@ -1,105 +1,54 @@
 ---
-import Layout from '../../layouts/BookOnRentLayout.astro';
-import { PLANS, FEATURES } from '../../data/bookonrent';
-
-const faqs = [
-  ['Can I cancel anytime?', 'Yes. Monthly plans stop at the end of the month you have paid for. No questions asked.'],
-  ['What if I stop paying?', 'Nothing is deleted. Your account goes back to Free limits, and you can’t add new books above 50 until you choose a plan again.'],
-  ['Can I switch plans?', 'Yes. Choose a bigger plan anytime and the old one stops right away. Buying Lifetime cancels your monthly plan for you.'],
-  ['How do I pay?', 'Securely through Razorpay: UPI Autopay (GPay, PhonePe, Paytm), credit or debit card, or netbanking.'],
-];
+// Unlisted placeholder while BookOnRent is not yet available.
 ---
 
-<Layout title="Pricing">
-  <section class="hero">
-    <h1>Simple pricing for your book library</h1>
-    <p class="muted lead">Start free. Pay only when your library grows. Cancel monthly plans anytime.</p>
-    <span class="tag">India only · Prices in ₹ · No hidden charges</span>
-  </section>
-
-  <section class="plans" aria-label="Plans">
-    {PLANS.map((p) => (
-      <article class:list={['plan', 'card', { popular: p.popular, lifetime: p.lifetime }]}>
-        {p.popular && <div class="ribbon">Most popular</div>}
-        {p.lifetime && <span class="pill pay-once">Pay once</span>}
-        <h2>{p.name}</h2>
-        <p class="price"><strong>{p.price}</strong> <span>{p.per}</span></p>
-        <p class="blurb">{p.blurb}</p>
-        <div class="limit">{p.books}</div>
-        <ul class="features">
-          {FEATURES.map((f) => <li>{f}</li>)}
-        </ul>
-        {p.id === 'free' ? (
-          <a class="btn btn-dark btn-block" href="/bookonrent/signin">Create free account</a>
-        ) : (
-          <a
-            class:list={['btn', 'btn-block', p.lifetime ? 'btn-gold' : p.popular ? 'btn-primary' : 'btn-outline']}
-            href={`/bookonrent/checkout?plan=${p.id}`}
-          >
-            {p.lifetime ? 'Buy Lifetime' : `Choose ${p.name}`}
-          </a>
-        )}
-      </article>
-    ))}
-  </section>
-
-  <section class="trust card">
-    <div><strong>🔒 Secure payments by Razorpay</strong><span class="muted">UPI Autopay · Cards · Netbanking</span></div>
-    <div><strong>☁️ Your library, safely online</strong><span class="muted">Stored securely in India, private to your account</span></div>
-  </section>
-
-  <section class="faq">
-    <h2>Common questions</h2>
-    <div class="faq-grid">
-      {faqs.map(([q, a]) => (
-        <div class="card pad">
-          <h3>{q}</h3>
-          <p class="muted">{a}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-</Layout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>BookOnRent · Coming soon</title>
+    <link rel="icon" href="/bookonrent/icon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <main>
+      <img src="/bookonrent/icon.svg" alt="" width="72" height="72" />
+      <h1>BookOnRent</h1>
+      <p class="tag">Your rental library, organized.</p>
+      <p class="soon">Coming soon</p>
+      <p class="muted">Questions? <a href="mailto:hello@oneview.world">hello@oneview.world</a></p>
+      <a class="home" href="/">← OneView</a>
+    </main>
+  </body>
+</html>
 
 <style>
-  .hero { text-align: center; padding: 24px 0 36px; }
-  .hero h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); }
-  .lead { font-size: 1.1rem; margin: 0 0 18px; }
-  .tag { display: inline-block; background: #ddf1f3; color: var(--teal-dark); font-weight: 600; font-size: .85rem; padding: 6px 16px; border-radius: 999px; }
-
-  .plans { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; align-items: stretch; }
-  .plan { position: relative; display: flex; flex-direction: column; padding: 26px 22px 22px; overflow: hidden; }
-  .plan h2 { font-size: 1.25rem; margin: 0 0 6px; }
-  .price { margin: 0 0 6px; }
-  .price strong { font-size: 2.2rem; }
-  .price span { color: var(--muted); }
-  .blurb { color: var(--muted); font-size: .92rem; min-height: 2.9em; margin: 0 0 14px; }
-  .limit { background: #f2f9fa; border-radius: 10px; padding: 10px 12px; font-weight: 700; margin-bottom: 16px; }
-  .features { list-style: none; padding: 0; margin: 0 0 22px; flex: 1; }
-  .features li { padding: 5px 0 5px 24px; position: relative; font-size: .92rem; }
-  .features li::before { content: '✓'; position: absolute; left: 2px; color: var(--green); font-weight: 700; }
-
-  .popular { border: 2px solid var(--teal); box-shadow: 0 16px 40px rgba(8,126,139,.16); padding-top: 52px; }
-  .ribbon { position: absolute; top: 0; left: 0; right: 0; background: var(--teal); color: #fff; text-align: center; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 7px; }
-
-  .lifetime { background: linear-gradient(135deg, #10213f, #0b4a63); color: #fff; border: 0; box-shadow: 0 16px 40px rgba(16,33,63,.25); }
-  .lifetime .price span, .lifetime .blurb { color: #b9c7da; }
-  .lifetime .limit { background: rgba(255,255,255,.1); }
-  .lifetime .features li::before { color: #7fe0b0; }
-  .lifetime .features li { color: #e6ecf5; }
-  .pay-once { background: var(--gold); color: var(--navy); align-self: flex-start; margin-bottom: 10px; }
-
-  .trust { display: flex; flex-wrap: wrap; gap: 16px 48px; padding: 20px 26px; margin: 36px 0 44px; }
-  .trust div { display: flex; flex-direction: column; }
-
-  .faq h2 { font-size: 1.5rem; margin-bottom: 18px; }
-  .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .faq h3 { font-size: 1.05rem; }
-  .faq p { margin: 0; }
-
-  @media (max-width: 1100px) { .plans { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 760px) {
-    .plans, .faq-grid { grid-template-columns: 1fr; }
-    .blurb { min-height: 0; }
+  :root { color-scheme: light; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px 16px;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+    background: linear-gradient(180deg, #e4f4f8, #ffffff 60%);
+    color: #10213f;
+    text-align: center;
   }
+  h1 { font-size: 2.4rem; margin: 18px 0 6px; color: #056777; }
+  .tag { margin: 0 0 28px; color: #5f6b80; font-size: 1.1rem; }
+  .soon {
+    display: inline-block;
+    margin: 0 0 28px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    background: #ddf1f3;
+    color: #056777;
+    font-weight: 600;
+  }
+  .muted { color: #5f6b80; margin: 0 0 20px; }
+  a { color: #087e8b; }
+  .home { font-size: .9rem; text-decoration: none; }
 </style>
