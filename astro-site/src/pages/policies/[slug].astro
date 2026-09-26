@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { policies, policyContactEmail, type AppPolicy } from '../../data/policies';
+
+export function getStaticPaths() {
+  return policies.map((policy) => ({
+    params: { slug: policy.slug },
+    props: { policy },
+  }));
+}
+
+interface Props {
+  policy: AppPolicy;
+}
+
+const { policy } = Astro.props;
+const { name } = policy;
+---
+
+<Layout
+  title={`Privacy Policy - ${name} | OneView`}
+  description={`Privacy policy for ${name} by OneView. ${name} collects no personal data.`}
+  canonicalPath={`/policies/${policy.slug}`}
+>
+  <Nav />
+  <main>
+    <article class="policy">
+      <div class="container-narrow">
+        <a href="/policies" class="back-link">← All policies</a>
+        <h1>Privacy Policy - {name}</h1>
+        <p class="updated">Last updated: {policy.updated}</p>
+
+        <div class="policy-content">
+          <h2>Overview</h2>
+          <p>{name} is {policy.description} developed by OneView. We respect your privacy and are committed to protecting it.</p>
+
+          <h2>Data Collection</h2>
+          <p>{name} does <strong>NOT</strong> collect, store, or transmit any personal data. Specifically:</p>
+          <ul>
+            <li>No personal information is collected</li>
+            <li>No usage analytics or tracking</li>
+            <li>No advertising or ad networks</li>
+            <li>No internet connection is used</li>
+            <li>No data is shared with third parties</li>
+            <li>No cookies or identifiers</li>
+          </ul>
+
+          <h2>Local Data</h2>
+          <p>All game data ({policy.localData}) is stored <strong>locally on your device only</strong> using an on-device database. This data never leaves your device.</p>
+
+          <h2>Children's Privacy</h2>
+          <p>{name} does not collect any data from anyone, including children under 13.</p>
+
+          <h2>Permissions</h2>
+          <p>{name} requires no special permissions. It works completely offline.</p>
+
+          <h2>Ads</h2>
+          <p>{name} contains no advertisements of any kind.</p>
+
+          <h2>Changes</h2>
+          <p>If we make changes to this policy, we will update this page.</p>
+
+          <h2>Contact</h2>
+          <p>If you have questions about this privacy policy, contact us at: <a href={`mailto:${policyContactEmail}`}>{policyContactEmail}</a></p>
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .policy {
+    padding: 140px 0 40px;
+  }
+  .back-link {
+    display: inline-block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+  .policy h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: 8px;
+  }
+  .updated {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 32px;
+  }
+  .policy-content {
+    line-height: 1.85;
+  }
+  .policy-content h2 {
+    font-size: 1.3rem;
+    margin: 36px 0 12px;
+  }
+  .policy-content p,
+  .policy-content ul {
+    margin: 0 0 16px;
+    color: var(--text-secondary);
+  }
+  .policy-content ul {
+    padding-left: 22px;
+  }
+  .policy-content li {
+    margin-bottom: 6px;
+  }
+  .policy-content strong {
+    color: var(--text);
+  }
+  .policy-content a {
+    color: var(--color-primary);
+  }
+</style>
