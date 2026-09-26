@@ -12,8 +12,7 @@ import { BOR } from '../../data/bookonrent';
       <ul class="rows">
         <li><span>Business</span><span>{BOR.business}</span></li>
         <li><span>Email</span><span><a href={`mailto:${BOR.email}`}>{BOR.email}</a></span></li>
-        {BOR.address && <li><span>Address</span><span>{BOR.address}</span></li>}
-        <li><span>Country</span><span>{BOR.country}</span></li>
+        <li><span>Location</span><span>{BOR.address}</span></li>
         <li><span>Support hours</span><span>Mon–Sat, 10 am – 6 pm IST</span></li>
       </ul>
     </div>
