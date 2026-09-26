@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { policies } from '../../data/policies';
+---
+
+<Layout
+  title="App Policies | OneView"
+  description="Privacy policies for apps and games published by OneView."
+  canonicalPath="/policies"
+>
+  <Nav />
+  <main>
+    <section class="policies">
+      <div class="container-narrow">
+        <h1>App Policies</h1>
+        <ul>
+          {policies.map((p) => (
+            <li><a href={`/policies/${p.slug}`}>{p.name} - Privacy Policy</a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .policies {
+    padding: 140px 0 80px;
+  }
+  .policies h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: 24px;
+  }
+  .policies ul {
+    padding-left: 22px;
+    line-height: 2;
+  }
+  .policies a {
+    color: var(--color-primary);
+  }
+</style>
