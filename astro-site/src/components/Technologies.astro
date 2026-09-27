@@ -14,13 +14,13 @@ import { technologyAreas } from '../data/technologies';
     <ul class="areas fade-in" aria-label="Technology areas we work in">
       {technologyAreas.map((a) => (
         <li>
-          <a class="tech" href={`/technologies#${a.slug}`} style={`--dot:${a.color}`}>
+          <a class="tech" href={`/technologies/#${a.slug}`} style={`--dot:${a.color}`}>
             <span class="ic"><Icon name={a.icon} size={18} /></span>{a.name}
           </a>
         </li>
       ))}
       <li>
-        <a class="tech more" href="/technologies">View all technologies <Icon name="arrow-right" size={16} /></a>
+        <a class="tech more" href="/technologies/">View all technologies <Icon name="arrow-right" size={16} /></a>
       </li>
     </ul>
   </div>

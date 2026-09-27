@@ -25,13 +25,13 @@ const p = project.data;
 <Layout
   title={`${p.title} — ${p.subtitle} | OneView`}
   description={p.subtitle + ' — a project by OneView. ' + p.techStack.join(', ')}
-  canonicalPath={`/projects/${project.slug}`}
+  canonicalPath={`/projects/${project.slug}/`}
 >
   <Nav />
   <main>
     <article class="project-detail">
       <div class="container">
-        <a href="/projects" class="back-link">← All projects</a>
+        <a href="/projects/" class="back-link">← All projects</a>
 
         <div class="header fade-in">
           <span class="domain-badge">{p.domain}</span>

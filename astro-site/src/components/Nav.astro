@@ -3,8 +3,8 @@ import Icon from './Icon.astro';
 import { site } from '../data/site';
 
 // Page links (not /#section links) are highlighted while you're on that page.
-const path = Astro.url.pathname.replace(/\/$/, '');
-const isCurrent = (href: string) => !href.includes('#') && (path === href || path.startsWith(href + '/'));
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const isCurrent = (href: string) => !href.includes('#') && path.startsWith(href);
 ---
 
 <header class="nav" id="site-nav">

@@ -23,7 +23,7 @@ const projects = (await getCollection('projects')).sort(
 <Layout
   title="Featured Work | OneView"
   description="Real products on the App Store and in daily production use — built by OneView. Games, AI platforms, healthcare software, logistics, and more."
-  canonicalPath="/projects"
+  canonicalPath="/projects/"
 >
   <Nav />
   <main>
@@ -41,7 +41,7 @@ const projects = (await getCollection('projects')).sort(
             const [c1, c2] = domainGradients[p.data.domain] ?? ['#6366F1', '#06B6D4'];
             const cover = p.data.screenshots[0];
             return (
-              <a href={`/projects/${p.slug}`} class="project-card">
+              <a href={`/projects/${p.slug}/`} class="project-card">
                 <div class={`cover ${p.data.isScreenshotLandscape ? '' : 'portrait'}`} style={`background: linear-gradient(135deg, ${c1}, ${c2})`}>
                   {cover && <img src={cover} alt={p.data.title} loading="lazy" />}
                 </div>

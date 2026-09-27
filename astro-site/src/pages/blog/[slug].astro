@@ -24,13 +24,13 @@ const { Content } = await post.render();
   title={`${post.data.title} | OneView`}
   description={post.data.metaDescription}
   keywords={post.data.seoKeywords.join(', ')}
-  canonicalPath={`/blog/${post.slug}`}
+  canonicalPath={`/blog/${post.slug}/`}
 >
   <Nav />
   <main>
     <article class="post">
       <div class="container-narrow">
-        <a href="/blog" class="back-link">← All posts</a>
+        <a href="/blog/" class="back-link">← All posts</a>
         <time datetime={post.data.date.toISOString()}>
           {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
         </time>
