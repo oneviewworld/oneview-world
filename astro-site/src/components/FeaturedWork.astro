@@ -31,7 +31,7 @@ const featured = (await getCollection('projects'))
       {featured.map((p) => {
         const [c1, c2] = domainGradients[p.data.domain] ?? ['#6366F1', '#06B6D4'];
         return (
-          <a href={`/projects/${p.slug}`} class="work-card fade-in" draggable="false">
+          <a href={`/projects/${p.slug}/`} class="work-card fade-in" draggable="false">
             <div class={`cover ${p.data.isScreenshotLandscape ? '' : 'portrait'}`} style={`background: linear-gradient(135deg, ${c1}, ${c2})`}>
               <img src={p.data.screenshots[0]} alt={`${p.data.title} screenshot`} loading="lazy" draggable="false" />
             </div>
@@ -46,7 +46,7 @@ const featured = (await getCollection('projects'))
     </Carousel>
 
     <div class="more fade-in">
-      <a href="/projects" class="btn btn-outline">See all projects <Icon name="arrow-right" size={16} /></a>
+      <a href="/projects/" class="btn btn-outline">See all projects <Icon name="arrow-right" size={16} /></a>
     </div>
   </div>
 </section>

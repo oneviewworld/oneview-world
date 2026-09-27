@@ -8,7 +8,7 @@ import { policies } from '../../data/policies';
 <Layout
   title="App Policies | OneView"
   description="Privacy policies for apps and games published by OneView."
-  canonicalPath="/policies"
+  canonicalPath="/policies/"
 >
   <Nav />
   <main>
@@ -17,7 +17,7 @@ import { policies } from '../../data/policies';
         <h1>App Policies</h1>
         <ul>
           {policies.map((p) => (
-            <li><a href={`/policies/${p.slug}`}>{p.name} - Privacy Policy</a></li>
+            <li><a href={`/policies/${p.slug}/`}>{p.name} - Privacy Policy</a></li>
           ))}
         </ul>
       </div>

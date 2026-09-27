@@ -22,13 +22,13 @@ const { name } = policy;
 <Layout
   title={`Privacy Policy - ${name} | OneView`}
   description={`Privacy policy for ${name} by OneView. ${name} collects no personal data.`}
-  canonicalPath={`/policies/${policy.slug}`}
+  canonicalPath={`/policies/${policy.slug}/`}
 >
   <Nav />
   <main>
     <article class="policy">
       <div class="container-narrow">
-        <a href="/policies" class="back-link">← All policies</a>
+        <a href="/policies/" class="back-link">← All policies</a>
         <h1>Privacy Policy - {name}</h1>
         <p class="updated">Last updated: {policy.updated}</p>
 
