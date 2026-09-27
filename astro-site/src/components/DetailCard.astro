@@ -1,0 +1,65 @@
+---
+// Card used on the dedicated section pages: icon (or step number), title,
+// description, labelled chip groups, and an optional link at the bottom.
+import Icon from './Icon.astro';
+
+interface Props {
+  id?: string;
+  icon?: string;
+  /** Shown instead of an icon, e.g. a process step number. */
+  badge?: string;
+  color?: string;
+  title: string;
+  description: string;
+  groups?: { label: string; items: string[] }[];
+  link?: { href: string; label: string };
+}
+
+const { id, icon, badge, color = 'var(--color-primary)', title, description, groups = [], link } = Astro.props;
+---
+
+<article id={id} class="card detail-card fade-in" style={`--dot:${color}`}>
+  <div class="head">
+    <span class="ic">{badge ? <b>{badge}</b> : <Icon name={icon ?? 'check'} size={22} />}</span>
+    <h2>{title}</h2>
+  </div>
+  <p class="desc">{description}</p>
+
+  {groups.filter((g) => g.items.length > 0).map((g) => (
+    <div class="group">
+      <h3>{g.label}</h3>
+      <ul>{g.items.map((item) => <li class="chip">{item}</li>)}</ul>
+    </div>
+  ))}
+
+  <slot />
+
+  {link && (
+    <a class="card-link" href={link.href}>{link.label} <Icon name="arrow-right" size={14} /></a>
+  )}
+</article>
+
+<style>
+  .detail-card { display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 96px; }
+  .head { display: flex; align-items: center; gap: 14px; }
+  .ic {
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 46px; height: 46px; border-radius: 12px;
+    color: var(--dot); background: color-mix(in srgb, var(--dot) 14%, transparent);
+  }
+  .ic b { font-size: 0.95rem; font-weight: 800; }
+  h2 { font-size: 1.15rem; margin: 0; }
+  .desc { margin: 0; color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem; }
+  .group h3 {
+    margin: 0 0 8px; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary);
+  }
+  .group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .card-link {
+    display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
+    margin-top: auto; padding-top: 4px;
+    font-size: 0.88rem; font-weight: 600; color: var(--color-primary);
+  }
+  .card-link:hover { gap: 9px; }
+  .detail-card:target { border-color: var(--dot); box-shadow: 0 0 0 3px color-mix(in srgb, var(--dot) 25%, transparent); }
+</style>

@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { site } from '../data/site';
 ---
 
@@ -19,6 +20,10 @@ import { site } from '../data/site';
       </div>
 
       <p class="about-text about-closing">{site.aboutClosing}</p>
+    </div>
+
+    <div class="section-more fade-in">
+      <a href="/about/" class="btn btn-outline">More about OneView <Icon name="arrow-right" size={16} /></a>
     </div>
   </div>
 </section>

@@ -1,0 +1,104 @@
+---
+import DetailLayout from '../layouts/DetailLayout.astro';
+import DetailCard from '../components/DetailCard.astro';
+import { site } from '../data/site';
+
+const principles = [
+  {
+    id: 'senior-team',
+    icon: 'verified',
+    color: '#6366F1',
+    title: 'A Small, Senior Team',
+    description:
+      'Engineers who have shipped real apps to the App Store, into hospitals, and into live logistics operations — not juniors learning on your project.',
+    values: ['Quality', 'Reliability'],
+  },
+  {
+    id: 'direct',
+    icon: 'consulting',
+    color: '#0EA5E9',
+    title: 'Talk to the Builders',
+    description:
+      'You work directly with the people writing the code. No sales layer, no account managers passing messages back and forth.',
+    values: ['Transparency', 'Speed'],
+  },
+  {
+    id: 'ownership',
+    icon: 'shield',
+    color: '#10B981',
+    title: 'You Own Everything',
+    description:
+      'Source code, app store listings, servers, and accounts are in your name from day one. You can take the project elsewhere at any time.',
+    values: ['Security', 'No lock-in'],
+  },
+  {
+    id: 'pricing',
+    icon: 'dashboard',
+    color: '#F59E0B',
+    title: 'Clear Scope & Pricing',
+    description:
+      'Every project starts with a written proposal: what gets built, when it ships, and a fixed price range — before any budget is committed.',
+    values: ['Transparency', 'Predictability'],
+  },
+  {
+    id: 'built-to-last',
+    icon: 'architecture',
+    color: '#8B5CF6',
+    title: 'Built to Last',
+    description:
+      'Proven technology, clean architecture, and documentation, so your product can grow and any developer can pick it up later.',
+    values: ['Performance', 'Scalability', 'Innovation'],
+  },
+  {
+    id: 'support',
+    icon: 'support',
+    color: '#EC4899',
+    title: 'We Stay After Launch',
+    description:
+      'Launch day is the start, not the end. We handle monitoring, fixes, OS updates, and new features as your product evolves.',
+    values: ['Support After Launch', 'Reliability'],
+  },
+];
+---
+
+<DetailLayout
+  title="About | OneView"
+  description="OneView is a small, senior team that designs, builds, and ships mobile apps, games, and software for founders and businesses. Meet the way we work."
+  canonicalPath="/about/"
+  section="about"
+  eyebrow="About"
+  heading="About OneView"
+  intro={[site.aboutDescription, site.aboutClosing]}
+  highlights={site.stats}
+  jump={principles.map((p) => ({ href: `#${p.id}`, label: p.title }))}
+>
+  {principles.map((p) => (
+    <DetailCard
+      id={p.id}
+      icon={p.icon}
+      color={p.color}
+      title={p.title}
+      description={p.description}
+      groups={[{ label: 'Values', items: p.values }]}
+    />
+  ))}
+
+  <div slot="after" class="values card fade-in">
+    <h2>Core Values</h2>
+    <ul>{site.coreValues.map((v) => <li class="chip">{v}</li>)}</ul>
+  </div>
+</DetailLayout>
+
+<style>
+  .values { margin-top: 32px; text-align: center; }
+  .values h2 { font-size: 1.15rem; margin: 0 0 16px; }
+  .values ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .values .chip {
+    padding: 10px 16px; font-weight: 500;
+    color: var(--color-primary);
+    border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+    background: linear-gradient(135deg,
+      color-mix(in srgb, var(--color-primary) 10%, transparent),
+      color-mix(in srgb, var(--color-accent) 6%, transparent));
+  }
+</style>

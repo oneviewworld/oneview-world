@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { processSteps } from '../data/process';
 ---
 
@@ -23,6 +24,10 @@ import { processSteps } from '../data/process';
         </li>
       ))}
     </ol>
+
+    <div class="section-more fade-in">
+      <a href="/process/" class="btn btn-outline">See the full process <Icon name="arrow-right" size={16} /></a>
+    </div>
   </div>
 </section>
 

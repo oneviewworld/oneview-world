@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Icon from './Icon.astro';
+
+const latest = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<section id="blog" data-bg="grid">
+  <div class="container-wide">
+    <div class="section-header fade-in">
+      <span class="eyebrow">Blog</span>
+      <h2>Insights &amp; Ideas</h2>
+      <p>Notes on AI, software development, and building digital products.</p>
+    </div>
+
+    <div class="grid grid-3">
+      {latest.map((post) => (
+        <a href={`/blog/${post.slug}/`} class="card post fade-in">
+          <time datetime={post.data.date.toISOString()}>
+            {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+          <h3>{post.data.title}</h3>
+          <p>{post.data.excerpt}</p>
+          <span class="read">Read more →</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="section-more fade-in">
+      <a href="/blog/" class="btn btn-outline">View all posts <Icon name="arrow-right" size={16} /></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .post { display: flex; flex-direction: column; gap: 10px; color: var(--text); }
+  .post time { font-size: 0.8rem; color: var(--text-secondary); }
+  .post h3 { font-size: 1.12rem; line-height: 1.35; margin: 0; }
+  .post p {
+    margin: 0; color: var(--text-secondary); font-size: 0.93rem; line-height: 1.6;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .read { margin-top: auto; padding-top: 4px; color: var(--color-primary); font-weight: 600; font-size: 0.9rem; }
+</style>

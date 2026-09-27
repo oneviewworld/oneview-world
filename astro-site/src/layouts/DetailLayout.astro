@@ -1,0 +1,132 @@
+---
+// Shared shell for the dedicated section pages (/services/, /projects/,
+// /technologies/, /process/, /about/, /blog/) so they all read the same:
+// back link → overview → at-a-glance facts → jump chips → card grid → CTA.
+import Layout from './Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  /** Homepage section this page expands on, e.g. "services" → back link to /#services. */
+  section: string;
+  eyebrow: string;
+  heading: string;
+  intro: string[];
+  highlights?: { value: string; label: string }[];
+  jump?: { href: string; label: string }[];
+  /** Columns for the card grid on desktop. */
+  cols?: 2 | 3 | 4;
+  cta?: { title: string; text: string };
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  section,
+  eyebrow,
+  heading,
+  intro,
+  highlights = [],
+  jump = [],
+  cols = 3,
+  cta = {
+    title: 'Have an idea you want to build?',
+    text: "Tell us what you have in mind and we'll come back with a plan, a realistic cost, and a timeline.",
+  },
+} = Astro.props;
+---
+
+<Layout title={title} description={description} canonicalPath={canonicalPath}>
+  <Nav />
+  <main>
+    <section class="detail-page">
+      <div class="container-wide">
+        <a href={`/#${section}`} class="back-link">← Back to home</a>
+
+        <div class="section-header fade-in">
+          <span class="eyebrow">{eyebrow}</span>
+          <h1>{heading}</h1>
+          {intro.map((p) => <p>{p}</p>)}
+        </div>
+
+        {highlights.length > 0 && (
+          <ul class="highlights fade-in" aria-label="At a glance">
+            {highlights.map((h) => (
+              <li><strong>{h.value}</strong><span>{h.label}</span></li>
+            ))}
+          </ul>
+        )}
+
+        {jump.length > 0 && (
+          <nav class="jump fade-in" aria-label="Jump to a section">
+            {jump.map((j) => <a href={j.href} class="chip">{j.label}</a>)}
+          </nav>
+        )}
+
+        <div class={`grid grid-${cols} detail-grid`}>
+          <slot />
+        </div>
+
+        <slot name="after" />
+
+        <div class="cta card fade-in">
+          <div>
+            <h2>{cta.title}</h2>
+            <p>{cta.text}</p>
+          </div>
+          <a href="/#contact" class="btn btn-primary">Let's talk <Icon name="arrow-right" size={16} /></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .detail-page { padding: 32px 0 80px; }
+  .back-link {
+    display: inline-block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+  .section-header p + p { margin-top: 12px; }
+
+  .highlights {
+    list-style: none; padding: 0; margin: 0 auto 32px; max-width: 900px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+  }
+  .highlights li {
+    display: flex; flex-direction: column; gap: 4px; text-align: center;
+    padding: 18px 12px; border-radius: var(--radius-lg);
+    background: var(--card); border: 1px solid var(--border);
+  }
+  .highlights strong { font-size: 1.15rem; color: var(--text); }
+  .highlights span { font-size: 0.82rem; color: var(--text-secondary); }
+
+  .jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto 48px; max-width: 1000px; }
+  .jump .chip { transition: border-color 0.2s ease, color 0.2s ease; }
+  .jump .chip:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+  .detail-grid { align-items: stretch; }
+
+  .cta {
+    margin-top: 56px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .cta h2 { margin: 0 0 6px; font-size: 1.3rem; }
+  .cta p { margin: 0; color: var(--text-secondary); }
+  .cta .btn { flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; }
+
+  @media (max-width: 900px) {
+    .highlights { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .detail-page { padding-top: 20px; }
+    .cta { flex-direction: column; align-items: flex-start; }
+  }
+</style>

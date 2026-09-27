@@ -1,8 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import Nav from '../../components/Nav.astro';
-import Footer from '../../components/Footer.astro';
+import DetailLayout from '../../layouts/DetailLayout.astro';
 
 const domainGradients: Record<string, [string, string]> = {
   Gaming: ['#EC4899', '#8B5CF6'],
@@ -18,59 +16,54 @@ const projects = (await getCollection('projects')).sort(
   (a, b) =>
     Number(b.data.isFeatured) - Number(a.data.isFeatured) || a.data.featuredOrder - b.data.featuredOrder
 );
+const domains = new Set(projects.map((p) => p.data.domain));
+const onAppStore = projects.filter((p) => p.data.appStoreUrl).length;
 ---
 
-<Layout
+<DetailLayout
   title="Featured Work | OneView"
   description="Real products on the App Store and in daily production use — built by OneView. Games, AI platforms, healthcare software, logistics, and more."
   canonicalPath="/projects/"
+  section="projects"
+  eyebrow="Projects"
+  heading="Featured Work"
+  intro={[
+    'Real products on the App Store and in daily production use — built by OneView, not mockups.',
+    'From arcade games and AI-powered security platforms to hospital management and logistics software, each project below was designed, built, and shipped by the same team you would work with.',
+  ]}
+  highlights={[
+    { value: `${projects.length}`, label: 'Products built' },
+    { value: `${domains.size}`, label: 'Industries' },
+    { value: `${onAppStore}`, label: 'Live on the App Store' },
+    { value: 'Mobile · Web · AI', label: 'Platforms covered' },
+  ]}
+  jump={projects.map((p) => ({ href: `#${p.slug}`, label: p.data.title }))}
+  cta={{
+    title: 'Want your product on this page?',
+    text: "Tell us about your idea and we'll show you how we would build it, with a realistic cost and timeline.",
+  }}
 >
-  <Nav />
-  <main>
-    <section class="projects-page">
-      <div class="container-wide">
-        <div class="section-header fade-in">
-          <span class="eyebrow">Projects</span>
-          <h1>Featured Work</h1>
-          <p>Real products on the App Store and in daily production use — built by OneView.</p>
-          <p class="project-count">{projects.length} {projects.length === 1 ? 'project' : 'projects'}</p>
+  {projects.map((p) => {
+    const [c1, c2] = domainGradients[p.data.domain] ?? ['#6366F1', '#06B6D4'];
+    const cover = p.data.screenshots[0];
+    return (
+      <a id={p.slug} href={`/projects/${p.slug}/`} class="project-card fade-in">
+        <div class={`cover ${p.data.isScreenshotLandscape ? '' : 'portrait'}`} style={`background: linear-gradient(135deg, ${c1}, ${c2})`}>
+          {cover && <img src={cover} alt={p.data.title} loading="lazy" />}
         </div>
-
-        <div class="grid grid-3 fade-in">
-          {projects.map((p) => {
-            const [c1, c2] = domainGradients[p.data.domain] ?? ['#6366F1', '#06B6D4'];
-            const cover = p.data.screenshots[0];
-            return (
-              <a href={`/projects/${p.slug}/`} class="project-card">
-                <div class={`cover ${p.data.isScreenshotLandscape ? '' : 'portrait'}`} style={`background: linear-gradient(135deg, ${c1}, ${c2})`}>
-                  {cover && <img src={cover} alt={p.data.title} loading="lazy" />}
-                </div>
-                <div class="project-body">
-                  <span class="domain-badge" style={`color:${c1}; border-color:${c1}55`}>{p.data.domain}</span>
-                  <h2>{p.data.title}</h2>
-                  <p>{p.data.subtitle}</p>
-                </div>
-              </a>
-            );
-          })}
+        <div class="project-body">
+          <span class="domain-badge" style={`color:${c1}; border-color:${c1}55`}>{p.data.domain}</span>
+          <h2>{p.data.title}</h2>
+          <p>{p.data.subtitle}</p>
         </div>
-      </div>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+      </a>
+    );
+  })}
+</DetailLayout>
 
 <style>
-  .projects-page {
-    padding-top: 140px;
-  }
-  .project-count {
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    font-weight: 600;
-    margin-top: 8px;
-  }
   .project-card {
+    scroll-margin-top: 96px;
     display: block;
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);

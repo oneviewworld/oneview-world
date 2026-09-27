@@ -291,6 +291,18 @@ h4 {
   }
 }
 
+/* "View all …" link under a homepage section, pointing at its dedicated page */
+.section-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+.section-more .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* ===== Scroll fade-in ===== */
 .fade-in {
   opacity: 0;

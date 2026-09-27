@@ -19,7 +19,7 @@ const featured = (await getCollection('projects'))
   .slice(0, 8);
 ---
 
-<section id="featured-work" data-bg="wash">
+<section id="projects" data-bg="wash">
   <div class="container-wide">
     <div class="section-header fade-in">
       <span class="eyebrow">Featured Work</span>
@@ -45,7 +45,7 @@ const featured = (await getCollection('projects'))
       })}
     </Carousel>
 
-    <div class="more fade-in">
+    <div class="section-more fade-in">
       <a href="/projects/" class="btn btn-outline">See all projects <Icon name="arrow-right" size={16} /></a>
     </div>
   </div>
@@ -81,6 +81,5 @@ const featured = (await getCollection('projects'))
   }
   .work-body h3 { font-size: 1.15rem; margin: 0 0 6px; }
   .work-body p { color: var(--text-secondary); font-size: 0.9rem; margin: 0; }
-  .more { text-align: center; margin-top: 8px; }
 </style>
 
