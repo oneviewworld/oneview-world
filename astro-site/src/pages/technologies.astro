@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import { technologyAreas } from '../data/technologies';
+
+const highlights = [
+  { value: `${technologyAreas.length}`, label: 'Technology areas' },
+  { value: 'iOS · Android', label: 'Native & cross-platform' },
+  { value: 'Web · Desktop', label: 'Windows, macOS & Linux' },
+  { value: '100%', label: 'Code ownership for you' },
+];
+---
+
+<Layout
+  title="Technologies | OneView"
+  description="The languages, frameworks, and platforms OneView uses to build mobile, web, desktop, backend, AI, and game software, from Flutter and Swift to React, .NET, and Python."
+  canonicalPath="/technologies"
+>
+  <Nav />
+  <main>
+    <section class="tech-page">
+      <div class="container-wide">
+        <a href="/#technologies" class="back-link">← Back to home</a>
+
+        <div class="section-header fade-in">
+          <span class="eyebrow">Technologies</span>
+          <h1>Technologies We Work With</h1>
+          <p>
+            We are not tied to one framework. For every project we choose the stack that fits your
+            users, budget, timeline, and team — native when performance and platform feel matter
+            most, cross-platform when you need to launch everywhere quickly.
+          </p>
+          <p>
+            Everything is built on proven, well-supported technology, documented as we go, and handed
+            over with full source code and accounts, so any developer can pick it up after us.
+          </p>
+        </div>
+
+        <ul class="highlights fade-in" aria-label="At a glance">
+          {highlights.map((h) => (
+            <li><strong>{h.value}</strong><span>{h.label}</span></li>
+          ))}
+        </ul>
+
+        <nav class="jump fade-in" aria-label="Jump to a technology area">
+          {technologyAreas.map((a) => <a href={`#${a.slug}`} class="chip">{a.name}</a>)}
+        </nav>
+
+        <div class="grid grid-3 areas">
+          {technologyAreas.map((a) => (
+            <article id={a.slug} class="card area fade-in" style={`--dot:${a.color}`}>
+              <div class="area-head">
+                <span class="ic"><Icon name={a.icon} size={22} /></span>
+                <h2>{a.name}</h2>
+              </div>
+              <p class="desc">{a.description}</p>
+
+              {a.languages.length > 0 && (
+                <div class="group">
+                  <h3>Languages</h3>
+                  <ul>{a.languages.map((l) => <li class="chip">{l}</li>)}</ul>
+                </div>
+              )}
+              <div class="group">
+                <h3>{a.languages.length > 0 ? 'Frameworks & tools' : 'Platforms & tools'}</h3>
+                <ul>{a.frameworks.map((f) => <li class="chip">{f}</li>)}</ul>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="cta card fade-in">
+          <div>
+            <h2>Not sure which stack is right for you?</h2>
+            <p>Tell us what you want to build and we'll recommend the approach, with a realistic cost and timeline.</p>
+          </div>
+          <a href="/#contact" class="btn btn-primary">Let's talk <Icon name="arrow-right" size={16} /></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .tech-page { padding: 140px 0 80px; }
+  .back-link {
+    display: inline-block;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+  .section-header p + p { margin-top: 12px; }
+
+  .highlights {
+    list-style: none; padding: 0; margin: 0 auto 32px; max-width: 900px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+  }
+  .highlights li {
+    display: flex; flex-direction: column; gap: 4px; text-align: center;
+    padding: 18px 12px; border-radius: var(--radius-lg);
+    background: var(--card); border: 1px solid var(--border);
+  }
+  .highlights strong { font-size: 1.15rem; color: var(--text); }
+  .highlights span { font-size: 0.82rem; color: var(--text-secondary); }
+
+  .jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto 48px; max-width: 1000px; }
+  .jump .chip { transition: border-color 0.2s ease, color 0.2s ease; }
+  .jump .chip:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+  .areas { align-items: stretch; }
+  .area { display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 96px; }
+  .area-head { display: flex; align-items: center; gap: 14px; }
+  .ic {
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 46px; height: 46px; border-radius: 12px;
+    color: var(--dot); background: color-mix(in srgb, var(--dot) 14%, transparent);
+  }
+  .area h2 { font-size: 1.15rem; margin: 0; }
+  .desc { margin: 0; color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem; }
+  .group h3 {
+    margin: 0 0 8px; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary);
+  }
+  .group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .area:target { border-color: var(--dot); box-shadow: 0 0 0 3px color-mix(in srgb, var(--dot) 25%, transparent); }
+
+  .cta {
+    margin-top: 56px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .cta h2 { margin: 0 0 6px; font-size: 1.3rem; }
+  .cta p { margin: 0; color: var(--text-secondary); }
+  .cta .btn { flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; }
+
+  @media (max-width: 900px) {
+    .highlights { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .tech-page { padding-top: 110px; }
+    .cta { flex-direction: column; align-items: flex-start; }
+  }
+</style>

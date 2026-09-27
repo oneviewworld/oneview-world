@@ -37,6 +37,9 @@ const cats = [
           <div class="chips">
             {s.benefits.map((b) => <span class="chip">{b}</span>)}
           </div>
+          {s.techSlug && (
+            <a class="tech-link" href={`/technologies#${s.techSlug}`}>View technologies <Icon name="arrow-right" size={14} /></a>
+          )}
         </div>
       ))}
     </Carousel>
@@ -66,6 +69,11 @@ const cats = [
   .card-title { font-size: 1.1rem; margin: 20px 0 10px; }
   .card-desc { color: var(--text-secondary); font-size: 0.92rem; margin: 0 0 16px; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+  .tech-link {
+    display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
+    margin-top: 18px; font-size: 0.88rem; font-weight: 600; color: var(--color-primary);
+  }
+  .tech-link:hover { gap: 9px; }
   @media (max-width: 640px) {
     .filters { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin-left: -20px; margin-right: -20px; padding: 0 20px 6px; scrollbar-width: none; }
     .filters::-webkit-scrollbar { display: none; }

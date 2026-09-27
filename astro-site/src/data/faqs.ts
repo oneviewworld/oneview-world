@@ -7,7 +7,7 @@ export const faqs: Faq[] = [
   {
     question: 'What technologies does OneView specialize in?',
     answer:
-      'OneView specializes in Flutter, .NET MAUI, ASP.NET Core, Firebase, Supabase, Azure, and AWS. Our primary focus is building cross-platform mobile applications and scalable backend systems.',
+      'OneView covers mobile, cross-platform, web, and desktop app development, along with backend and APIs, AI, databases, cloud hosting, games, and UI/UX design. We pick the stack that best fits each project; the full list of languages and frameworks is on our Technologies page.',
   },
   {
     question: 'How do we get started?',
@@ -30,8 +30,8 @@ export const faqs: Faq[] = [
       'Yes. OneView handles monitoring, fixes, and new features after launch. You are never locked in — you hold all the code and accounts, and can take the project elsewhere at any time.',
   },
   {
-    question: 'Can you migrate our existing Xamarin app to .NET MAUI or Flutter?',
+    question: 'Can you modernize or migrate our existing app?',
     answer:
-      'Absolutely. OneView has extensive experience migrating legacy Xamarin applications to .NET MAUI and Flutter, preserving business logic while modernizing the user interface and architecture.',
+      'Absolutely. OneView has extensive experience moving legacy mobile, web, and desktop apps onto modern, supported technology, preserving your data and business logic while modernizing the user interface and architecture.',
   },
 ];
