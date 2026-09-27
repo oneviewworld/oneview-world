@@ -1,78 +1,50 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import Nav from '../../components/Nav.astro';
-import Footer from '../../components/Footer.astro';
+import DetailLayout from '../../layouts/DetailLayout.astro';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const latest = posts[0]?.data.date;
 ---
 
-<Layout
+<DetailLayout
   title="Blog | OneView"
   description="Insights on AI, software development, UI design, and building digital products — from the OneView team."
   canonicalPath="/blog/"
+  section="blog"
+  eyebrow="Blog"
+  heading="Insights & Ideas"
+  intro={[
+    'Notes on AI, software development, design, and building digital products — written by the people who build them.',
+    'Practical guides and lessons from real projects, so you can make better decisions about your own product, whether you work with us or not.',
+  ]}
+  highlights={[
+    { value: `${posts.length}`, label: 'Articles published' },
+    { value: 'AI · Design · Dev', label: 'Topics covered' },
+    { value: latest ? latest.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '—', label: 'Latest article' },
+    { value: 'Free', label: 'No sign-up needed' },
+  ]}
+  cta={{
+    title: 'Have a question we have not written about?',
+    text: "Ask us directly — we're happy to talk through your idea, your stack, or your launch plan.",
+  }}
 >
-  <Nav />
-  <main>
-    <section class="blog-list">
-      <div class="container-narrow">
-        <div class="section-header fade-in">
-          <span class="eyebrow">Blog</span>
-          <h1>Insights & Ideas</h1>
-          <p>Notes on AI, software development, and building digital products.</p>
-        </div>
-
-        <div class="posts fade-in">
-          {posts.map((post) => (
-            <a href={`/blog/${post.slug}/`} class="post-card">
-              <time datetime={post.data.date.toISOString()}>
-                {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-              </time>
-              <h2>{post.data.title}</h2>
-              <p>{post.data.excerpt}</p>
-              <span class="read-more">Read more →</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-  </main>
-  <Footer />
-</Layout>
+  {posts.map((post) => (
+    <a href={`/blog/${post.slug}/`} class="card post-card fade-in">
+      <time datetime={post.data.date.toISOString()}>{fmt(post.data.date)}</time>
+      <h2>{post.data.title}</h2>
+      <p>{post.data.excerpt}</p>
+      <span class="read-more">Read more →</span>
+    </a>
+  ))}
+</DetailLayout>
 
 <style>
-  .blog-list {
-    padding-top: 140px;
-  }
-  .posts {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .post-card {
-    display: block;
-    padding: 28px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    background: var(--card);
-  }
-  .post-card time {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-  }
-  .post-card h2 {
-    font-size: 1.3rem;
-    margin: 10px 0;
-  }
-  .post-card p {
-    color: var(--text-secondary);
-    margin: 0 0 12px;
-  }
-  .read-more {
-    color: var(--color-primary);
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
+  .post-card { display: flex; flex-direction: column; gap: 10px; color: var(--text); }
+  .post-card time { font-size: 0.8rem; color: var(--text-secondary); }
+  .post-card h2 { font-size: 1.15rem; line-height: 1.35; margin: 0; }
+  .post-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+  .read-more { margin-top: auto; padding-top: 4px; color: var(--color-primary); font-weight: 600; font-size: 0.9rem; }
 </style>

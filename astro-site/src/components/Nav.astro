@@ -2,9 +2,10 @@
 import Icon from './Icon.astro';
 import { site } from '../data/site';
 
-// Page links (not /#section links) are highlighted while you're on that page.
+// Header links scroll to homepage sections; while you're on an item's
+// dedicated page (or one of its sub-pages), that item is highlighted.
 const path = Astro.url.pathname.replace(/\/?$/, '/');
-const isCurrent = (href: string) => !href.includes('#') && path.startsWith(href);
+const isCurrent = (item: { page?: string }) => !!item.page && path.startsWith(item.page);
 ---
 
 <header class="nav" id="site-nav">
@@ -20,8 +21,8 @@ const isCurrent = (href: string) => !href.includes('#') && path.startsWith(href)
       {site.navItems.map((item, i) => (
         <a
           href={item.href}
-          class:list={[{ 'drawer-only': !item.primary, active: isCurrent(item.href) }]}
-          aria-current={isCurrent(item.href) ? 'page' : undefined}
+          class:list={[{ 'drawer-only': !item.primary, active: isCurrent(item) }]}
+          aria-current={isCurrent(item) ? 'page' : undefined}
           style={`--i:${i}`}
         >{item.label}</a>
       ))}

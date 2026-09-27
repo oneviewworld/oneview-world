@@ -1,0 +1,47 @@
+---
+import DetailLayout from '../layouts/DetailLayout.astro';
+import DetailCard from '../components/DetailCard.astro';
+import { processSteps } from '../data/process';
+
+const colors = ['#6366F1', '#7C3AED', '#8B5CF6', '#EC4899', '#0EA5E9', '#10B981', '#F59E0B', '#F05032'];
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+---
+
+<DetailLayout
+  title="Our Process | OneView"
+  description="How OneView takes your app from idea to launch in eight clear steps — discovery, planning, wireframing, design, development, testing, deployment, and support."
+  canonicalPath="/process/"
+  section="process"
+  eyebrow="Our Process"
+  heading="From Idea to Delivery"
+  intro={[
+    'Building software should not feel like a black box. Our process is broken into eight clear steps, each with a defined outcome, so you always know what is being built, what it costs, and when it ships.',
+    'You see working progress every week or two, can change priorities between cycles, and approve each stage before we move on.',
+  ]}
+  highlights={[
+    { value: `${processSteps.length} steps`, label: 'Idea to launch & beyond' },
+    { value: 'Every 1–2 weeks', label: 'Working demo you can try' },
+    { value: 'Before any build', label: 'Written scope & price' },
+    { value: 'After launch', label: 'Fixes & new features' },
+  ]}
+  jump={processSteps.map((s) => ({ href: `#${slug(s.title)}`, label: `${s.number} · ${s.title}` }))}
+  cols={4}
+  cta={{
+    title: 'Ready to start with step one?',
+    text: 'Discovery starts with a no-pressure conversation about what you want to build.',
+  }}
+>
+  {processSteps.map((s, i) => (
+    <DetailCard
+      id={slug(s.title)}
+      badge={s.number}
+      color={colors[i % colors.length]}
+      title={s.title}
+      description={s.description}
+      groups={[
+        { label: 'What happens', items: s.activities },
+        { label: 'What you get', items: s.deliverables },
+      ]}
+    />
+  ))}
+</DetailLayout>

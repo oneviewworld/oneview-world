@@ -1,0 +1,51 @@
+---
+import DetailLayout from '../layouts/DetailLayout.astro';
+import DetailCard from '../components/DetailCard.astro';
+import { services } from '../data/services';
+
+const categoryInfo: Record<string, { label: string; color: string }> = {
+  apps: { label: 'Apps & Games', color: '#6366F1' },
+  platform: { label: 'Platform & Cloud', color: '#0EA5E9' },
+  ai: { label: 'AI & Automation', color: '#8B5CF6' },
+  design: { label: 'Design & Strategy', color: '#F59E0B' },
+};
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+---
+
+<DetailLayout
+  title="Services | OneView"
+  description="Mobile, web, and desktop app development, backend and cloud, AI integration, UI/UX design, and consulting — everything OneView offers to take your product from idea to launch."
+  canonicalPath="/services/"
+  section="services"
+  eyebrow="Services"
+  heading="Everything You Need to Ship"
+  intro={[
+    'From the first sketch to the App Store and beyond, the same small team handles design, development, backend, AI, and launch — so nothing gets lost between handoffs and you always know who is building your product.',
+    'Pick one service or all of them. Every engagement starts with a written proposal covering scope, timeline, and a fixed price range, and ends with you owning all the code and accounts.',
+  ]}
+  highlights={[
+    { value: `${services.length}`, label: 'Services under one roof' },
+    { value: 'Idea → Launch', label: 'One team end to end' },
+    { value: 'Fixed range', label: 'Written proposal & price' },
+    { value: '100%', label: 'Code ownership for you' },
+  ]}
+  jump={services.map((s) => ({ href: `#${slug(s.title)}`, label: s.title }))}
+>
+  {services.map((s) => {
+    const cat = categoryInfo[s.category];
+    return (
+      <DetailCard
+        id={slug(s.title)}
+        icon={s.icon}
+        color={cat.color}
+        title={s.title}
+        description={s.description}
+        groups={[
+          { label: 'Category', items: [cat.label] },
+          { label: "What's included", items: s.benefits },
+        ]}
+        link={s.techSlug ? { href: `/technologies/#${s.techSlug}`, label: 'View technologies' } : undefined}
+      />
+    );
+  })}
+</DetailLayout>
