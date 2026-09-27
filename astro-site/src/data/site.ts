@@ -34,13 +34,14 @@ export const site = {
     'Support After Launch',
   ],
 
+  // Keep this in the same order as the sections on the homepage.
   // Header links scroll to the homepage section (href); items with a `page`
   // also have a dedicated page, linked from that section and the footer.
   navItems: [
     { label: 'Home', href: '/#home', primary: false },
+    { label: 'Projects', href: '/#projects', page: '/projects/', primary: true },
     { label: 'Services', href: '/#services', page: '/services/', primary: true },
     { label: 'Solutions', href: '/#solutions', primary: false },
-    { label: 'Projects', href: '/#projects', page: '/projects/', primary: true },
     { label: 'Technologies', href: '/#technologies', page: '/technologies/', primary: true },
     { label: 'Why OneView', href: '/#why-oneview', primary: false },
     { label: 'Process', href: '/#process', page: '/process/', primary: true },
