@@ -39,7 +39,7 @@ export const site = {
     { label: 'Services', href: '/#services', primary: true },
     { label: 'Solutions', href: '/#solutions', primary: false },
     { label: 'Projects', href: '/projects', primary: true },
-    { label: 'Technologies', href: '/#technologies', primary: false },
+    { label: 'Technologies', href: '/technologies', primary: true },
     { label: 'Why OneView', href: '/#why-oneview', primary: false },
     { label: 'Process', href: '/#process', primary: true },
     { label: 'About', href: '/#about', primary: true },

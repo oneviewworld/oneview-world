@@ -16,9 +16,7 @@ const year = new Date().getFullYear();
 
     <div>
       <div class="col-title">Company</div>
-      {site.navItems.slice(0, 6).map((item) => (
-        <a class="col-link" href={item.label === 'Technologies' ? '/technologies' : item.href}>{item.label}</a>
-      ))}
+      {site.navItems.slice(0, 6).map((item) => <a class="col-link" href={item.href}>{item.label}</a>)}
     </div>
 
     <div>

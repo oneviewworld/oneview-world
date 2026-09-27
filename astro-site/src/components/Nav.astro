@@ -1,6 +1,10 @@
 ---
 import Icon from './Icon.astro';
 import { site } from '../data/site';
+
+// Page links (not /#section links) are highlighted while you're on that page.
+const path = Astro.url.pathname.replace(/\/$/, '');
+const isCurrent = (href: string) => !href.includes('#') && (path === href || path.startsWith(href + '/'));
 ---
 
 <header class="nav" id="site-nav">
@@ -14,7 +18,12 @@ import { site } from '../data/site';
 
     <nav class="nav-links" id="nav-links" aria-label="Primary">
       {site.navItems.map((item, i) => (
-        <a href={item.href} class={item.primary ? '' : 'drawer-only'} style={`--i:${i}`}>{item.label}</a>
+        <a
+          href={item.href}
+          class:list={[{ 'drawer-only': !item.primary, active: isCurrent(item.href) }]}
+          aria-current={isCurrent(item.href) ? 'page' : undefined}
+          style={`--i:${i}`}
+        >{item.label}</a>
       ))}
     </nav>
 
