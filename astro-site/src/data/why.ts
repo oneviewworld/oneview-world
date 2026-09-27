@@ -20,7 +20,7 @@ export const whyReasons: WhyReason[] = [
   {
     title: 'Cross-Platform Expertise',
     description:
-      'Deep expertise in Flutter, .NET MAUI, and native development for unified multi-platform solutions.',
+      'Deep expertise across native mobile, cross-platform, web, and desktop development for unified multi-platform solutions.',
     icon: 'devices',
   },
   {

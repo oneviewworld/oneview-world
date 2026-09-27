@@ -12,7 +12,7 @@ interface Props {
 const {
   title,
   description,
-  keywords = 'hire app developer, build my app, turn app idea into reality, MVP development, app developer for startups, mobile app developer for hire, iOS Android app development, custom software development, Flutter developer, AI app development',
+  keywords = 'hire app developer, build my app, turn app idea into reality, MVP development, app developer for startups, mobile app developer for hire, iOS Android app development, custom software development, Flutter developer, React Native developer, .NET MAUI developer, web app development, desktop app development, AI app development',
   image = 'https://oneview.world/icons/Icon-512.png',
   canonicalPath = '/',
 } = Astro.props;
@@ -108,6 +108,16 @@ const canonical = new URL(canonicalPath, 'https://oneview.world').toString();
         { threshold: 0, rootMargin: '0px 0px -10% 0px' }
       );
       document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+      // Arriving from another page with a #section link (e.g. /#technologies): the
+      // browser's own jump gets lost while the long homepage is still laying out,
+      // so land on the section once everything has loaded.
+      if (location.hash.length > 1) {
+        addEventListener('load', () => {
+          const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+          if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'instant' }));
+        }, { once: true });
+      }
     </script>
   </body>
 </html>

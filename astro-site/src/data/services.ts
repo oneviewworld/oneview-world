@@ -3,87 +3,94 @@ export interface Service {
   description: string;
   icon: string;
   category: 'apps' | 'platform' | 'ai' | 'design';
+  /** Anchor on /technologies that lists the tools behind this service. */
+  techSlug?: string;
   benefits: string[];
 }
 
 export const services: Service[] = [
   {
-    title: 'Flutter Development',
+    title: 'Mobile App Development',
     category: 'apps',
+    techSlug: 'mobile',
     description:
-      'High-performance cross-platform applications built with Flutter, ' +
-      'delivering native experiences on iOS, Android, Web, and Desktop ' +
-      'from a single codebase.',
-    icon: 'flutter',
-    benefits: [
-      'Single codebase for all platforms',
-      'Native performance',
-      'Beautiful custom UI',
-      'Rapid development cycle',
-    ],
-  },
-  {
-    title: 'Android Development',
-    category: 'apps',
-    description:
-      'Native Android applications built with modern architecture patterns, ' +
-      'Kotlin, and Jetpack Compose for optimal performance and user experience.',
-    icon: 'android',
-    benefits: [
-      'Native Android performance',
-      'Material Design 3',
-      'Modern architecture',
-      'Google Play optimization',
-    ],
-  },
-  {
-    title: 'iOS Development',
-    category: 'apps',
-    description:
-      "Premium iOS applications crafted with Swift and SwiftUI, following Apple's " +
-      'Human Interface Guidelines for an exceptional user experience.',
+      'Native iPhone, iPad, and Android apps that feel right at home on each ' +
+      'platform, designed, built, and published to the App Store and Google Play.',
     icon: 'apple',
     benefits: [
-      'Native iOS experience',
-      'SwiftUI interfaces',
-      'App Store optimization',
-      'Apple ecosystem integration',
+      'Native look & feel',
+      'Smooth performance',
+      'App Store & Play Store launch',
+      'Device feature integration',
     ],
   },
   {
     title: 'Cross-Platform Development',
     category: 'apps',
+    techSlug: 'cross-platform',
     description:
-      'Unified cross-platform solutions using Flutter and .NET MAUI, ' +
-      'maximizing code reuse while maintaining platform-native behavior.',
+      'One shared codebase for iOS, Android, web, and desktop, so you launch ' +
+      'everywhere faster and maintain one product instead of several.',
     icon: 'devices',
     benefits: [
-      'Shared business logic',
-      'Platform-specific UX',
-      'Reduced development cost',
+      'Single codebase',
+      'Lower development cost',
       'Faster time to market',
+      'Consistent experience',
     ],
   },
   {
-    title: '.NET MAUI & Xamarin',
+    title: 'Web Development',
     category: 'apps',
+    techSlug: 'web',
     description:
-      'Enterprise-grade cross-platform applications using .NET MAUI, ' +
-      'including Xamarin migration to modern .NET architectures.',
+      'Websites, web apps, SaaS platforms, and admin dashboards that load fast, ' +
+      'rank well in search, and work on every screen size.',
+    icon: 'web',
+    benefits: [
+      'Responsive on every screen',
+      'SEO & performance tuned',
+      'Progressive Web Apps (PWA)',
+      'Admin panels & dashboards',
+    ],
+  },
+  {
+    title: 'Desktop App Development',
+    category: 'apps',
+    techSlug: 'desktop',
+    description:
+      'Software for Windows, macOS, and Linux built for offline work, ' +
+      'hardware integration, and heavy everyday workloads.',
+    icon: 'desktop',
+    benefits: [
+      'Windows, macOS & Linux',
+      'Offline-first operation',
+      'Hardware & device integration',
+      'Installer & auto-updates',
+    ],
+  },
+  {
+    title: 'App Modernization & Migration',
+    category: 'apps',
+    techSlug: 'cross-platform',
+    description:
+      'Move ageing mobile, web, or desktop apps onto modern, supported ' +
+      'technology while keeping your data and business logic intact.',
     icon: 'integration',
     benefits: [
-      '.NET ecosystem integration',
-      'Enterprise authentication',
-      'Xamarin to MAUI migration',
-      'Shared C# codebase',
+      'Legacy app upgrades',
+      'Business logic preserved',
+      'Refreshed UI & UX',
+      'Lower maintenance cost',
     ],
   },
   {
     title: 'Backend & API Development',
+    techSlug: 'backend',
     category: 'platform',
     description:
-      'Scalable RESTful APIs and backend services built with ASP.NET Core, ' +
-      'designed for high availability, security, and performance.',
+      'Secure, scalable server logic and APIs that power your apps, handle ' +
+      'logins and payments, and connect to third-party services.',
     icon: 'cloud',
     benefits: [
       'Scalable architecture',
@@ -122,11 +129,11 @@ export const services: Service[] = [
   },
   {
     title: 'AI & ML Integration',
+    techSlug: 'ai',
     category: 'ai',
     description:
-      'Intelligent AI-powered solutions integrating LLMs, computer vision, ' +
-      'and machine learning pipelines into production applications using ' +
-      'Python, FastAPI, and Ollama.',
+      'Practical AI built into real products: chat assistants, document ' +
+      'extraction, image and video analysis, and private, self-hosted models.',
     icon: 'brain',
     benefits: [
       'LLM & chatbot integration',
@@ -137,10 +144,11 @@ export const services: Service[] = [
   },
   {
     title: 'Game Development',
+    techSlug: 'games',
     category: 'apps',
     description:
-      'Engaging mobile games and interactive experiences built with ' +
-      'Flutter, Unity, and custom game engines for captivating gameplay.',
+      'Engaging mobile games and interactive experiences with polished ' +
+      'controls, level design, sound, and monetization.',
     icon: 'game',
     benefits: [
       'Cross-platform gaming',
@@ -151,10 +159,11 @@ export const services: Service[] = [
   },
   {
     title: 'Database Design',
+    techSlug: 'databases',
     category: 'platform',
     description:
-      'Optimized database architectures using SQL Server, Firebase, ' +
-      'and Supabase for reliable, performant data management.',
+      'Data models designed for speed and integrity, from on-device offline ' +
+      'storage to large relational and real-time databases.',
     icon: 'database',
     benefits: [
       'Optimized queries',
@@ -165,10 +174,11 @@ export const services: Service[] = [
   },
   {
     title: 'Cloud Integration',
+    techSlug: 'cloud',
     category: 'platform',
     description:
-      'End-to-end cloud solutions leveraging Azure and AWS for ' +
-      'hosting, storage, authentication, and scalable infrastructure.',
+      'Hosting, storage, authentication, and managed backends that scale ' +
+      'with your users while keeping running costs predictable.',
     icon: 'cloud-queue',
     benefits: [
       'Auto-scaling',
@@ -179,6 +189,7 @@ export const services: Service[] = [
   },
   {
     title: 'UI/UX Design',
+    techSlug: 'design',
     category: 'design',
     description:
       'Research-driven user experience design and pixel-perfect user ' +
@@ -193,6 +204,7 @@ export const services: Service[] = [
   },
   {
     title: 'Business Automation',
+    techSlug: 'ai',
     category: 'ai',
     description:
       'Intelligent automation solutions that reduce manual effort, ' +
