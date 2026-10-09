@@ -81,6 +81,8 @@ const canonical = new URL(canonicalPath, 'https://oneview.world').toString();
     <!-- EmailJS (public key injected at build time by GitHub Actions) -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" is:inline></script>
     <script is:inline>emailjs.init('EMAILJS_PUBLIC_KEY_PLACEHOLDER');</script>
+    <!-- GoatCounter analytics -->
+    <script data-goatcounter="https://oneview.goatcounter.com/count" async src="https://gc.zgo.at/count.js" is:inline></script>
 
     <script is:inline>
       // Light is the default; only apply dark if the visitor chose it. Runs before paint to avoid a flash.
