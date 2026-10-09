@@ -57,7 +57,7 @@ export const site = {
   },
 
   stats: [
-    { value: '11+', label: 'Projects Delivered' },
+    { value: '8+', label: 'Projects Delivered' },
     { value: '5', label: 'Platforms' },
     { value: '9+', label: 'Years Engineering' },
     { value: '3+', label: 'AI Projects' },
